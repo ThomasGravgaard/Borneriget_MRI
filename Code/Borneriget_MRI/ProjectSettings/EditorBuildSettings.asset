@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 0
+    path: Assets/hellocardboard-unity/Scenes/VrMode.unity
+    guid: 4812ec05e87b8414abcdfe0d625c0e60
+  - enabled: 1
+    path: Assets/Scenes/Main.unity
+    guid: c57306f703171024a84644a19670a633
+  - enabled: 1
+    path: Assets/Scenes/NormalVideo.unity
+    guid: e790218bc2b675b47877a65341670b61
+  - enabled: 1
+    path: Assets/Scenes/VrVideo.unity
+    guid: d1c3109bdb54ad54c8a2b2838528e640
+  m_configObjects:
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 2b0a791c1bc75fd4ea59b1d3d7e3becf, type: 2}
+    xr.sdk.mock-hmd.settings: {fileID: 11400000, guid: 4559027471aa6b741b4363e4ac6cd5de, type: 2}
