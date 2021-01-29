@@ -15,12 +15,13 @@ namespace Borneriget.MRI
         private GameObject Theo;
         [SerializeField]
         private GameObject Thea;
+        [SerializeField]
+        private Camera MenuCam;
 
         public event Action<bool> SelectMode;
 
         private void Awake()
         {
-            Debug.Log("lobby awake");
             gameObject.SetActive(false);
             NormalButton.onClick.AddListener(NormalButton_Click);
             VrButton.onClick.AddListener(VrButton_Click);
@@ -28,7 +29,7 @@ namespace Borneriget.MRI
 
         public void Show(string avatar)
         {
-            Debug.Log("Show lobby");
+            MenuCam.enabled = true;
             gameObject.SetActive(true);
             Theo.SetActive(avatar == "Theo");
             Thea.SetActive(avatar == "Thea");
@@ -36,6 +37,7 @@ namespace Borneriget.MRI
 
         public void Hide()
         {
+            MenuCam.enabled = false;
             gameObject.SetActive(false);
         }
 

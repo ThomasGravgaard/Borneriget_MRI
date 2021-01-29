@@ -1,0 +1,16 @@
+- Load indicator while waiting for video
+
+- Set up videos properly
+- Resize encode MRI video
+
+
+- Add reticle for VR
+- Progress UI should be a ring around reticle
+- Use HasDeviceParams to tell ppl what is going on before we get params.
+
+
+Exit button in VR
+Video timer in VR
+Fade mellem videoer
+
+

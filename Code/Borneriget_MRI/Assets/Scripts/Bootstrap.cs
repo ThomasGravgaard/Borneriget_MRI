@@ -41,8 +41,6 @@ namespace Borneriget.MRI
 
 			// Register commands
 			Facade.RegisterCommand(PreferencesMediator.Notifications.PreferencesSelected, () => new ChangeMediatorCommand<PreferencesMediator, LobbyMediator>());
-			Facade.RegisterCommand(LobbyMediator.Notifications.StartNormalVideo, () => new ShowNormalVideo());
-			Facade.RegisterCommand(LobbyMediator.Notifications.StartVrVideo, () => new ShowVrVideo());
 
 			// Start up the main menu
 			Facade.RegisterMediator(new PreferencesMediator());

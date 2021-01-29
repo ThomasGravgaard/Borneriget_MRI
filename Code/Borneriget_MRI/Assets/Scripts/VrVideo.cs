@@ -1,3 +1,4 @@
+using Borneriget.MRI;
 using Google.XR.Cardboard;
 using System;
 using System.Collections;
@@ -44,6 +45,7 @@ public class VrVideo : MonoBehaviour
         UiYoffset = transform.position.y - Cam.transform.position.y;
         GazeTarget.SetActive(false);
         StartCoroutine(InitializeXR());
+        StartCoroutine(PrepareVideo());
         camRoot = Cam.transform;
         while (camRoot.parent)
         {
@@ -82,7 +84,10 @@ public class VrVideo : MonoBehaviour
 
     private IEnumerator InitializeXR()
     {
-        yield return XRGeneralSettings.Instance.Manager.InitializeLoader();
+        if (!Application.isEditor)
+        {
+            yield return XRGeneralSettings.Instance.Manager.InitializeLoader();
+        }
         if (XRGeneralSettings.Instance.Manager.activeLoader == null)
         {
             Log("Initializing XR Failed.");
@@ -112,11 +117,26 @@ public class VrVideo : MonoBehaviour
         GazeTarget.transform.position = Cam.transform.position + (vec * dist);
     }
 
+    private IEnumerator PrepareVideo()
+    {
+        var videoProxy = Bootstrap.Facade.RetrieveProxy<VideoProxy>();
+        Player.url = videoProxy.GetVrVideo();
+        Player.Prepare();
+        while (!Player.isPrepared)
+        {
+            yield return null;
+        }
+    }
+
     private IEnumerator StartVideo()
     {
         Environment.SetActive(false);
         UI.SetActive(false);
         var totalTime = TimeSpan.FromSeconds(Player.frameCount / Player.frameRate);
+        while (!Player.isPrepared)
+        {
+            yield return null;
+        }
         Player.Play();
         while (!Player.isPlaying)
         {
@@ -131,8 +151,9 @@ public class VrVideo : MonoBehaviour
             Label.text = $"{currentTime:mm\\:ss} / {totalTime:mm\\:ss}";
             yield return null;
         }
-        Environment.SetActive(true);
-        UI.SetActive(true);
+        //Environment.SetActive(true);
+        //UI.SetActive(true);
+        Bootstrap.Facade.SendNotification(LobbyMediator.Notifications.VideoDone);
     }
 
     private void StopXR()
@@ -150,7 +171,7 @@ public class VrVideo : MonoBehaviour
         XRGeneralSettings.Instance.Manager.DeinitializeLoader();
         Log("XR deinitialized.");
 
-        SceneManager.LoadScene(0);
+        Bootstrap.Facade.SendNotification(LobbyMediator.Notifications.VideoDone);
     }
 
     public void Update()
