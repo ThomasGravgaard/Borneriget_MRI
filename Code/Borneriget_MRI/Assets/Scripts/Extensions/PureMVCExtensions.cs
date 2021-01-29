@@ -12,6 +12,13 @@ namespace Borneriget.MRI
             return facade.RetrieveProxy<T>(name);
         }
 
+        public static bool HasProxy<T>(this IFacade facade, string name) where T : IProxy => facade.HasProxy(name);
+        public static bool HasProxy<T>(this IFacade facade) where T : IProxy
+        {
+            var name = GetNameFromType(typeof(T));
+            return facade.HasProxy<T>(name);
+        }
+
         public static T RetrieveMediator<T>(this IFacade facade, string name) where T : IMediator => (T)facade.RetrieveMediator(name);
         public static T RetrieveMediator<T>(this IFacade facade) where T : IMediator
         {
