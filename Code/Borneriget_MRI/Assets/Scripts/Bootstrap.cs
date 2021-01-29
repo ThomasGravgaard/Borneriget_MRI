@@ -38,7 +38,12 @@ namespace Borneriget.MRI
 			var config = Resources.Load<TextAsset>("Config");
 			var videoUrls = JsonConvert.DeserializeObject<VideoUrls>(config.text);
 			Facade.RegisterProxy(new VideoProxy(videoUrls));
-			
+
+			// Register commands
+			Facade.RegisterCommand(PreferencesMediator.Notifications.PreferencesSelected, () => new ChangeMediatorCommand<PreferencesMediator, LobbyMediator>());
+			Facade.RegisterCommand(LobbyMediator.Notifications.StartNormalVideo, () => new ShowNormalVideo());
+			Facade.RegisterCommand(LobbyMediator.Notifications.StartVrVideo, () => new ShowVrVideo());
+
 			// Start up the main menu
 			Facade.RegisterMediator(new PreferencesMediator());
 		}

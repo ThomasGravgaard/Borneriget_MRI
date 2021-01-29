@@ -26,6 +26,13 @@ namespace Borneriget.MRI
             return facade.RetrieveMediator<T>(name);
         }
 
+        public static T RemoveMediator<T>(this IFacade facade, string name) where T : IMediator => (T)facade.RemoveMediator(name);
+        public static T RemoveMediator<T>(this IFacade facade) where T : IMediator
+        {
+            var name = GetNameFromType(typeof(T));
+            return facade.RemoveMediator<T>(name);
+        }
+
         private static string GetNameFromType(Type type)
         {
             var field = type.GetField("NAME");

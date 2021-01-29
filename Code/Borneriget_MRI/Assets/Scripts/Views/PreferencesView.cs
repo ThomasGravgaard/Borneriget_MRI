@@ -27,14 +27,17 @@ namespace Borneriget.MRI
 
         private void Awake()
         {
+            gameObject.SetActive(false);
             LanguageSelection.SetActive(false);
             AvatarSelection.SetActive(false);
         }
 
         public void Show()
         {
+            gameObject.SetActive(true);
             LanguageSelection.SetActive(true);
         }
+
         public void Hide()
         {
             gameObject.SetActive(false);
