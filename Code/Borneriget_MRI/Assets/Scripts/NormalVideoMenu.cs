@@ -72,8 +72,11 @@ public class NormalVideoMenu : MonoBehaviour
         while (Player.isPlaying)
         {
             // Update progress while playing
-            var progress = ((float)Player.frame / (float)Player.frameCount);
-            Progress.fillAmount = progress;
+            if (Player.frameCount > 0)
+            {
+                var progress = ((float)Player.frame / (float)Player.frameCount);
+                Progress.fillAmount = progress;
+            }
 
             if (Application.isEditor && Progress.fillAmount > 0.1f)
             {

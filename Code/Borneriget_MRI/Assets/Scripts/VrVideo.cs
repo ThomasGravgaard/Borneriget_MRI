@@ -132,7 +132,6 @@ public class VrVideo : MonoBehaviour
     {
         Environment.SetActive(false);
         UI.SetActive(false);
-        var totalTime = TimeSpan.FromSeconds(Player.frameCount / Player.frameRate);
         while (!Player.isPrepared)
         {
             yield return null;
@@ -142,17 +141,32 @@ public class VrVideo : MonoBehaviour
         {
             yield return null;
         }
+        TimeSpan? totalTime = null;
+        float? progress = null;
         while (Player.isPlaying)
         {
-            // Update progress while playing
-            var progress = ((float)Player.frame / (float)Player.frameCount);
-            //Progress.fillAmount = progress;
-            var currentTime = TimeSpan.FromSeconds(Player.frame / Player.frameRate);
-            Label.text = $"{currentTime:mm\\:ss} / {totalTime:mm\\:ss}";
+            try
+            {
+                if (!totalTime.HasValue && Player.frameRate > 0)
+                {
+                    totalTime = TimeSpan.FromSeconds(Player.frameCount / Player.frameRate);
+                }
+                if (Player.frameCount > 0)
+                {
+                    progress = ((float)Player.frame / (float)Player.frameCount);
+                }
+                if (Player.frameRate > 0)
+                {
+                    var currentTime = TimeSpan.FromSeconds(Player.frame / Player.frameRate);
+                    Label.text = $"{currentTime:mm\\:ss} / {totalTime:mm\\:ss}";
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"Uncaught exception. {ex.Message}");
+            }
             yield return null;
         }
-        //Environment.SetActive(true);
-        //UI.SetActive(true);
         Bootstrap.Facade.SendNotification(LobbyMediator.Notifications.VideoDone);
     }
 

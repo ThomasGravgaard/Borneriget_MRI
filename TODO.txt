@@ -1,13 +1,11 @@
-- Load indicator while waiting for video
+- Issue with spawning cube if phone is on table
 
-- Set up videos properly
-- Resize encode MRI video
-
+- Load indicator if/when waiting for video
 
 - Add reticle for VR
 - Progress UI should be a ring around reticle
 - Use HasDeviceParams to tell ppl what is going on before we get params.
-
+- VR video progress - how?
 
 Exit button in VR
 Video timer in VR
