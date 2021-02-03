@@ -5,9 +5,6 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/hellocardboard-unity/Scenes/VrMode.unity
-    guid: 4812ec05e87b8414abcdfe0d625c0e60
   - enabled: 1
     path: Assets/Scenes/Main.unity
     guid: c57306f703171024a84644a19670a633
