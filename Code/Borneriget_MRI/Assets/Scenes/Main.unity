@@ -329,7 +329,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1669498549608010, guid: 592c0548515406c448086496fa7904c2, type: 3}
       propertyPath: m_Name
-      value: Theo
+      value: Avatar
       objectReference: {fileID: 0}
     - target: {fileID: 1669498549608010, guid: 592c0548515406c448086496fa7904c2, type: 3}
       propertyPath: m_Layer

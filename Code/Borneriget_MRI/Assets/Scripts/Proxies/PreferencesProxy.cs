@@ -9,6 +9,12 @@ namespace Borneriget.MRI
         public string Language { get; set; }
         public string Avatar { get; set; }
 
+        public enum Avatars
+        {
+            Theo,
+            Thea
+        }
+
         public PreferencesProxy() : base(NAME)
         {
         }
