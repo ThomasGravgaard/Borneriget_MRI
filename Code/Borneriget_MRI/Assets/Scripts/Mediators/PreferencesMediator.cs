@@ -34,6 +34,7 @@ namespace Borneriget.MRI
         {
             View.LanguageSelected -= View_LanguageSelected;
             View.AvatarSelected -= View_AvatarSelected;
+            View.FormatSelected -= View_FormatSelected;
             base.OnRemove();
         }
 
@@ -43,6 +44,7 @@ namespace Borneriget.MRI
             ViewComponent = Object.FindObjectOfType<PreferencesView>(true);
             View.LanguageSelected += View_LanguageSelected;
             View.AvatarSelected += View_AvatarSelected;
+            View.FormatSelected += View_FormatSelected;
             View.Show();
         }
 
@@ -54,6 +56,11 @@ namespace Borneriget.MRI
         private void View_AvatarSelected(PreferencesProxy.Avatars avatar)
         {
             Preferences.Avatar = avatar;
+        }
+
+        private void View_FormatSelected(bool useVr)
+        {
+            Preferences.UseVr = useVr;
             View.Hide();
             Facade.SendNotification(Notifications.PreferencesSelected);
         }

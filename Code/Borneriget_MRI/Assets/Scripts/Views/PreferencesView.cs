@@ -21,15 +21,23 @@ namespace Borneriget.MRI
         private GameObject Theo;
         [SerializeField]
         private GameObject Thea;
+        [SerializeField]
+        private GameObject FormatSelection;
+        [SerializeField]
+        private GameObject Tablet;
+        [SerializeField]
+        private GameObject Cardboard;
 
         public event Action<string> LanguageSelected;
         public event Action<PreferencesProxy.Avatars> AvatarSelected;
+        public event Action<bool> FormatSelected;
 
         private void Awake()
         {
             gameObject.SetActive(false);
             LanguageSelection.SetActive(false);
             AvatarSelection.SetActive(false);
+            FormatSelection.SetActive(false);
         }
 
         public void Show()
@@ -68,6 +76,17 @@ namespace Borneriget.MRI
                     SelectAvatar(PreferencesProxy.Avatars.Theo);
                 }
             }
+            else if (FormatSelection.activeInHierarchy)
+            {
+                if (target == Tablet)
+                {
+                    SelectFormat(false);
+                }
+                if (target == Cardboard)
+                {
+                    SelectFormat(true);
+                }
+            }
         }
 
         private void SelectLanguage(string language)
@@ -81,6 +100,13 @@ namespace Borneriget.MRI
         {
             AvatarSelection.SetActive(false);
             AvatarSelected?.Invoke(avatar);
+            FormatSelection.SetActive(true);
+        }
+
+        private void SelectFormat(bool useVr)
+        {
+            FormatSelection.SetActive(false);
+            FormatSelected?.Invoke(useVr);
         }
     }
 }

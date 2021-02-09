@@ -8,6 +8,7 @@ namespace Borneriget.MRI
 
         public string Language { get; set; }
         public Avatars Avatar { get; set; }
+        public bool UseVr { get; set; }
 
         public enum Avatars
         {
