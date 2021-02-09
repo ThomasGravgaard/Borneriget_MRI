@@ -51,7 +51,7 @@ namespace Borneriget.MRI
             Preferences.Language = language;
         }
 
-        private void View_AvatarSelected(string avatar)
+        private void View_AvatarSelected(PreferencesProxy.Avatars avatar)
         {
             Preferences.Avatar = avatar;
             View.Hide();

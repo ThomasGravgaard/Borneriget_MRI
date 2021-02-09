@@ -26,6 +26,8 @@ namespace Borneriget.MRI
         {
             base.OnRegister();
             Preferences = Facade.RetrieveProxy<PreferencesProxy>();
+
+            Facade.RegisterMediator(new AvatarMediator(Preferences.Avatar));
             InitializeView();
         }
 
@@ -38,7 +40,7 @@ namespace Borneriget.MRI
         {
             ViewComponent = Object.FindObjectOfType<LobbyView>(true);
             View.SelectMode += View_SelectMode;
-            View.Show(Preferences.Avatar);
+            View.Show();
         }
 
         public override void HandleNotification(INotification notification)
@@ -47,7 +49,7 @@ namespace Borneriget.MRI
             {
                 case Notifications.VideoDone:
                     SceneManager.UnloadSceneAsync(VideoScene);
-                    View.Show(Preferences.Avatar);
+                    View.Show();
                     break;
             }
         }

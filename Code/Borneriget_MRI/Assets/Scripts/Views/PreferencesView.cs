@@ -23,7 +23,7 @@ namespace Borneriget.MRI
         private GameObject Thea;
 
         public event Action<string> LanguageSelected;
-        public event Action<string> AvatarSelected;
+        public event Action<PreferencesProxy.Avatars> AvatarSelected;
 
         private void Awake()
         {
@@ -61,11 +61,11 @@ namespace Borneriget.MRI
             {
                 if (target == Theo)
                 {
-                    SelectAvatar("Theo");
+                    SelectAvatar(PreferencesProxy.Avatars.Theo);
                 }
                 if (target == Thea)
                 {
-                    SelectAvatar("Thea");
+                    SelectAvatar(PreferencesProxy.Avatars.Theo);
                 }
             }
         }
@@ -77,7 +77,7 @@ namespace Borneriget.MRI
             AvatarSelection.SetActive(true);
         }
 
-        private void SelectAvatar(string avatar)
+        private void SelectAvatar(PreferencesProxy.Avatars avatar)
         {
             AvatarSelection.SetActive(false);
             AvatarSelected?.Invoke(avatar);

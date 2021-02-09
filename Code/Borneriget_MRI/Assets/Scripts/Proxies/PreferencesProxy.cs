@@ -7,7 +7,7 @@ namespace Borneriget.MRI
         public new static string NAME = "PreferencesProxy";
 
         public string Language { get; set; }
-        public string Avatar { get; set; }
+        public Avatars Avatar { get; set; }
 
         public enum Avatars
         {

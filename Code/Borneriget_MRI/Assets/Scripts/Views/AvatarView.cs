@@ -38,9 +38,10 @@ namespace Borneriget.MRI
 					}
 				}
 			}
-			SetState(State.NEUTRAL);
 			audioSource = GetComponent<AudioSource>();
 			animator = GetComponent<Animator>();
+
+			SetState(State.NEUTRAL);
 		}
 
 		private void Update() {
@@ -54,8 +55,9 @@ namespace Borneriget.MRI
 			}
 		}
 
-		public void SetAvatar(PreferencesProxy.Avatars avatar)
+		public void Show(PreferencesProxy.Avatars avatar)
         {
+			gameObject.SetActive(true);
 			foreach (var theoObject in theoObjects)
 			{
 				theoObject.enabled = (avatar == PreferencesProxy.Avatars.Theo);

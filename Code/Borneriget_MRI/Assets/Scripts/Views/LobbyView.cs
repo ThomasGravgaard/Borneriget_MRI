@@ -12,10 +12,6 @@ namespace Borneriget.MRI
         [SerializeField]
         private Button VrButton;
         [SerializeField]
-        private GameObject Theo;
-        [SerializeField]
-        private GameObject Thea;
-        [SerializeField]
         private Camera MenuCam;
 
         public event Action<bool> SelectMode;
@@ -27,12 +23,10 @@ namespace Borneriget.MRI
             VrButton.onClick.AddListener(VrButton_Click);
         }
 
-        public void Show(string avatar)
+        public void Show()
         {
             MenuCam.enabled = true;
             gameObject.SetActive(true);
-            Theo.SetActive(avatar == "Theo");
-            Thea.SetActive(avatar == "Thea");
         }
 
         public void Hide()
