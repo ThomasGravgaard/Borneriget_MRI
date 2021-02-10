@@ -84,10 +84,7 @@ public class VrVideo : MonoBehaviour
 
     private IEnumerator InitializeXR()
     {
-        if (!Application.isEditor)
-        {
-            yield return XRGeneralSettings.Instance.Manager.InitializeLoader();
-        }
+        yield return XRGeneralSettings.Instance.Manager.InitializeLoader();
         if (XRGeneralSettings.Instance.Manager.activeLoader == null)
         {
             Log("Initializing XR Failed.");
