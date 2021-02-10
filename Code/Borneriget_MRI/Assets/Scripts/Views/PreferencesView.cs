@@ -73,7 +73,7 @@ namespace Borneriget.MRI
                 }
                 if (target == Thea)
                 {
-                    SelectAvatar(PreferencesProxy.Avatars.Theo);
+                    SelectAvatar(PreferencesProxy.Avatars.Thea);
                 }
             }
             else if (FormatSelection.activeInHierarchy)

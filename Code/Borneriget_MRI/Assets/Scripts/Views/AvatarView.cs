@@ -87,9 +87,9 @@ namespace Borneriget.MRI
 			SetState(State.SLEEPING);
 		}
 
-		public void Speak(AudioClip audioClip)
+		public void Speak(Action speakDone)
 		{
-			StartCoroutine(SpeakCoroutine(audioClip));
+			StartCoroutine(SpeakCoroutine(speakDone));
 		}
 
 		public void StopSpeak()
@@ -99,12 +99,15 @@ namespace Borneriget.MRI
 			audioSource.Stop();
 		}
 
-		private IEnumerator SpeakCoroutine(AudioClip audioClip)
+		private IEnumerator SpeakCoroutine(Action speakDone)
 		{
-			audioSource.PlayOneShot(audioClip);
+			audioSource.PlayOneShot(audioSource.clip);
 			animator.SetBool("talking", true);
-			yield return new WaitForSeconds(audioClip.length);
+			yield return new WaitForSeconds(13);
 			animator.SetBool("talking", false);
+			Debug.Log("Speak done");
+			audioSource.Stop();
+			speakDone();
 		}
 	}
 }

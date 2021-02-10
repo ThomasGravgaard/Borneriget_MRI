@@ -17,6 +17,7 @@ namespace Borneriget.MRI
 
         public static class Notifications
         {
+            public const string SpeakDone = "SpeakDone";
             public const string StartNormalVideo = "NormalVideo";
             public const string StartVrVideo = "VrVideo";
             public const string VideoDone = "VideoDone";
@@ -33,13 +34,13 @@ namespace Borneriget.MRI
 
         public override string[] ListNotificationInterests()
         {
-            return new[] { Notifications.VideoDone };
+            return new[] { Notifications.SpeakDone, Notifications.VideoDone };
         }
 
         private void InitializeView()
         {
             ViewComponent = Object.FindObjectOfType<LobbyView>(true);
-            View.SelectMode += View_SelectMode;
+            View.SelectRoom += View_SelectMode;
             View.Show();
         }
 
@@ -51,12 +52,15 @@ namespace Borneriget.MRI
                     SceneManager.UnloadSceneAsync(VideoScene);
                     View.Show();
                     break;
+                case Notifications.SpeakDone:
+                    View.ShowButtons();
+                    break;
             }
         }
 
-        private void View_SelectMode(bool isNormalMode)
+        private void View_SelectMode(int room)
         {
-            VideoScene = isNormalMode ? Notifications.StartNormalVideo : Notifications.StartVrVideo;
+            VideoScene = Preferences.UseVr ? Notifications.StartVrVideo : Notifications.StartNormalVideo;
             Facade.SendNotification(VideoScene);
             SceneManager.LoadSceneAsync(VideoScene, LoadSceneMode.Additive);
             View.Hide();

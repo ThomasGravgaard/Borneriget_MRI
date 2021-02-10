@@ -25,6 +25,7 @@ namespace Borneriget.MRI
         {
             ViewComponent = Object.FindObjectOfType<AvatarView>(true);
             View.Show(Avatar);
+            View.Speak(() => { Facade.SendNotification(LobbyMediator.Notifications.SpeakDone); });
         }
     }
 }

@@ -8,19 +8,22 @@ namespace Borneriget.MRI
     public class LobbyView : MonoBehaviour
     {
         [SerializeField]
-        private Button NormalButton;
+        private GameObject Buttons;
         [SerializeField]
-        private Button VrButton;
+        private Button Room1;
+        [SerializeField]
+        private Button Room2;
         [SerializeField]
         private Camera MenuCam;
 
-        public event Action<bool> SelectMode;
+        public event Action<int> SelectRoom;
 
         private void Awake()
         {
             gameObject.SetActive(false);
-            NormalButton.onClick.AddListener(NormalButton_Click);
-            VrButton.onClick.AddListener(VrButton_Click);
+            Buttons.SetActive(false);
+            Room1.onClick.AddListener(Room1_Click);
+            Room2.onClick.AddListener(Room2_Click);
         }
 
         public void Show()
@@ -35,15 +38,20 @@ namespace Borneriget.MRI
             gameObject.SetActive(false);
         }
 
-        private void VrButton_Click()
+        public void ShowButtons()
         {
-            SelectMode?.Invoke(false);
+            Buttons.SetActive(true);
+        }
+
+        private void Room1_Click()
+        {
+            SelectRoom?.Invoke(1);
             gameObject.SetActive(false);
         }
 
-        private void NormalButton_Click()
+        private void Room2_Click()
         {
-            SelectMode?.Invoke(true);
+            SelectRoom?.Invoke(2);
             gameObject.SetActive(false);
         }
     }
