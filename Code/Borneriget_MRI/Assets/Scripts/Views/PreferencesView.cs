@@ -27,6 +27,8 @@ namespace Borneriget.MRI
         private GameObject Tablet;
         [SerializeField]
         private GameObject Cardboard;
+        [SerializeField]
+        private GameObject Frame;
 
         public event Action<string> LanguageSelected;
         public event Action<PreferencesProxy.Avatars> AvatarSelected;
@@ -36,7 +38,7 @@ namespace Borneriget.MRI
 
         private void Awake()
         {
-            gameObject.SetActive(false);
+            Frame.SetActive(false);
             LanguageSelection.SetActive(false);
             AvatarSelection.SetActive(false);
             FormatSelection.SetActive(false);
@@ -45,30 +47,31 @@ namespace Borneriget.MRI
 
         public void Show()
         {
-            gameObject.SetActive(true);
+            Frame.SetActive(true);
             LanguageSelection.SetActive(true);
         }
 
         public void Hide()
         {
-            gameObject.SetActive(false);
+            Frame.SetActive(false);
         }
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            var selected = false;
+            if (!Frame.activeInHierarchy)
+            {
+                return;
+            }
             var target = eventData.pointerCurrentRaycast.gameObject;
             if (LanguageSelection.activeInHierarchy)
             {
                 if (target == Danish)
                 {
                     SelectLanguage("da-DK");
-                    selected = true;
                 }
                 if (target == English)
                 {
                     SelectLanguage("en-EN");
-                    selected = true;
                 }
             }
             else if (AvatarSelection.activeInHierarchy)
@@ -76,12 +79,10 @@ namespace Borneriget.MRI
                 if (target == Theo)
                 {
                     SelectAvatar(PreferencesProxy.Avatars.Theo);
-                    selected = true;
                 }
                 if (target == Thea)
                 {
                     SelectAvatar(PreferencesProxy.Avatars.Thea);
-                    selected = true;
                 }
             }
             else if (FormatSelection.activeInHierarchy)
@@ -89,22 +90,17 @@ namespace Borneriget.MRI
                 if (target == Tablet)
                 {
                     SelectFormat(false);
-                    selected = true;
                 }
                 if (target == Cardboard)
                 {
                     SelectFormat(true);
-                    selected = true;
                 }
-            }
-            if (selected)
-            {
-                audioSource.Play();
             }
         }
 
         private void SelectLanguage(string language)
         {
+            audioSource.Play();
             LanguageSelection.SetActive(false);
             LanguageSelected?.Invoke(language);
             AvatarSelection.SetActive(true);
@@ -112,13 +108,15 @@ namespace Borneriget.MRI
 
         private void SelectAvatar(PreferencesProxy.Avatars avatar)
         {
-            AvatarSelection.SetActive(false);
+            audioSource.Play();
             AvatarSelected?.Invoke(avatar);
+            AvatarSelection.SetActive(false);
             FormatSelection.SetActive(true);
         }
 
         private void SelectFormat(bool useVr)
         {
+            audioSource.Play();
             FormatSelection.SetActive(false);
             FormatSelected?.Invoke(useVr);
         }
