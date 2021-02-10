@@ -32,12 +32,15 @@ namespace Borneriget.MRI
         public event Action<PreferencesProxy.Avatars> AvatarSelected;
         public event Action<bool> FormatSelected;
 
+        private AudioSource audioSource;
+
         private void Awake()
         {
             gameObject.SetActive(false);
             LanguageSelection.SetActive(false);
             AvatarSelection.SetActive(false);
             FormatSelection.SetActive(false);
+            audioSource = GetComponent<AudioSource>();
         }
 
         public void Show()
@@ -53,16 +56,19 @@ namespace Borneriget.MRI
 
         public void OnPointerClick(PointerEventData eventData)
         {
+            var selected = false;
             var target = eventData.pointerCurrentRaycast.gameObject;
             if (LanguageSelection.activeInHierarchy)
             {
                 if (target == Danish)
                 {
                     SelectLanguage("da-DK");
+                    selected = true;
                 }
                 if (target == English)
                 {
                     SelectLanguage("en-EN");
+                    selected = true;
                 }
             }
             else if (AvatarSelection.activeInHierarchy)
@@ -70,10 +76,12 @@ namespace Borneriget.MRI
                 if (target == Theo)
                 {
                     SelectAvatar(PreferencesProxy.Avatars.Theo);
+                    selected = true;
                 }
                 if (target == Thea)
                 {
                     SelectAvatar(PreferencesProxy.Avatars.Thea);
+                    selected = true;
                 }
             }
             else if (FormatSelection.activeInHierarchy)
@@ -81,11 +89,17 @@ namespace Borneriget.MRI
                 if (target == Tablet)
                 {
                     SelectFormat(false);
+                    selected = true;
                 }
                 if (target == Cardboard)
                 {
                     SelectFormat(true);
+                    selected = true;
                 }
+            }
+            if (selected)
+            {
+                audioSource.Play();
             }
         }
 
