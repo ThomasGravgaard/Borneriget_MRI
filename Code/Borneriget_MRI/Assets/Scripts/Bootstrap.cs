@@ -40,7 +40,10 @@ namespace Borneriget.MRI
 			Facade.RegisterProxy(new VideoProxy(videoUrls));
 
 			// Register commands
-			Facade.RegisterCommand(PreferencesMediator.Notifications.PreferencesSelected, () => new ChangeMediatorCommand<PreferencesMediator, LobbyMediator>());
+			Facade.RegisterCommand(PreferencesMediator.Notifications.PreferencesSelected, () => new ChangeMediatorCommand<PreferencesMediator, StoryMediator>());
+
+			// Register mediators that we always have
+			Facade.RegisterMediator(new SoundMediator());
 
 			// Start up the main menu
 			Facade.RegisterMediator(new PreferencesMediator());

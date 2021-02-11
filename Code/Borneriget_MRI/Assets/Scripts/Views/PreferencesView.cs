@@ -34,15 +34,12 @@ namespace Borneriget.MRI
         public event Action<PreferencesProxy.Avatars> AvatarSelected;
         public event Action<bool> FormatSelected;
 
-        private AudioSource audioSource;
-
         private void Awake()
         {
             Frame.SetActive(false);
             LanguageSelection.SetActive(false);
             AvatarSelection.SetActive(false);
             FormatSelection.SetActive(false);
-            audioSource = GetComponent<AudioSource>();
         }
 
         public void Show()
@@ -100,7 +97,7 @@ namespace Borneriget.MRI
 
         private void SelectLanguage(string language)
         {
-            audioSource.Play();
+            Bootstrap.Facade.SendNotification(SoundMediator.Notifications.ClickButton);
             LanguageSelection.SetActive(false);
             LanguageSelected?.Invoke(language);
             AvatarSelection.SetActive(true);
@@ -108,7 +105,7 @@ namespace Borneriget.MRI
 
         private void SelectAvatar(PreferencesProxy.Avatars avatar)
         {
-            audioSource.Play();
+            Bootstrap.Facade.SendNotification(SoundMediator.Notifications.ClickButton);
             AvatarSelected?.Invoke(avatar);
             AvatarSelection.SetActive(false);
             FormatSelection.SetActive(true);
@@ -116,7 +113,7 @@ namespace Borneriget.MRI
 
         private void SelectFormat(bool useVr)
         {
-            audioSource.Play();
+            Bootstrap.Facade.SendNotification(SoundMediator.Notifications.ClickButton);
             FormatSelection.SetActive(false);
             FormatSelected?.Invoke(useVr);
         }
