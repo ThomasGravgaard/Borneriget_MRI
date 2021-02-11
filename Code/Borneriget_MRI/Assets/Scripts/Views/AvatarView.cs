@@ -5,7 +5,8 @@ using UnityEngine;
 
 namespace Borneriget.MRI
 {
-	public class AvatarView : MonoBehaviour {
+    public class AvatarView : MonoBehaviour
+	{
 		public enum State {
 			NEUTRAL,
 			HAPPY,
@@ -15,13 +16,16 @@ namespace Borneriget.MRI
 			BYE
 		}
 
+		[SerializeField]
+		private AudioClip[] speaks = null;
+
 		private State currentState;
 		private List<SpriteRenderer> theaObjects = new List<SpriteRenderer>();
 		private List<SpriteRenderer> theoObjects = new List<SpriteRenderer>();
 		private AudioSource audioSource;
 		private Animator animator;
 
-		private void Awake()
+        private void Awake()
 		{
 			//Find the gender specific body parts
 			foreach (var child in GetComponentsInChildren<SpriteRenderer>(includeInactive: true))
@@ -41,7 +45,13 @@ namespace Borneriget.MRI
 			audioSource = GetComponent<AudioSource>();
 			animator = GetComponent<Animator>();
 
-			SetState(State.NEUTRAL);
+			foreach (var child in gameObject.GetComponentsInChildren<SpriteRenderer>())
+			{
+				var childCollider = child.gameObject.AddComponent<BoxCollider2D>();
+				childCollider.usedByComposite = true;
+			}
+
+			SetState(State.SLEEPING);
 		}
 
 		private void Update() {
@@ -83,13 +93,25 @@ namespace Borneriget.MRI
 			return currentState;
 		}
 
-		public void Sleep() {
+		public void WakeUp(Action awake)
+        {
+			StartCoroutine(WakeUpCo(awake));
+        }
+
+        private IEnumerator WakeUpCo(Action awake)
+        {
+			SetState(State.NEUTRAL);
+			yield return new WaitForSeconds(3);
+			awake();
+        }
+
+        public void Sleep() {
 			SetState(State.SLEEPING);
 		}
 
 		public void Speak(Action speakDone)
 		{
-			StartCoroutine(SpeakCoroutine(speakDone));
+			StartCoroutine(SpeakCo(speaks[0], speakDone));
 		}
 
 		public void StopSpeak()
@@ -99,15 +121,14 @@ namespace Borneriget.MRI
 			audioSource.Stop();
 		}
 
-		private IEnumerator SpeakCoroutine(Action speakDone)
-		{
-			audioSource.PlayOneShot(audioSource.clip);
+		private IEnumerator SpeakCo(AudioClip clip, Action speakDone)
+		{			
+			audioSource.PlayOneShot(clip);
 			animator.SetBool("talking", true);
-			yield return new WaitForSeconds(13);
+			yield return new WaitForSeconds(clip.length);
 			animator.SetBool("talking", false);
-			Debug.Log("Speak done");
 			audioSource.Stop();
 			speakDone();
 		}
-	}
+    }
 }
