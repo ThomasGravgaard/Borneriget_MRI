@@ -47,7 +47,7 @@ namespace Borneriget.MRI
 
         private void InitializeView()
         {
-            ViewComponent = Object.FindObjectOfType<Story2dView>(true);
+            ViewComponent = Preferences.UseVr ? (IStoryView)Object.FindObjectOfType<Story3dView>(true) : (IStoryView)Object.FindObjectOfType<Story2dView>(true);
             View.Initialize(Notifications.ViewInitialized);
         }
 
