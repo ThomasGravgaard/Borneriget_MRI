@@ -35,6 +35,7 @@ namespace Borneriget.MRI
             View.LanguageSelected -= View_LanguageSelected;
             View.AvatarSelected -= View_AvatarSelected;
             View.FormatSelected -= View_FormatSelected;
+            View.Hide();
             base.OnRemove();
         }
 

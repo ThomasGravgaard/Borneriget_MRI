@@ -37,13 +37,13 @@ namespace Borneriget.MRI
 			// Load in the video Urls
 			var config = Resources.Load<TextAsset>("Config");
 			var videoUrls = JsonConvert.DeserializeObject<VideoUrls>(config.text);
-			Facade.RegisterProxy(new VideoProxy(videoUrls));
 
 			// Register commands
 			Facade.RegisterCommand(PreferencesMediator.Notifications.PreferencesSelected, () => new ChangeMediatorCommand<PreferencesMediator, StoryMediator>());
 
 			// Register mediators that we always have
 			Facade.RegisterMediator(new SoundMediator());
+			Facade.RegisterMediator(new VideoMediator(videoUrls));
 
 			// Start up the main menu
 			Facade.RegisterMediator(new PreferencesMediator());

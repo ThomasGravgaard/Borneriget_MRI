@@ -88,6 +88,6 @@ public class NormalVideoMenu : MonoBehaviour
         }
         Video.SetActive(false);
 
-        Bootstrap.Facade.SendNotification(LobbyMediator.Notifications.VideoDone);
+        Bootstrap.Facade.SendNotification(VideoMediator.Notifications.VideoDone);
     }
 }

@@ -164,7 +164,7 @@ public class VrVideo : MonoBehaviour
             }
             yield return null;
         }
-        Bootstrap.Facade.SendNotification(LobbyMediator.Notifications.VideoDone);
+        Bootstrap.Facade.SendNotification(VideoMediator.Notifications.VideoDone);
     }
 
     private void StopXR()
@@ -182,7 +182,7 @@ public class VrVideo : MonoBehaviour
         XRGeneralSettings.Instance.Manager.DeinitializeLoader();
         Log("XR deinitialized.");
 
-        Bootstrap.Facade.SendNotification(LobbyMediator.Notifications.VideoDone);
+        Bootstrap.Facade.SendNotification(VideoMediator.Notifications.VideoDone);
     }
 
     public void Update()

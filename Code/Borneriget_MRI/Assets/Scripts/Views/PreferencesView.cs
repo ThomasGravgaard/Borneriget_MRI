@@ -44,6 +44,7 @@ namespace Borneriget.MRI
 
         public void Show()
         {
+            gameObject.SetActive(true);
             Frame.SetActive(true);
             LanguageSelection.SetActive(true);
         }
@@ -51,6 +52,7 @@ namespace Borneriget.MRI
         public void Hide()
         {
             Frame.SetActive(false);
+            gameObject.SetActive(false);
         }
 
         public void OnPointerClick(PointerEventData eventData)
