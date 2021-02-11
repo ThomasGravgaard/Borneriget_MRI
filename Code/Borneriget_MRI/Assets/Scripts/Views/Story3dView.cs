@@ -12,7 +12,7 @@ namespace Borneriget.MRI
         [SerializeField]
         private GameObject Bear;
         [SerializeField]
-        private float BearDistance;
+        private Renderer ScreenImage;
         [SerializeField]
         private GameObject Environment;
         [SerializeField]
@@ -146,7 +146,7 @@ namespace Borneriget.MRI
 #if UNITY_EDITOR
                 var mouseDelta = lastMousePos - Input.mousePosition;
                 lastMousePos = Input.mousePosition;
-                var rotate = new Vector3(mouseDelta.y, mouseDelta.x, 0) * Time.deltaTime * MouseRotateSpeed;
+                var rotate = new Vector3(mouseDelta.y, -mouseDelta.x, 0) * Time.deltaTime * MouseRotateSpeed;
                 CamRoot.transform.Rotate(rotate);
 #endif
             }
