@@ -80,7 +80,6 @@ namespace Borneriget.MRI
                     View.Prepare((Preferences.UseVr) ? Urls.VrVideos[progress] : Urls.NormalVideos[progress]);
                     break;
                 case Notifications.PlayVideo:
-                    Debug.Log("Play video");
                     View.PlayVideo();
                     break;
             }
