@@ -2076,21 +2076,5 @@ PrefabInstance:
       propertyPath: MenuCam
       value: 
       objectReference: {fileID: 180068257}
-    - target: {fileID: 8253602381621869952, guid: 97787db8acce856468b73bfba30edd87, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 8253602381621869952, guid: 97787db8acce856468b73bfba30edd87, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 8681481679365302547, guid: 97787db8acce856468b73bfba30edd87, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 1920
-      objectReference: {fileID: 0}
-    - target: {fileID: 8681481679365302547, guid: 97787db8acce856468b73bfba30edd87, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 1080
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97787db8acce856468b73bfba30edd87, type: 3}

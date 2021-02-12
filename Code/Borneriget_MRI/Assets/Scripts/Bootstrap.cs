@@ -44,6 +44,7 @@ namespace Borneriget.MRI
 			// Register mediators that we always have
 			Facade.RegisterMediator(new SoundMediator());
 			Facade.RegisterMediator(new VideoMediator(videoUrls));
+			Facade.RegisterMediator(new FaderMediator());
 
 			// Start up the main menu
 			Facade.RegisterMediator(new PreferencesMediator());

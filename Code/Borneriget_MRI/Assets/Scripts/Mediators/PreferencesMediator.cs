@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace Borneriget.MRI
 {
+
     public class PreferencesMediator : Mediator
     {
         public PreferencesMediator() : base(NAME) {}
@@ -62,8 +63,7 @@ namespace Borneriget.MRI
         private void View_FormatSelected(bool useVr)
         {
             Preferences.UseVr = useVr;
-            View.Hide();
-            Facade.SendNotification(Notifications.PreferencesSelected);
+            Facade.SendNotification(FaderMediator.Notifications.StartFade, Notifications.PreferencesSelected);
         }
     }
 }
