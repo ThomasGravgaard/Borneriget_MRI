@@ -36,6 +36,8 @@ namespace Borneriget.MRI
         {
             Environment.SetActive(false);
             CamRoot.gameObject.SetActive(false);
+            GazeProgress.gameObject.SetActive(false);
+            GazeProgress.fillAmount = 0;
         }
 
         public void Initialize(string doneNotification)
@@ -70,6 +72,7 @@ namespace Borneriget.MRI
             MenuCam.enabled = false;
             CamRoot.gameObject.SetActive(true);
             Environment.SetActive(true);
+            GazeProgress.gameObject.SetActive(true);
             StartCoroutine(ShowCo(doneNotification));
         }
 
@@ -140,6 +143,7 @@ namespace Borneriget.MRI
                     }
                     if (progress == 1)
                     {
+                        GazeProgress.fillAmount = 0;
                         Bootstrap.Facade.SendNotification(StoryMediator.Notifications.AvatarClicked);
                     }
                 }
