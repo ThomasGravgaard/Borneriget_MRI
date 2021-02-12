@@ -22,6 +22,7 @@ namespace Borneriget.MRI
             public const string ViewInitialized = "ViewInitialized";
             public const string ViewShown = "ViewShown";
             public const string AvatarClicked = "AvatarClicked";
+            public const string FadeAfterVideo = "FadeAfterVideo";
         }
 
         public override void OnRegister()
@@ -39,6 +40,8 @@ namespace Borneriget.MRI
                 Notifications.ViewInitialized,
                 Notifications.ViewShown,
                 Notifications.AvatarClicked,
+                Notifications.FadeAfterVideo,
+                VideoMediator.Notifications.PlayVideo,
                 VideoMediator.Notifications.VideoDone, 
                 AvatarMediator.Notifications.SpeakDone, 
                 AvatarMediator.Notifications.AvatarAwake 
@@ -76,10 +79,18 @@ namespace Borneriget.MRI
                     Facade.SendNotification(AvatarMediator.Notifications.AvatarSpeak, Progress);
                     break;
                 case AvatarMediator.Notifications.SpeakDone:
+                    SendNotification(FaderMediator.Notifications.StartFade, new FaderMediator.FadeNotification {
+                        Name = VideoMediator.Notifications.PlayVideo,
+                        Body = Progress
+                    });
+                    break;
+                case VideoMediator.Notifications.PlayVideo:
                     View.ShowVideo();
-                    Facade.SendNotification(VideoMediator.Notifications.PlayVideo, Progress);
                     break;
                 case VideoMediator.Notifications.VideoDone:
+                    SendNotification(FaderMediator.Notifications.StartFade, Notifications.FadeAfterVideo);
+                    break;
+                case Notifications.FadeAfterVideo:
                     View.Show(Progress, Notifications.ViewShown);
                     break;
             }

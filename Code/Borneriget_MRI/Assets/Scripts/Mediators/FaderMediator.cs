@@ -11,12 +11,18 @@ namespace Borneriget.MRI
         public new static string NAME = "FaderMediator";
 
         private FaderView[] Views;
-        private string SendOnFade = null;
+        private FadeNotification? SendOnFade = null;
 
         public static class Notifications
         {
             public const string StartFade = "StartFade";
             public const string FadeBlack = "FadeBlack";
+        }
+
+        public struct FadeNotification
+        {
+            public string Name;
+            public object Body;
         }
 
         public override void OnRegister()
@@ -33,7 +39,15 @@ namespace Borneriget.MRI
 
         private void FaderMediator_OnFadeBlack()
         {
-            SendNotification(SendOnFade ?? Notifications.FadeBlack);
+            if (SendOnFade.HasValue)
+            {
+                SendNotification(SendOnFade.Value.Name, SendOnFade.Value.Body);
+                SendOnFade = null;
+            }
+            else
+            {
+                SendNotification(Notifications.FadeBlack);
+            }
         }
 
         public override string[] ListNotificationInterests()
@@ -49,7 +63,21 @@ namespace Borneriget.MRI
                 {
                     view.StartFade();
                 }
-                SendOnFade = (notification.Body != null) ? notification.Body.ToString() : null; 
+                if (notification.Body != null)
+                {
+                    if (notification.Body is FadeNotification)
+                    {
+                        SendOnFade = (FadeNotification)notification.Body;
+                    }
+                    else
+                    {
+                        SendOnFade = new FadeNotification { Name = notification.Body.ToString(), Body = null };
+                    }
+                }
+                else
+                {
+                    SendOnFade = null;
+                }
             }
         }
     }

@@ -12,3 +12,38 @@ Video timer in VR
 Fade mellem videoer
 
 
+----------------------
+Møde 10/2
+
+I VR skal der være still billeder og så en flydende til at starte videoen. Når videoen er slut fades tilbage til still.
+
+Pause knap i VR
+
+Play/pause i 2D
+Fade in/out
+
+Gå i lobby i VR
+
+Vække Theo, i 2d ved at trykke på ham. I 3d ved at kigge.
+
+
+-------------------
+Missing stuff
+-------------------
++ Real 3D environment
++ Still picture in 3D
++ Gaze progress in 3D
++ Fading in 2D
++ Fading in 3D
+- Pause video in 2D
+- Video progress in 2D
+- More than one lobby picture
+- More than one video
+- Pause video in 3D
+
+-------------------
+Polish
+-------------------
+- Frame size on different devices
+- 2D video screen size fitting
+- 3d environment exit - where to go?
