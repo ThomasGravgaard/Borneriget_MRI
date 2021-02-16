@@ -77,7 +77,7 @@ namespace Borneriget.MRI
                     break;
                 case Notifications.PrepareVideo:
                     var progress = (int)notification.Body;
-                    View.Prepare((Preferences.UseVr) ? Urls.VrVideos[progress] : Urls.NormalVideos[progress]);
+                    View.Prepare((Preferences.UseVr) ? Urls.VrVideos.SafeGet(progress) : Urls.NormalVideos.SafeGet(progress));
                     break;
                 case Notifications.PlayVideo:
                     View.PlayVideo();

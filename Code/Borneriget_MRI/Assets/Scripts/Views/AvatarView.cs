@@ -109,9 +109,9 @@ namespace Borneriget.MRI
 			SetState(State.SLEEPING);
 		}
 
-		public void Speak(Action speakDone)
+		public void Speak(int progress, Action speakDone)
 		{
-			StartCoroutine(SpeakCo(speaks[0], speakDone));
+			StartCoroutine(SpeakCo(speaks.SafeGet(progress), speakDone));
 		}
 
 		public void StopSpeak()

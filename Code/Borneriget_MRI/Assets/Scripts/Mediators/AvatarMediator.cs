@@ -52,7 +52,7 @@ namespace Borneriget.MRI
                     View.WakeUp(() => Facade.SendNotification(Notifications.AvatarAwake));
                     break;
                 case Notifications.AvatarSpeak:
-                    View.Speak(() => Facade.SendNotification(Notifications.SpeakDone));
+                    View.Speak((int)notification.Body, () => Facade.SendNotification(Notifications.SpeakDone));
                     break;
             }
         }

@@ -91,6 +91,7 @@ namespace Borneriget.MRI
                     SendNotification(FaderMediator.Notifications.StartFade, Notifications.FadeAfterVideo);
                     break;
                 case Notifications.FadeAfterVideo:
+                    Progress++;
                     View.Show(Progress, Notifications.ViewShown);
                     break;
             }
