@@ -71,6 +71,8 @@ namespace Borneriget.MRI
 #if UNITY_EDITOR
             lastMousePos = Input.mousePosition;
 #endif
+            ScreenImage.material.mainTexture = ScreenImages.SafeGet(room);
+            ScreenImage.material.SetTexture("_EmissionMap", ScreenImages.SafeGet(room));
             MenuCam.enabled = false;
             CamRoot.gameObject.SetActive(true);
             Environment.SetActive(true);
