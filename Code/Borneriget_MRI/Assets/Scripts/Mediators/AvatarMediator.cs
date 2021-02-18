@@ -18,6 +18,7 @@ namespace Borneriget.MRI
             public const string WakeAvatar = "WakeAvatar";
             public const string AvatarAwake = "AvatarAwake";
             public const string AvatarSpeak = "AvatarSpeak";
+            public const string StopSpeak = "StopSpeak";
             public const string SpeakDone = "SpeakDone";
         }
 
@@ -35,6 +36,7 @@ namespace Borneriget.MRI
             return new[] { 
                 Notifications.WakeAvatar,
                 Notifications.AvatarSpeak,
+                Notifications.StopSpeak,
             };
         }
 
@@ -53,6 +55,9 @@ namespace Borneriget.MRI
                     break;
                 case Notifications.AvatarSpeak:
                     View.Speak((int)notification.Body, () => Facade.SendNotification(Notifications.SpeakDone));
+                    break;
+                case Notifications.StopSpeak:
+                    View.StopSpeak();
                     break;
             }
         }

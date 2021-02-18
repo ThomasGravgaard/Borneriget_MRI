@@ -21,6 +21,8 @@ namespace Borneriget.MRI
         private GameObject VideoImage;
         [SerializeField]
         private Image VideoProgress;
+        [SerializeField]
+        private GameObject ExitButton;
 
         [SerializeField]
         private GameObject Buttons;
@@ -30,13 +32,16 @@ namespace Borneriget.MRI
         private Button Room2;
 
         public event Action<int> SelectRoom;
+        public event Action Exit;
 
         private void Awake()
         {
+            VideoProgress.fillAmount = 0;
             Background.gameObject.SetActive(false);
             Bear.SetActive(false);
             Buttons.SetActive(false);
             VideoImage.SetActive(false);
+            ExitButton.SetActive(false);
             Room1.onClick.AddListener(Room1_Click);
             Room2.onClick.AddListener(Room2_Click);
         }
@@ -61,6 +66,7 @@ namespace Borneriget.MRI
 
         private IEnumerator ShowCo(string doneNotification)
         {
+            ExitButton.SetActive(true);
             VideoImage.SetActive(false);
             MenuCam.enabled = true;
             Background.gameObject.SetActive(true);
@@ -71,8 +77,11 @@ namespace Borneriget.MRI
 
         public void Hide()
         {
-            MenuCam.enabled = false;
-            gameObject.SetActive(false);
+            Background.gameObject.SetActive(false);
+            Bear.SetActive(false);
+            Buttons.SetActive(false);
+            VideoImage.SetActive(false);
+            ExitButton.SetActive(false);
         }
 
         public void ShowButtons()
@@ -105,6 +114,10 @@ namespace Borneriget.MRI
                 if (target == Bear)
                 {
                     Bootstrap.Facade.SendNotification(StoryMediator.Notifications.AvatarClicked);
+                }
+                if (target == ExitButton)
+                {
+                    Exit?.Invoke();
                 }
             }
         }

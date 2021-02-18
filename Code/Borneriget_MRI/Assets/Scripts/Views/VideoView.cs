@@ -89,5 +89,13 @@ namespace Borneriget.MRI
                 Player.Play();
             }
         }
+
+        public void StopVideo()
+        {
+            if (Player.isPlaying)
+            {
+                Player.Stop();
+            }
+        }
     }
 }

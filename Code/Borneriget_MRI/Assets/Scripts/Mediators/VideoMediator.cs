@@ -18,6 +18,7 @@ namespace Borneriget.MRI
             public const string PrepareVideo = "PrepareVideo";
             public const string PlayVideo = "PlayVideo";
             public const string TogglePause = "TogglePause";
+            public const string StopVideo = "StopVideo";
             public const string VideoDone = "VideoDone";
             public const string VideoProgressUpdate = "VideoProgressUpdate";
         }
@@ -65,7 +66,8 @@ namespace Borneriget.MRI
                 PreferencesMediator.Notifications.PreferencesSelected,
                 Notifications.PrepareVideo,
                 Notifications.PlayVideo,
-                Notifications.TogglePause
+                Notifications.TogglePause,
+                Notifications.StopVideo
             };
         }
 
@@ -86,6 +88,9 @@ namespace Borneriget.MRI
                     break;
                 case Notifications.TogglePause:
                     View.TogglePause();
+                    break;
+                case Notifications.StopVideo:
+                    View.StopVideo();
                     break;
             }
         }

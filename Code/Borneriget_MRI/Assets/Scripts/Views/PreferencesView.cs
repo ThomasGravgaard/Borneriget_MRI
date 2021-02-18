@@ -42,11 +42,18 @@ namespace Borneriget.MRI
             FormatSelection.SetActive(false);
         }
 
-        public void Show()
+        public void Show(bool hasSelectedLanguage)
         {
             gameObject.SetActive(true);
             Frame.SetActive(true);
-            LanguageSelection.SetActive(true);
+            if (hasSelectedLanguage)
+            {
+                FormatSelection.SetActive(true);
+            }
+            else
+            {
+                LanguageSelection.SetActive(true);
+            }
         }
 
         public void Hide()

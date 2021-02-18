@@ -34,6 +34,8 @@ namespace Borneriget.MRI
         private bool vrPlaying = false;
         private float progress;
 
+        public event Action Exit;
+
         private void Awake()
         {
             Environment.SetActive(false);
@@ -113,6 +115,7 @@ namespace Borneriget.MRI
                 if (Api.IsCloseButtonPressed)
                 {
                     StopXR();
+                    Exit?.Invoke();
                 }
 
                 if (Api.IsGearButtonPressed)
@@ -156,6 +159,12 @@ namespace Borneriget.MRI
                 lastMousePos = Input.mousePosition;
                 var rotate = new Vector3(mouseDelta.y, -mouseDelta.x, 0) * Time.deltaTime * MouseRotateSpeed;
                 CamRoot.transform.Rotate(rotate);
+
+                if (Input.GetKeyDown(KeyCode.Escape))
+                {
+                    StopXR();
+                    Exit?.Invoke();
+                }
 #endif
             }
         }

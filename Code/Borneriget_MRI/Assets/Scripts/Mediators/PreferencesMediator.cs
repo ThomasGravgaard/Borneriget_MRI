@@ -23,12 +23,13 @@ namespace Borneriget.MRI
         {
             base.OnRegister();
 
-            if (!Facade.HasProxy<PreferencesProxy>())
+            var hasSelectedLanguage = Facade.HasProxy<PreferencesProxy>();
+            if (!hasSelectedLanguage)
             {
                 Facade.RegisterProxy(new PreferencesProxy());
             }
             Preferences = Facade.RetrieveProxy<PreferencesProxy>();
-            InitializeView();
+            InitializeView(hasSelectedLanguage);
         }
 
         public override void OnRemove()
@@ -40,14 +41,14 @@ namespace Borneriget.MRI
             base.OnRemove();
         }
 
-        private void InitializeView()
+        private void InitializeView(bool hasSelectedLanguage)
         {
             // The preferences menu should already be present in the scene. Just get it.
             ViewComponent = Object.FindObjectOfType<PreferencesView>(true);
             View.LanguageSelected += View_LanguageSelected;
             View.AvatarSelected += View_AvatarSelected;
             View.FormatSelected += View_FormatSelected;
-            View.Show();
+            View.Show(hasSelectedLanguage);
         }
 
         private void View_LanguageSelected(string language)
@@ -62,6 +63,7 @@ namespace Borneriget.MRI
 
         private void View_FormatSelected(bool useVr)
         {
+            Debug.Log($"Format selected {useVr}");
             Preferences.UseVr = useVr;
             Facade.SendNotification(FaderMediator.Notifications.StartFade, Notifications.PreferencesSelected);
         }

@@ -23,6 +23,7 @@ namespace Borneriget.MRI
             public const string ViewShown = "ViewShown";
             public const string AvatarClicked = "AvatarClicked";
             public const string FadeAfterVideo = "FadeAfterVideo";
+            public const string ReturnToMenu = "ReturnToMenu";
         }
 
         public override void OnRegister()
@@ -41,18 +42,32 @@ namespace Borneriget.MRI
                 Notifications.ViewShown,
                 Notifications.AvatarClicked,
                 Notifications.FadeAfterVideo,
+                Notifications.ReturnToMenu,
                 VideoMediator.Notifications.PlayVideo,
                 VideoMediator.Notifications.VideoDone, 
                 VideoMediator.Notifications.VideoProgressUpdate,
                 AvatarMediator.Notifications.SpeakDone, 
-                AvatarMediator.Notifications.AvatarAwake 
+                AvatarMediator.Notifications.AvatarAwake
             };
         }
 
         private void InitializeView()
         {
+            Debug.Log("Initialize story");
             ViewComponent = Preferences.UseVr ? (IStoryView)Object.FindObjectOfType<Story3dView>(true) : (IStoryView)Object.FindObjectOfType<Story2dView>(true);
+            View.Exit += View_Exit;
             View.Initialize(Notifications.ViewInitialized);
+        }
+
+        private void View_Exit()
+        {
+            SendNotification(FaderMediator.Notifications.StartFade, Notifications.ReturnToMenu);
+        }
+
+        public override void OnRemove()
+        {
+            base.OnRemove();
+            Debug.Log("Remove story");
         }
 
         public override void HandleNotification(INotification notification)
@@ -97,6 +112,9 @@ namespace Borneriget.MRI
                 case Notifications.FadeAfterVideo:
                     Progress++;
                     View.Show(Progress, Notifications.ViewShown);
+                    break;
+                case Notifications.ReturnToMenu:
+                    View.Hide();
                     break;
             }
         }
