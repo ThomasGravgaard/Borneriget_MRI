@@ -18,7 +18,6 @@ namespace Borneriget.MRI
         public override void Execute(INotification notification)
         {
             base.Execute(notification);
-            UnityEngine.Debug.Log($"Change mediator {typeof(T1)} => {typeof(T2)}");
             Facade.RemoveMediator<T1>();
             Facade.RegisterMediator(Activator.CreateInstance<T2>());
         }

@@ -87,6 +87,11 @@ namespace Borneriget.MRI
             Bear.SetActive(true);
             yield return new WaitForSeconds(0.1f);
             Bootstrap.Facade.SendNotification(doneNotification);
+            yield return new WaitForSeconds(10f);
+            if (progress < 1)
+            {
+                Bootstrap.Facade.SendNotification(StoryMediator.Notifications.AvatarClicked);
+            }
         }
 
         public void ShowVideo()

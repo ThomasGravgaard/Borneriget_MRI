@@ -53,7 +53,6 @@ namespace Borneriget.MRI
 
         private void InitializeView()
         {
-            Debug.Log("Initialize story");
             ViewComponent = Preferences.UseVr ? (IStoryView)Object.FindObjectOfType<Story3dView>(true) : (IStoryView)Object.FindObjectOfType<Story2dView>(true);
             View.Exit += View_Exit;
             View.Initialize(Notifications.ViewInitialized);
@@ -67,7 +66,6 @@ namespace Borneriget.MRI
         public override void OnRemove()
         {
             base.OnRemove();
-            Debug.Log("Remove story");
         }
 
         public override void HandleNotification(INotification notification)

@@ -57,7 +57,6 @@ namespace Borneriget.MRI
 
         public override void HandleNotification(INotification notification)
         {
-            Debug.Log($"Fader {notification.Name} {notification.Body}");
             if (notification.Name == Notifications.StartFade)
             {
                 foreach (var view in Views)

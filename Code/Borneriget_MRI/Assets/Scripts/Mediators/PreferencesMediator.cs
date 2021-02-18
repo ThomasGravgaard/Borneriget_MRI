@@ -63,7 +63,6 @@ namespace Borneriget.MRI
 
         private void View_FormatSelected(bool useVr)
         {
-            Debug.Log($"Format selected {useVr}");
             Preferences.UseVr = useVr;
             Facade.SendNotification(FaderMediator.Notifications.StartFade, Notifications.PreferencesSelected);
         }

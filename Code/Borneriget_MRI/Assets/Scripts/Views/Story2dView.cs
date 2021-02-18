@@ -33,6 +33,7 @@ namespace Borneriget.MRI
 
         public event Action<int> SelectRoom;
         public event Action Exit;
+        private bool avatarClicked;
 
         private void Awake()
         {
@@ -59,6 +60,7 @@ namespace Borneriget.MRI
 
         public void Show(int room, string doneNotification)
         {
+            avatarClicked = false;
             VideoProgress.fillAmount = 0;
             Background.texture = BackgroundImages.SafeGet(room);
             StartCoroutine(ShowCo(doneNotification));
@@ -73,6 +75,11 @@ namespace Borneriget.MRI
             Bear.SetActive(true);
             yield return new WaitForSeconds(1f);
             Bootstrap.Facade.SendNotification(doneNotification);
+            yield return new WaitForSeconds(10f);
+            if (!avatarClicked)
+            {
+                Bootstrap.Facade.SendNotification(StoryMediator.Notifications.AvatarClicked);
+            }
         }
 
         public void Hide()
@@ -113,7 +120,11 @@ namespace Borneriget.MRI
                 var target = eventData.pointerCurrentRaycast.gameObject;
                 if (target == Bear)
                 {
-                    Bootstrap.Facade.SendNotification(StoryMediator.Notifications.AvatarClicked);
+                    if (!avatarClicked)
+                    {
+                        avatarClicked = true;
+                        Bootstrap.Facade.SendNotification(StoryMediator.Notifications.AvatarClicked);
+                    }
                 }
                 if (target == ExitButton)
                 {
