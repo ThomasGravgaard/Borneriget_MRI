@@ -14,6 +14,8 @@ namespace Borneriget.MRI
         [SerializeField]
         private Renderer ScreenImage;
         [SerializeField]
+        private Texture[] ScreenImages;
+        [SerializeField]
         private GameObject Environment;
         [SerializeField]
         private Camera MenuCam;

@@ -16,15 +16,5 @@ namespace Borneriget.MRI
         }
 
         private VideoUrls Videos => (VideoUrls)Data;
-
-        public string GetVrVideo()
-        {
-            return Videos.VrVideos[0];
-        }
-
-        public string GetNormalVideo()
-        {
-            return Videos.NormalVideos[0];
-        }
     }
 }

@@ -8,7 +8,7 @@ namespace Borneriget.MRI
 {
     public class VideoUrls
     {
-        public string[] NormalVideos;
-        public string[] VrVideos;
+        public Dictionary<string, string[]> NormalVideos;
+        public Dictionary<string, string[]> VrVideos;
     }
 }

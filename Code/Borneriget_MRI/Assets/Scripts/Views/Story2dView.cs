@@ -12,7 +12,9 @@ namespace Borneriget.MRI
         [SerializeField]
         private Camera MenuCam;
         [SerializeField]
-        private GameObject Background;
+        private RawImage Background;
+        [SerializeField]
+        private Texture[] BackgroundImages;
         [SerializeField]
         private GameObject Bear;
         [SerializeField]
@@ -29,7 +31,7 @@ namespace Borneriget.MRI
 
         private void Awake()
         {
-            Background.SetActive(false);
+            Background.gameObject.SetActive(false);
             Bear.SetActive(false);
             Buttons.SetActive(false);
             VideoImage.SetActive(false);
@@ -50,6 +52,7 @@ namespace Borneriget.MRI
 
         public void Show(int room, string doneNotification)
         {
+            Background.texture = BackgroundImages.SafeGet(room);
             StartCoroutine(ShowCo(doneNotification));
             // TODO: Change the background
         }
@@ -58,7 +61,7 @@ namespace Borneriget.MRI
         {
             VideoImage.SetActive(false);
             MenuCam.enabled = true;
-            Background.SetActive(true);
+            Background.gameObject.SetActive(true);
             Bear.SetActive(true);
             yield return new WaitForSeconds(1f);
             Bootstrap.Facade.SendNotification(doneNotification);
@@ -99,7 +102,7 @@ namespace Borneriget.MRI
         public void ShowVideo()
         {
             Bear.SetActive(false);
-            Background.SetActive(false);
+            Background.gameObject.SetActive(false);
             VideoImage.SetActive(true);
         }
     }

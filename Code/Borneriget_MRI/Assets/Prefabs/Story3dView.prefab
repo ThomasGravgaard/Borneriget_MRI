@@ -257,6 +257,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bear: {fileID: 0}
   ScreenImage: {fileID: 1376756746573160234}
+  ScreenImages:
+  - {fileID: 2800000, guid: a87212331710dbf44b79748eb62467a1, type: 3}
+  - {fileID: 2800000, guid: a59635be1f3c71d42ad540254dee6d60, type: 3}
+  - {fileID: 2800000, guid: 3406931bd50865f47b0435b91ac8b57b, type: 3}
+  - {fileID: 2800000, guid: 3406931bd50865f47b0435b91ac8b57b, type: 3}
+  - {fileID: 2800000, guid: 9aa3b07473083484caa0e806af30af25, type: 3}
+  - {fileID: 2800000, guid: a59635be1f3c71d42ad540254dee6d60, type: 3}
   Environment: {fileID: 4748976178994690848}
   MenuCam: {fileID: 0}
   Cam: {fileID: 4748976178819131262}

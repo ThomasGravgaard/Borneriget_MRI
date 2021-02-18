@@ -66,11 +66,11 @@ namespace Borneriget.MRI
             {
                 if (target == Danish)
                 {
-                    SelectLanguage("da-DK");
+                    SelectLanguage("da");
                 }
                 if (target == English)
                 {
-                    SelectLanguage("en-EN");
+                    SelectLanguage("en");
                 }
             }
             else if (AvatarSelection.activeInHierarchy)

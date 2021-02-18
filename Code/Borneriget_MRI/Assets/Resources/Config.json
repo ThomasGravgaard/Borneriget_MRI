@@ -1,4 +1,27 @@
 {
-	"NormalVideos": ["https://csbdaaaa95db00cx48f7x90f.blob.core.windows.net/mri/MRI.mp4?sv=2019-12-12&st=2021-01-28T13%3A10%3A16Z&se=2021-03-29T12%3A10%3A00Z&sr=b&sp=r&sig=J%2F7IWuK50Q2LZ10fau3m7GDUzs96dfwq31K5PiF%2BfjU%3D"],
-	"VrVideos": ["https://csbdaaaa95db00cx48f7x90f.blob.core.windows.net/mri/5_2K.mp4?sv=2019-12-12&st=2021-01-29T15%3A44%3A41Z&se=2021-03-30T14%3A44%3A00Z&sr=b&sp=r&sig=HJUK4EvFVdrFa8uxcZBPB8KIqRBsMoroKCzBjbl3F2o%3D"]
+
+	"NormalVideos": {
+		"da": [
+			"https://csbdaaaa95db00cx48f7x90f.blob.core.windows.net/mri/00036.mp4?sv=2019-12-12&st=2021-02-18T12%3A40%3A39Z&se=2021-03-31T11%3A40%3A00Z&sr=b&sp=r&sig=U2TI%2BChGRpQ2F3efzNY13ky9rrzIYV1rW%2FdClEX0BNk%3D",
+			"https://csbdaaaa95db00cx48f7x90f.blob.core.windows.net/mri/00036.mp4?sv=2019-12-12&st=2021-02-18T12%3A40%3A39Z&se=2021-03-31T11%3A40%3A00Z&sr=b&sp=r&sig=U2TI%2BChGRpQ2F3efzNY13ky9rrzIYV1rW%2FdClEX0BNk%3D"
+		],
+		"en": [
+			"https://csbdaaaa95db00cx48f7x90f.blob.core.windows.net/mri/00036.mp4?sv=2019-12-12&st=2021-02-18T12%3A40%3A39Z&se=2021-03-31T11%3A40%3A00Z&sr=b&sp=r&sig=U2TI%2BChGRpQ2F3efzNY13ky9rrzIYV1rW%2FdClEX0BNk%3D",
+			"https://csbdaaaa95db00cx48f7x90f.blob.core.windows.net/mri/00036.mp4?sv=2019-12-12&st=2021-02-18T12%3A40%3A39Z&se=2021-03-31T11%3A40%3A00Z&sr=b&sp=r&sig=U2TI%2BChGRpQ2F3efzNY13ky9rrzIYV1rW%2FdClEX0BNk%3D"
+		]
+	},
+	"VrVideos": {
+		"da": [
+			"https://csbdaaaa95db00cx48f7x90f.blob.core.windows.net/mri/5_2K.mp4?sv=2019-12-12&st=2021-01-29T15%3A44%3A41Z&se=2021-03-30T14%3A44%3A00Z&sr=b&sp=r&sig=HJUK4EvFVdrFa8uxcZBPB8KIqRBsMoroKCzBjbl3F2o%3D", 
+			"https://csbdaaaa95db00cx48f7x90f.blob.core.windows.net/mri/5_2K.mp4?sv=2019-12-12&st=2021-01-29T15%3A44%3A41Z&se=2021-03-30T14%3A44%3A00Z&sr=b&sp=r&sig=HJUK4EvFVdrFa8uxcZBPB8KIqRBsMoroKCzBjbl3F2o%3D", 
+			"https://csbdaaaa95db00cx48f7x90f.blob.core.windows.net/mri/Luca_2K.mp4?sv=2019-12-12&st=2021-02-18T12%3A36%3A28Z&se=2021-03-31T11%3A36%3A00Z&sr=b&sp=r&sig=TEOtXRzMnCRXKtFVfs7WrrvDjOwoWe6ptJ654M%2FnFTg%3D",
+			"https://csbdaaaa95db00cx48f7x90f.blob.core.windows.net/mri/V1_Ella_2K.mp4?sv=2019-12-12&st=2021-02-18T12%3A38%3A47Z&se=2021-03-31T11%3A38%3A00Z&sr=b&sp=r&sig=6ICwGM90c6oGQ1BFsVfxrsowp25tTrAmA1SbqQaJHEg%3D"
+		],
+		"en": [
+			"https://csbdaaaa95db00cx48f7x90f.blob.core.windows.net/mri/5_2K.mp4?sv=2019-12-12&st=2021-01-29T15%3A44%3A41Z&se=2021-03-30T14%3A44%3A00Z&sr=b&sp=r&sig=HJUK4EvFVdrFa8uxcZBPB8KIqRBsMoroKCzBjbl3F2o%3D",
+			"https://csbdaaaa95db00cx48f7x90f.blob.core.windows.net/mri/5_2K.mp4?sv=2019-12-12&st=2021-01-29T15%3A44%3A41Z&se=2021-03-30T14%3A44%3A00Z&sr=b&sp=r&sig=HJUK4EvFVdrFa8uxcZBPB8KIqRBsMoroKCzBjbl3F2o%3D",
+			"https://csbdaaaa95db00cx48f7x90f.blob.core.windows.net/mri/V3_English_2K.mp4?sv=2019-12-12&st=2021-02-18T12%3A39%3A19Z&se=2021-03-31T11%3A39%3A00Z&sr=b&sp=r&sig=%2BkCZtlZvwje%2FvDOYgYzXz750xuyz7MwcWRJcFQMsFHE%3D",
+			"https://csbdaaaa95db00cx48f7x90f.blob.core.windows.net/mri/V1_Ella_2K.mp4?sv=2019-12-12&st=2021-02-18T12%3A38%3A47Z&se=2021-03-31T11%3A38%3A00Z&sr=b&sp=r&sig=6ICwGM90c6oGQ1BFsVfxrsowp25tTrAmA1SbqQaJHEg%3D"
+		]
+	}
 }
