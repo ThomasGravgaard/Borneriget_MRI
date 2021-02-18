@@ -19,6 +19,8 @@ namespace Borneriget.MRI
         private GameObject Bear;
         [SerializeField]
         private GameObject VideoImage;
+        [SerializeField]
+        private Image VideoProgress;
 
         [SerializeField]
         private GameObject Buttons;
@@ -52,9 +54,9 @@ namespace Borneriget.MRI
 
         public void Show(int room, string doneNotification)
         {
+            VideoProgress.fillAmount = 0;
             Background.texture = BackgroundImages.SafeGet(room);
             StartCoroutine(ShowCo(doneNotification));
-            // TODO: Change the background
         }
 
         private IEnumerator ShowCo(string doneNotification)
@@ -92,10 +94,18 @@ namespace Borneriget.MRI
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            var target = eventData.pointerCurrentRaycast.gameObject;
-            if (target == Bear)
+            if (VideoImage.activeInHierarchy)
             {
-                Bootstrap.Facade.SendNotification(StoryMediator.Notifications.AvatarClicked);
+                // We are playing a video. A click will pause it
+                Bootstrap.Facade.SendNotification(VideoMediator.Notifications.TogglePause);
+            }
+            else
+            {
+                var target = eventData.pointerCurrentRaycast.gameObject;
+                if (target == Bear)
+                {
+                    Bootstrap.Facade.SendNotification(StoryMediator.Notifications.AvatarClicked);
+                }
             }
         }
 
@@ -104,6 +114,11 @@ namespace Borneriget.MRI
             Bear.SetActive(false);
             Background.gameObject.SetActive(false);
             VideoImage.SetActive(true);
+        }
+
+        public void SetVideoProgress(VideoProgress progress)
+        {
+            VideoProgress.fillAmount = progress.Progress;
         }
     }
 }

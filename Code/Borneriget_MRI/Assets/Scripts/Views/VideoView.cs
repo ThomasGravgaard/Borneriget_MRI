@@ -18,13 +18,6 @@ namespace Borneriget.MRI
         public event Action VideoDone;
         public event Action<VideoProgress> VideoProgressUpdate;
 
-        public struct VideoProgress
-        {
-            public TimeSpan TotalTime;
-            public TimeSpan CurrentTime;
-            public float Progress;
-        }
-
         public void Initialize(bool isVr)
         {
             Player.targetTexture = (isVr) ? VrTexture : NormalTexture;
@@ -59,7 +52,7 @@ namespace Borneriget.MRI
             }
             Player.Play();           
             var totalTime = (Player.frameRate > 0) ? TimeSpan.FromSeconds(Player.frameCount / Player.frameRate) : TimeSpan.FromSeconds(0);
-            while (Player.isPlaying)
+            while (Player.isPlaying || Player.isPaused)
             {
                 // Update progress while playing
                 if (Player.frameCount > 0)
@@ -83,6 +76,18 @@ namespace Borneriget.MRI
                 yield return null;
             }
             VideoDone?.Invoke();
+        }
+
+        public void TogglePause()
+        {
+            if (Player.isPlaying)
+            {
+                Player.Pause();
+            }
+            else
+            {
+                Player.Play();
+            }
         }
     }
 }

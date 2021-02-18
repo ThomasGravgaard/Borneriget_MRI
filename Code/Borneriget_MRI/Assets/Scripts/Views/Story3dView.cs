@@ -159,5 +159,10 @@ namespace Borneriget.MRI
 #endif
             }
         }
+
+        public void SetVideoProgress(VideoProgress progress)
+        {
+            // We do not show progress in 3d.
+        }
     }
 }

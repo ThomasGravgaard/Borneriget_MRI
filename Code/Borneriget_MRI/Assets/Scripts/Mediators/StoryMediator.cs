@@ -43,6 +43,7 @@ namespace Borneriget.MRI
                 Notifications.FadeAfterVideo,
                 VideoMediator.Notifications.PlayVideo,
                 VideoMediator.Notifications.VideoDone, 
+                VideoMediator.Notifications.VideoProgressUpdate,
                 AvatarMediator.Notifications.SpeakDone, 
                 AvatarMediator.Notifications.AvatarAwake 
             };
@@ -89,6 +90,9 @@ namespace Borneriget.MRI
                     break;
                 case VideoMediator.Notifications.VideoDone:
                     SendNotification(FaderMediator.Notifications.StartFade, Notifications.FadeAfterVideo);
+                    break;
+                case VideoMediator.Notifications.VideoProgressUpdate:
+                    View.SetVideoProgress((VideoProgress)notification.Body);
                     break;
                 case Notifications.FadeAfterVideo:
                     Progress++;

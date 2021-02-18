@@ -17,6 +17,7 @@ namespace Borneriget.MRI
         {
             public const string PrepareVideo = "PrepareVideo";
             public const string PlayVideo = "PlayVideo";
+            public const string TogglePause = "TogglePause";
             public const string VideoDone = "VideoDone";
             public const string VideoProgressUpdate = "VideoProgressUpdate";
         }
@@ -42,7 +43,7 @@ namespace Borneriget.MRI
             View.VideoProgressUpdate -= View_VideoProgressUpdate;
         }
 
-        private void View_VideoProgressUpdate(VideoView.VideoProgress progress)
+        private void View_VideoProgressUpdate(VideoProgress progress)
         {
             Facade.SendNotification(Notifications.VideoProgressUpdate, progress);
         }
@@ -54,7 +55,7 @@ namespace Borneriget.MRI
 
         private void View_VideoPrepared()
         {
-            
+            // We are not really doing anything here. It might be involved when we try error scenarios like offline.
         }
 
         public override string[] ListNotificationInterests()
@@ -63,7 +64,8 @@ namespace Borneriget.MRI
             { 
                 PreferencesMediator.Notifications.PreferencesSelected,
                 Notifications.PrepareVideo,
-                Notifications.PlayVideo
+                Notifications.PlayVideo,
+                Notifications.TogglePause
             };
         }
 
@@ -81,6 +83,9 @@ namespace Borneriget.MRI
                     break;
                 case Notifications.PlayVideo:
                     View.PlayVideo();
+                    break;
+                case Notifications.TogglePause:
+                    View.TogglePause();
                     break;
             }
         }
