@@ -13,7 +13,8 @@ namespace Borneriget.MRI
 			STRESSED,
 			SLEEP,
 			SLEEPING,
-			BYE
+			BYE,
+			DIPLOMA
 		}
 
 		[SerializeField]
@@ -87,6 +88,16 @@ namespace Borneriget.MRI
 			if (state == State.BYE) {
 				animator.SetTrigger("bye");
 			}
+            if (state == State.DIPLOMA)
+            {
+				animator.SetTrigger("diploma");
+            }
+		}
+
+		public void BackToIdle()
+        {
+			SetState(State.NEUTRAL);
+			animator.SetTrigger("idle");
 		}
 
 		public State GetState() {
@@ -111,7 +122,7 @@ namespace Borneriget.MRI
 
 		public void Speak(int progress, Action speakDone)
 		{
-			StartCoroutine(SpeakCo(speaks.SafeGet(progress), speakDone));
+			StartCoroutine(SpeakCo(speaks.SafeGet(progress), speakDone, progress < 5));
 		}
 
 		public void StopSpeak()
@@ -121,12 +132,18 @@ namespace Borneriget.MRI
 			audioSource.Stop();
 		}
 
-		private IEnumerator SpeakCo(AudioClip clip, Action speakDone)
+		private IEnumerator SpeakCo(AudioClip clip, Action speakDone, bool activateTalk)
 		{			
 			audioSource.PlayOneShot(clip);
-			animator.SetBool("talking", true);
+            if (activateTalk)
+            {
+				animator.SetBool("talking", true);
+			}
 			yield return new WaitForSeconds(clip.length);
-			animator.SetBool("talking", false);
+            if (activateTalk)
+            {
+				animator.SetBool("talking", false);
+            }
 			audioSource.Stop();
 			speakDone();
 		}

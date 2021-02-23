@@ -1,45 +1,22 @@
-- Issue with spawning cube if phone is on table
-
-- Load indicator if/when waiting for video
-
-- Add reticle for VR
-- Progress UI should be a ring around reticle
-- Use HasDeviceParams to tell ppl what is going on before we get params.
-- VR video progress - how?
-
-Exit button in VR
-Video timer in VR
-Fade mellem videoer
-
-
-----------------------
-Møde 10/2
-
-I VR skal der være still billeder og så en flydende til at starte videoen. Når videoen er slut fades tilbage til still.
-
-Pause knap i VR
-
-Play/pause i 2D
-Fade in/out
-
-Gå i lobby i VR
-
-Vække Theo, i 2d ved at trykke på ham. I 3d ved at kigge.
-
 
 -------------------
-Missing stuff
+Features
 -------------------
 + Real 3D environment
 + Still picture in 3D
 + Gaze progress in 3D
 + Fading in 2D
 + Fading in 3D
-- Pause video in 2D
-- Video progress in 2D
-- More than one lobby picture
-- More than one video
-- Pause video in 3D
++ Pause video in 2D
++ Video progress in 2D
++ More than one lobby picture
++ More than one video
++ Exit in VR it is the close button - go back to mode selection.
++ Timeout på bamsen der vågner
++ Menu når man er færdig med alle videoer
++ Nye 2d videoer
+- Slut animation hvor bamsen står med et diplom
+- UI når der pauses
 
 -------------------
 Polish
@@ -47,3 +24,5 @@ Polish
 - Frame size on different devices
 - 2D video screen size fitting
 - 3d environment exit - where to go?
+- Load indicator if/when waiting for video
+- Use HasDeviceParams to tell ppl what is going on before we get params.

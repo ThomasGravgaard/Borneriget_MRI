@@ -40,6 +40,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Bear
+    uniqueID: 3648555015
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

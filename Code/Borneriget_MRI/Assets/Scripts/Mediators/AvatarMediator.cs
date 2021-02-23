@@ -15,11 +15,13 @@ namespace Borneriget.MRI
 
         public static class Notifications
         {
+            public const string Idle = "Idle";
             public const string WakeAvatar = "WakeAvatar";
             public const string AvatarAwake = "AvatarAwake";
             public const string AvatarSpeak = "AvatarSpeak";
             public const string StopSpeak = "StopSpeak";
             public const string SpeakDone = "SpeakDone";
+            public const string ShowDiploma = "ShowDiploma";
         }
 
         private AvatarView View => (AvatarView)ViewComponent;
@@ -33,9 +35,11 @@ namespace Borneriget.MRI
 
         public override string[] ListNotificationInterests()
         {
-            return new[] { 
+            return new[] {
+                Notifications.Idle,
                 Notifications.WakeAvatar,
                 Notifications.AvatarSpeak,
+                Notifications.ShowDiploma,
                 Notifications.StopSpeak,
             };
         }
@@ -50,11 +54,17 @@ namespace Borneriget.MRI
         {
             switch (notification.Name)
             {
+                case Notifications.Idle:
+                    View.BackToIdle();
+                    break;
                 case Notifications.WakeAvatar:
-                    View.WakeUp(() => Facade.SendNotification(Notifications.AvatarAwake));
+                    View.WakeUp(() => SendNotification(Notifications.AvatarAwake));
                     break;
                 case Notifications.AvatarSpeak:
                     View.Speak((int)notification.Body, () => Facade.SendNotification(Notifications.SpeakDone));
+                    break;
+                case Notifications.ShowDiploma:
+                    View.SetState(AvatarView.State.DIPLOMA);
                     break;
                 case Notifications.StopSpeak:
                     View.StopSpeak();

@@ -103,9 +103,16 @@ namespace Borneriget.MRI
                     View.Show(Progress, Notifications.ViewShown);
                     break;
                 case Notifications.ViewShown:
-                    SendNotification(VideoMediator.Notifications.PrepareVideo, Progress);
+                    if (Progress < 5)
+                    {
+                        SendNotification(VideoMediator.Notifications.PrepareVideo, Progress);
+                    }
                     if (AvatarAwake)
                     {
+                        if (Progress == 5)
+                        {
+                            SendNotification(AvatarMediator.Notifications.ShowDiploma);
+                        }
                         SendNotification(AvatarMediator.Notifications.AvatarSpeak, Progress);
                     }
                     break;
@@ -120,10 +127,20 @@ namespace Borneriget.MRI
                     SendNotification(AvatarMediator.Notifications.AvatarSpeak, Progress);
                     break;
                 case AvatarMediator.Notifications.SpeakDone:
-                    SendNotification(FaderMediator.Notifications.StartFade, new FaderMediator.FadeNotification {
-                        Name = VideoMediator.Notifications.PlayVideo,
-                        Body = Progress
-                    });
+                    if (Progress < 5)
+                    {
+                        SendNotification(FaderMediator.Notifications.StartFade, new FaderMediator.FadeNotification
+                        {
+                            Name = VideoMediator.Notifications.PlayVideo,
+                            Body = Progress
+                        });
+                    }
+                    else
+                    {
+                        // We have finished talking about the diploma. So go back to the menu.
+                        SendNotification(AvatarMediator.Notifications.Idle);
+                        SendNotification(FaderMediator.Notifications.StartFade, Notifications.FadeAfterVideo);
+                    }
                     break;
                 case VideoMediator.Notifications.PlayVideo:
                     View.ShowVideo();
@@ -141,6 +158,7 @@ namespace Borneriget.MRI
                         ShowMenu = true;
                         Progress = 0;
                     }
+                    Debug.Log($"Fade done. Progress {Progress}. ShowMenu {ShowMenu}");
                     View.Show(Progress, (ShowMenu) ? string.Empty : Notifications.ViewShown);
                     break;
                 case Notifications.FadeAfterMenuSelect:
