@@ -10,6 +10,7 @@ namespace Borneriget.MRI
         public void SetVideoProgress(VideoProgress progress);
         public void Hide();
 
+        public event Action<int> SelectRoom;
         public event Action Exit;
     }
 }

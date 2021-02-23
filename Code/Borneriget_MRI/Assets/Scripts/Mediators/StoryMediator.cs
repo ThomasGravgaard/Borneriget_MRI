@@ -16,6 +16,7 @@ namespace Borneriget.MRI
 
         private bool AvatarAwake = false;
         private int Progress = 0;
+        private bool ShowMenu = false;
 
         public static class Notifications
         {
@@ -23,7 +24,25 @@ namespace Borneriget.MRI
             public const string ViewShown = "ViewShown";
             public const string AvatarClicked = "AvatarClicked";
             public const string FadeAfterVideo = "FadeAfterVideo";
+            public const string FadeAfterMenuSelect = "FadeAfterMenuSelect";
             public const string ReturnToMenu = "ReturnToMenu";
+        }
+
+        public override string[] ListNotificationInterests()
+        {
+            return new[] {
+                Notifications.ViewInitialized,
+                Notifications.ViewShown,
+                Notifications.AvatarClicked,
+                Notifications.FadeAfterVideo,
+                Notifications.FadeAfterMenuSelect,
+                Notifications.ReturnToMenu,
+                VideoMediator.Notifications.PlayVideo,
+                VideoMediator.Notifications.VideoDone, 
+                VideoMediator.Notifications.VideoProgressUpdate,
+                AvatarMediator.Notifications.SpeakDone, 
+                AvatarMediator.Notifications.AvatarAwake
+            };
         }
 
         public override void OnRegister()
@@ -35,26 +54,18 @@ namespace Borneriget.MRI
             InitializeView();
         }
 
-        public override string[] ListNotificationInterests()
+        public override void OnRemove()
         {
-            return new[] {
-                Notifications.ViewInitialized,
-                Notifications.ViewShown,
-                Notifications.AvatarClicked,
-                Notifications.FadeAfterVideo,
-                Notifications.ReturnToMenu,
-                VideoMediator.Notifications.PlayVideo,
-                VideoMediator.Notifications.VideoDone, 
-                VideoMediator.Notifications.VideoProgressUpdate,
-                AvatarMediator.Notifications.SpeakDone, 
-                AvatarMediator.Notifications.AvatarAwake
-            };
+            base.OnRemove();
+            View.Exit -= View_Exit;
+            View.SelectRoom -= View_SelectRoom;
         }
 
         private void InitializeView()
         {
             ViewComponent = Preferences.UseVr ? (IStoryView)Object.FindObjectOfType<Story3dView>(true) : (IStoryView)Object.FindObjectOfType<Story2dView>(true);
             View.Exit += View_Exit;
+            View.SelectRoom += View_SelectRoom;
             View.Initialize(Notifications.ViewInitialized);
         }
 
@@ -63,9 +74,25 @@ namespace Borneriget.MRI
             SendNotification(FaderMediator.Notifications.StartFade, Notifications.ReturnToMenu);
         }
 
-        public override void OnRemove()
+        private void View_SelectRoom(int index)
         {
-            base.OnRemove();
+            if (ShowMenu)
+            {
+                // We will start the speak and the video
+                switch (index)
+                {
+                    case 0:
+                        Progress = 1;
+                        break;
+                    case 1:
+                        Progress = 2;
+                        break;
+                    case 2:
+                        Progress = 4;
+                        break;
+                }
+                SendNotification(FaderMediator.Notifications.StartFade, Notifications.FadeAfterMenuSelect);
+            }
         }
 
         public override void HandleNotification(INotification notification)
@@ -76,21 +103,21 @@ namespace Borneriget.MRI
                     View.Show(Progress, Notifications.ViewShown);
                     break;
                 case Notifications.ViewShown:
-                    Facade.SendNotification(VideoMediator.Notifications.PrepareVideo, Progress);
+                    SendNotification(VideoMediator.Notifications.PrepareVideo, Progress);
                     if (AvatarAwake)
                     {
-                        Facade.SendNotification(AvatarMediator.Notifications.AvatarSpeak, Progress);
+                        SendNotification(AvatarMediator.Notifications.AvatarSpeak, Progress);
                     }
                     break;
                 case Notifications.AvatarClicked:
                     if (!AvatarAwake)
                     {
-                        Facade.SendNotification(AvatarMediator.Notifications.WakeAvatar);
+                        SendNotification(AvatarMediator.Notifications.WakeAvatar);
                         AvatarAwake = true;
                     }
                     break;
                 case AvatarMediator.Notifications.AvatarAwake:
-                    Facade.SendNotification(AvatarMediator.Notifications.AvatarSpeak, Progress);
+                    SendNotification(AvatarMediator.Notifications.AvatarSpeak, Progress);
                     break;
                 case AvatarMediator.Notifications.SpeakDone:
                     SendNotification(FaderMediator.Notifications.StartFade, new FaderMediator.FadeNotification {
@@ -108,7 +135,15 @@ namespace Borneriget.MRI
                     View.SetVideoProgress((VideoProgress)notification.Body);
                     break;
                 case Notifications.FadeAfterVideo:
-                    Progress++;
+                    if (Progress++ == 5)
+                    {
+                        // We have shown all videos. We now have a selection menu.
+                        ShowMenu = true;
+                        Progress = 0;
+                    }
+                    View.Show(Progress, (ShowMenu) ? string.Empty : Notifications.ViewShown);
+                    break;
+                case Notifications.FadeAfterMenuSelect:
                     View.Show(Progress, Notifications.ViewShown);
                     break;
                 case Notifications.ReturnToMenu:

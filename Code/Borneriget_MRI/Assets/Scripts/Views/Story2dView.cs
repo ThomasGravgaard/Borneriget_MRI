@@ -25,11 +25,9 @@ namespace Borneriget.MRI
         private GameObject ExitButton;
 
         [SerializeField]
-        private GameObject Buttons;
+        private GameObject ButtonParent;
         [SerializeField]
-        private Button Room1;
-        [SerializeField]
-        private Button Room2;
+        private Button[] Buttons;
 
         public event Action<int> SelectRoom;
         public event Action Exit;
@@ -40,11 +38,15 @@ namespace Borneriget.MRI
             VideoProgress.fillAmount = 0;
             Background.gameObject.SetActive(false);
             Bear.SetActive(false);
-            Buttons.SetActive(false);
+            ButtonParent.SetActive(false);
             VideoImage.SetActive(false);
             ExitButton.SetActive(false);
-            Room1.onClick.AddListener(Room1_Click);
-            Room2.onClick.AddListener(Room2_Click);
+            var buttonIndex = 0;
+            foreach (var button in Buttons)
+            {
+                var idx = buttonIndex++;
+                button.onClick.AddListener(() => Button_Click(idx));
+            }
         }
 
         public void Initialize(string doneNotification)
@@ -62,17 +64,26 @@ namespace Borneriget.MRI
         {
             avatarClicked = false;
             VideoProgress.fillAmount = 0;
-            Background.texture = BackgroundImages.SafeGet(room);
-            StartCoroutine(ShowCo(doneNotification));
-        }
-
-        private IEnumerator ShowCo(string doneNotification)
-        {
             ExitButton.SetActive(true);
             VideoImage.SetActive(false);
             MenuCam.enabled = true;
             Background.gameObject.SetActive(true);
             Bear.SetActive(true);
+            if (string.IsNullOrEmpty(doneNotification))
+            {
+                // We have no notification, so we will show the menu and wait for a click.
+                Background.texture = BackgroundImages.SafeGet(0);
+                ButtonParent.SetActive(true);
+            }
+            else
+            {
+                Background.texture = BackgroundImages.SafeGet(room);
+                StartCoroutine(ShowCo(doneNotification));
+            }
+        }
+
+        private IEnumerator ShowCo(string doneNotification)
+        {
             yield return new WaitForSeconds(1f);
             Bootstrap.Facade.SendNotification(doneNotification);
             yield return new WaitForSeconds(10f);
@@ -86,26 +97,20 @@ namespace Borneriget.MRI
         {
             Background.gameObject.SetActive(false);
             Bear.SetActive(false);
-            Buttons.SetActive(false);
+            ButtonParent.SetActive(false);
             VideoImage.SetActive(false);
             ExitButton.SetActive(false);
         }
 
         public void ShowButtons()
         {
-            Buttons.SetActive(true);
+            ButtonParent.SetActive(true);
         }
 
-        private void Room1_Click()
+        private void Button_Click(int index)
         {
-            SelectRoom?.Invoke(1);
-            gameObject.SetActive(false);
-        }
-
-        private void Room2_Click()
-        {
-            SelectRoom?.Invoke(2);
-            gameObject.SetActive(false);
+            ButtonParent.SetActive(false);
+            SelectRoom?.Invoke(index);
         }
 
         public void OnPointerClick(PointerEventData eventData)

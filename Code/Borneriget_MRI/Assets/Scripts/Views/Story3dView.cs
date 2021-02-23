@@ -35,6 +35,7 @@ namespace Borneriget.MRI
         private float progress;
 
         public event Action Exit;
+        public event Action<int> SelectRoom;
 
         private void Awake()
         {
