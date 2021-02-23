@@ -13,10 +13,14 @@ namespace Borneriget.MRI
         private RenderTexture NormalTexture;
         [SerializeField]
         private RenderTexture VrTexture;
+        [SerializeField]
+        private bool ShortenInEditor;
 
         public event Action VideoPrepared;
         public event Action VideoDone;
         public event Action<VideoProgress> VideoProgressUpdate;
+
+        private bool PausedVideo = false;
 
         public void Initialize(bool isVr)
         {
@@ -52,7 +56,8 @@ namespace Borneriget.MRI
             }
             Player.Play();           
             var totalTime = (Player.frameRate > 0) ? TimeSpan.FromSeconds(Player.frameCount / Player.frameRate) : TimeSpan.FromSeconds(0);
-            while (Player.isPlaying || Player.isPaused)
+            var lastProgress = 0f;
+            while (Player.isPlaying || PausedVideo)
             {
                 // Update progress while playing
                 if (Player.frameCount > 0)
@@ -66,11 +71,13 @@ namespace Borneriget.MRI
                         Progress = progress
                     });
 
-                    if (Application.isEditor && progress > 0.1f)
+                    if (ShortenInEditor && Application.isEditor && progress > 0.1f)
                     {
                         Player.Stop();
                         break;
                     }
+
+                    lastProgress = progress;
                 }
 
                 yield return null;
@@ -82,10 +89,12 @@ namespace Borneriget.MRI
         {
             if (Player.isPlaying)
             {
+                PausedVideo = true;
                 Player.Pause();
             }
             else
             {
+                PausedVideo = false;
                 Player.Play();
             }
         }
