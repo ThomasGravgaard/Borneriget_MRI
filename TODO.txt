@@ -15,8 +15,17 @@ Features
 + Timeout på bamsen der vågner
 + Menu når man er færdig med alle videoer
 + Nye 2d videoer
-- Slut animation hvor bamsen står med et diplom
++ Slut animation hvor bamsen står med et diplom
 - UI når der pauses
+- Menu in VR
+- Back button during video?
+- 2D Videokontroller: Stop, skip
+- Hold telefonen vågen mode
+- Glitch ved overgang til diplom
+- Er fadet længere når man bruger tilbagepil?
+- Tilbage til menu i stedet for menu.
+- Skift til 3d knap i menuen.
+- Titelskærm
 
 -------------------
 Polish
