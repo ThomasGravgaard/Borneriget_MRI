@@ -47,6 +47,7 @@ namespace Borneriget.MRI
 
         public void Initialize(string doneNotification)
         {
+            Screen.sleepTimeout = SleepTimeout.NeverSleep;
             StartCoroutine(InitializeXRCo(doneNotification));
         }
 
@@ -106,6 +107,7 @@ namespace Borneriget.MRI
             MenuCam.enabled = true;
             CamRoot.gameObject.SetActive(false);
             Environment.SetActive(false);
+            Screen.sleepTimeout = SleepTimeout.SystemSetting;
         }
 
         private void StopXR()

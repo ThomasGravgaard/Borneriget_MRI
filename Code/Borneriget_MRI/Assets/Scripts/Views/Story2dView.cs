@@ -51,6 +51,7 @@ namespace Borneriget.MRI
 
         public void Initialize(string doneNotification)
         {
+            Screen.sleepTimeout = SleepTimeout.NeverSleep;
             StartCoroutine(InitializeCo(doneNotification));
         }
 
@@ -100,6 +101,7 @@ namespace Borneriget.MRI
             ButtonParent.SetActive(false);
             VideoImage.SetActive(false);
             ExitButton.SetActive(false);
+            Screen.sleepTimeout = SleepTimeout.SystemSetting;
         }
 
         public void ShowButtons()
