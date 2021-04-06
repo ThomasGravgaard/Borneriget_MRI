@@ -39,6 +39,7 @@ namespace Borneriget.MRI
 			var videoUrls = JsonConvert.DeserializeObject<VideoUrls>(config.text);
 
 			// Register commands
+			Facade.RegisterCommand(TitleScreenMediator.Notifications.TitleScreenShown, () => new ChangeMediatorCommand<TitleScreenMediator, PreferencesMediator>());
 			Facade.RegisterCommand(PreferencesMediator.Notifications.PreferencesSelected, () => new ChangeMediatorCommand<PreferencesMediator, StoryMediator>());
 			Facade.RegisterCommand(StoryMediator.Notifications.ReturnToMenu, () => new ReturnToMenuCommand());
 
@@ -48,7 +49,7 @@ namespace Borneriget.MRI
 			Facade.RegisterMediator(new FaderMediator());
 
 			// Start up the main menu
-			Facade.RegisterMediator(new PreferencesMediator());
+			Facade.RegisterMediator(new TitleScreenMediator());
 		}
 	}
 }

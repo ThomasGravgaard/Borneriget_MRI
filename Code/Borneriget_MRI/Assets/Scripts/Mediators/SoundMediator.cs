@@ -15,6 +15,7 @@ namespace Borneriget.MRI
         public static class Notifications
         {
             public const string ClickButton = "ClickButton";
+            public const string MenuSpeak = "MenuSpeak";
         }
 
         public override void OnRegister()
@@ -29,7 +30,7 @@ namespace Borneriget.MRI
 
         public override string[] ListNotificationInterests()
         {
-            return new[] { Notifications.ClickButton };
+            return new[] { Notifications.ClickButton, Notifications.MenuSpeak };
         }
 
         public override void HandleNotification(INotification notification)
@@ -38,6 +39,10 @@ namespace Borneriget.MRI
             if (notification.Name == Notifications.ClickButton)
             {
                 View.ClickButton();
+            }
+            if (notification.Name == Notifications.MenuSpeak)
+            {
+                View.MenuSpeak((int)notification.Body);
             }
         }
     }

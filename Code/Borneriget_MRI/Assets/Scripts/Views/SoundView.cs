@@ -7,6 +7,8 @@ namespace Borneriget.MRI
     {
         [SerializeField]
         private AudioClip buttonClick;
+        [SerializeField]
+        private AudioClip[] menuSpeaks;
 
         private AudioSource audioSource;
 
@@ -18,6 +20,14 @@ namespace Borneriget.MRI
         public void ClickButton()
         {
             audioSource.PlayOneShot(buttonClick);
+        }
+
+        public void MenuSpeak(int menuStep)
+        {
+            if (menuStep > -1 && menuStep < menuSpeaks.Length)
+            {
+                audioSource.PlayOneShot(menuSpeaks[menuStep]);
+            }
         }
     }
 }

@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 namespace Borneriget.MRI
 {
+
     public class PreferencesView : MonoBehaviour, IPointerClickHandler
     {
         [SerializeField]
@@ -48,10 +49,12 @@ namespace Borneriget.MRI
             Frame.SetActive(true);
             if (hasSelectedLanguage)
             {
+                Bootstrap.Facade.SendNotification(SoundMediator.Notifications.MenuSpeak, 2);
                 FormatSelection.SetActive(true);
             }
             else
             {
+                Bootstrap.Facade.SendNotification(SoundMediator.Notifications.MenuSpeak, 1);
                 LanguageSelection.SetActive(true);
             }
         }
@@ -110,6 +113,7 @@ namespace Borneriget.MRI
             LanguageSelection.SetActive(false);
             LanguageSelected?.Invoke(language);
             AvatarSelection.SetActive(true);
+            Bootstrap.Facade.SendNotification(SoundMediator.Notifications.MenuSpeak, 2);
         }
 
         private void SelectAvatar(PreferencesProxy.Avatars avatar)
@@ -118,6 +122,7 @@ namespace Borneriget.MRI
             AvatarSelected?.Invoke(avatar);
             AvatarSelection.SetActive(false);
             FormatSelection.SetActive(true);
+            Bootstrap.Facade.SendNotification(SoundMediator.Notifications.MenuSpeak, 3);
         }
 
         private void SelectFormat(bool useVr)

@@ -5,7 +5,6 @@ using UnityEngine;
 
 namespace Borneriget.MRI
 {
-
     public class PreferencesMediator : Mediator
     {
         public PreferencesMediator() : base(NAME) {}
