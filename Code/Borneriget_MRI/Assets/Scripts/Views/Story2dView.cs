@@ -117,25 +117,38 @@ namespace Borneriget.MRI
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            if (VideoImage.activeInHierarchy)
+            var target = eventData.pointerCurrentRaycast.gameObject;
+            if (target == Bear)
             {
-                // We are playing a video. A click will pause it
-                Bootstrap.Facade.SendNotification(VideoMediator.Notifications.TogglePause);
-            }
-            else
-            {
-                var target = eventData.pointerCurrentRaycast.gameObject;
-                if (target == Bear)
+                if (!avatarClicked)
                 {
-                    if (!avatarClicked)
-                    {
-                        avatarClicked = true;
-                        Bootstrap.Facade.SendNotification(StoryMediator.Notifications.AvatarClicked);
-                    }
+                    avatarClicked = true;
+                    Bootstrap.Facade.SendNotification(StoryMediator.Notifications.AvatarClicked);
                 }
-                if (target == ExitButton)
+            }
+            if (target == ExitButton)
+            {
+                Exit?.Invoke();
+            }
+            else if (VideoImage.activeInHierarchy)
+            {
+                if (eventData.button == PointerEventData.InputButton.Left)
                 {
-                    Exit?.Invoke();
+                    // We are playing a video. A click will pause it
+                    Bootstrap.Facade.SendNotification(VideoMediator.Notifications.TogglePause);
+                }
+                if (eventData.button == PointerEventData.InputButton.Right)
+                {
+                    // We are playing a video. A right click will stop it
+                    Bootstrap.Facade.SendNotification(VideoMediator.Notifications.StopVideo);
+                }
+            }
+            else if (avatarClicked)
+            {
+                if (eventData.button == PointerEventData.InputButton.Right)
+                {
+                    // We are in a speak. Right click to skip it.
+                    Bootstrap.Facade.SendNotification(AvatarMediator.Notifications.StopSpeak);
                 }
             }
         }
