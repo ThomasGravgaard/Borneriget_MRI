@@ -103,9 +103,13 @@ namespace Borneriget.MRI
                     View.Show(Progress, Notifications.ViewShown);
                     break;
                 case Notifications.ViewShown:
-                    if (Progress < 5)
+                    if (Progress < 4)
                     {
                         SendNotification(VideoMediator.Notifications.PrepareVideo, Progress);
+                    }
+                    else
+                    {
+                        Debug.Log("No video");
                     }
                     if (AvatarAwake)
                     {
@@ -127,7 +131,7 @@ namespace Borneriget.MRI
                     SendNotification(AvatarMediator.Notifications.AvatarSpeak, Progress);
                     break;
                 case AvatarMediator.Notifications.SpeakDone:
-                    if (Progress < 5)
+                    if (Progress < 4)
                     {
                         SendNotification(FaderMediator.Notifications.StartFade, new FaderMediator.FadeNotification
                         {
@@ -137,7 +141,7 @@ namespace Borneriget.MRI
                     }
                     else
                     {
-                        // We have finished talking about the diploma. So go back to the menu.
+                        // We have no more videos, so just fade to the next speak.
                         SendNotification(AvatarMediator.Notifications.Idle);
                         SendNotification(FaderMediator.Notifications.StartFade, Notifications.FadeAfterVideo);
                     }
