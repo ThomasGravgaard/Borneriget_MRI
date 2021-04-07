@@ -1,6 +1,22 @@
 
--------------------
+------------------
 Features
+-------------------
+- UI når der pauses
+- 2D video seek
+- Menu in VR
+
+-------------------
+Polish
+-------------------
+- Frame size on different devices
+- 2D video screen size fitting
+- 3d environment exit - where to go?
+- Load indicator if/when waiting for video
+- Use HasDeviceParams to tell ppl what is going on before we get params.
+
+-------------------
+Done
 -------------------
 + Real 3D environment
 + Still picture in 3D
@@ -16,22 +32,20 @@ Features
 + Menu når man er færdig med alle videoer
 + Nye 2d videoer
 + Slut animation hvor bamsen står med et diplom
-- UI når der pauses
-- Menu in VR
-- Back button during video?
-- 2D Videokontroller: Stop, skip
-- Hold telefonen vågen mode
-- Glitch ved overgang til diplom
-- Er fadet længere når man bruger tilbagepil?
-- Tilbage til menu i stedet for menu.
-- Skift til 3d knap i menuen.
-- Titelskærm
-
--------------------
-Polish
--------------------
-- Frame size on different devices
-- 2D video screen size fitting
-- 3d environment exit - where to go?
-- Load indicator if/when waiting for video
-- Use HasDeviceParams to tell ppl what is going on before we get params.
++ Hold telefonen vågen mode
++ Titelskærm
++ Speaks i menuen
++ Speaks når man skal vække bjørnen.
++ Nye speaks (skelne mellem Theo/Thea?)
++ Speak skal stoppe hvis man klikker hurtigt
++ Check at bamsen vågner i 3D både når man kigger og ved timeout.
++ Er fadet længere når man bruger tilbagepil til menuen? Nej.
++ Nye videoer
++ Snorkelyd før man vækker bjørnen.
++ Flow - ingen videoer til sidst.
++ Tilbageknappen virker ikke mens videoen spiller?
++ Skift til 3d knap i menuen. Back i menuen.
++ Tilbage til menu i stedet for preferencer.
++ Back/forward button everywhere that can skip to the next step (2D).
++ Glitch i bamsen ved overgang til diplom (eventuelt træk det lidt hvor lang tid der går før vi skifter animation).
++ Glitch når vi fjerner diplom
