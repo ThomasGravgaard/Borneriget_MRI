@@ -97,7 +97,6 @@ namespace Borneriget.MRI
 		}
 
 		public void SetState(State state) {
-			Debug.Log("Set state " + state);
 			currentState = state;
 			animator.SetBool("happy", state == State.HAPPY);
 			animator.SetBool("stress", state == State.STRESSED);
