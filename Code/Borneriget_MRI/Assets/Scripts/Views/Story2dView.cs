@@ -23,6 +23,8 @@ namespace Borneriget.MRI
         private Image VideoProgress;
         [SerializeField]
         private GameObject ExitButton;
+        [SerializeField]
+        private GameObject NextButton;
 
         [SerializeField]
         private GameObject ButtonParent;
@@ -41,6 +43,7 @@ namespace Borneriget.MRI
             ButtonParent.SetActive(false);
             VideoImage.SetActive(false);
             ExitButton.SetActive(false);
+            NextButton.SetActive(false);
             var buttonIndex = 0;
             foreach (var button in Buttons)
             {
@@ -61,12 +64,12 @@ namespace Borneriget.MRI
             Bootstrap.Facade.SendNotification(doneNotification);
         }
 
-        public void Show(int room, string doneNotification)
+        public void Show(int room, string doneNotification, bool avatarAwake)
         {
-            Debug.Log($"Show room. Done: {doneNotification}");
-            avatarClicked = false;
+            avatarClicked = avatarAwake;
             VideoProgress.fillAmount = 0;
-            ExitButton.SetActive(true);
+            ExitButton.SetActive(avatarAwake);
+            NextButton.SetActive(avatarAwake);
             VideoImage.SetActive(false);
             MenuCam.enabled = true;
             Background.gameObject.SetActive(true);
@@ -102,6 +105,7 @@ namespace Borneriget.MRI
             ButtonParent.SetActive(false);
             VideoImage.SetActive(false);
             ExitButton.SetActive(false);
+            NextButton.SetActive(false);
             Screen.sleepTimeout = SleepTimeout.SystemSetting;
         }
 
@@ -116,37 +120,57 @@ namespace Borneriget.MRI
             SelectRoom?.Invoke(index);
         }
 
+        private IEnumerator ShowButtonsAfterAwake()
+        {
+            yield return new WaitForSeconds(5);
+            ExitButton.SetActive(true);
+            NextButton.SetActive(true);
+            avatarClicked = true;
+        }
+
         public void OnPointerClick(PointerEventData eventData)
         {
             var target = eventData.pointerCurrentRaycast.gameObject;
-            if (target == Bear)
+            if (!avatarClicked)
             {
-                if (!avatarClicked)
+                // The bear is not awake, so the only controls active are the bear
+                if (target == Bear)
                 {
-                    avatarClicked = true;
                     Bootstrap.Facade.SendNotification(StoryMediator.Notifications.AvatarClicked);
+                    StartCoroutine(ShowButtonsAfterAwake());
                 }
             }
-            if (target == ExitButton)
+            else
             {
-                Exit?.Invoke();
-            }
-            else if (VideoImage.activeInHierarchy)
-            {
-                if (eventData.button == PointerEventData.InputButton.Left)
+                if (target == ExitButton)
                 {
-                    // We are playing a video. A click will pause it
-                    Bootstrap.Facade.SendNotification(VideoMediator.Notifications.TogglePause);
+                    Exit?.Invoke();
                 }
-                if (eventData.button == PointerEventData.InputButton.Right)
+                else if (target == NextButton)
                 {
-                    // We are playing a video. A right click will stop it
-                    Bootstrap.Facade.SendNotification(VideoMediator.Notifications.StopVideo);
+                    if (VideoImage.activeInHierarchy)
+                    {
+                        Bootstrap.Facade.SendNotification(VideoMediator.Notifications.StopVideo);
+                    }
+                    else
+                    {
+                        Bootstrap.Facade.SendNotification(AvatarMediator.Notifications.StopSpeak);
+                    }
                 }
-            }
-            else if (avatarClicked)
-            {
-                if (eventData.button == PointerEventData.InputButton.Right)
+                else if (VideoImage.activeInHierarchy)
+                {
+                    if (eventData.button == PointerEventData.InputButton.Left)
+                    {
+                        // We are playing a video. A click will pause it
+                        Bootstrap.Facade.SendNotification(VideoMediator.Notifications.TogglePause);
+                    }
+                    if (eventData.button == PointerEventData.InputButton.Right)
+                    {
+                        // We are playing a video. A right click will stop it
+                        Bootstrap.Facade.SendNotification(VideoMediator.Notifications.StopVideo);
+                    }
+                }
+                else if (eventData.button == PointerEventData.InputButton.Right)
                 {
                     // We are in a speak. Right click to skip it.
                     Bootstrap.Facade.SendNotification(AvatarMediator.Notifications.StopSpeak);

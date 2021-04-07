@@ -115,7 +115,7 @@ namespace Borneriget.MRI
             switch (notification.Name)
             {
                 case Notifications.ViewInitialized:
-                    View.Show(Progress, Notifications.ViewShown);
+                    View.Show(Progress, Notifications.ViewShown, AvatarAwake);
                     break;
                 case Notifications.ViewShown:
                     if (Progress < 4)
@@ -181,10 +181,10 @@ namespace Borneriget.MRI
                         Progress = 0;
                     }
                     OnMenu = true;
-                    View.Show(Progress, (ShowMenu) ? string.Empty : Notifications.ViewShown);
+                    View.Show(Progress, (ShowMenu) ? string.Empty : Notifications.ViewShown, AvatarAwake);
                     break;
                 case Notifications.FadeAfterMenuSelect:
-                    View.Show(Progress, Notifications.ViewShown);
+                    View.Show(Progress, Notifications.ViewShown, AvatarAwake);
                     break;
                 case Notifications.ShowPreferences:
                     View.Hide();
@@ -193,7 +193,7 @@ namespace Borneriget.MRI
                     ShowMenu = true;
                     Progress = 0;
                     Exiting = false;
-                    View.Show(Progress, string.Empty);
+                    View.Show(Progress, string.Empty, AvatarAwake);
                     break;
             }
         }

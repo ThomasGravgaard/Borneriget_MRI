@@ -33,6 +33,7 @@ namespace Borneriget.MRI
         private Vector3 lastMousePos;
         private bool vrPlaying = false;
         private float progress;
+        private bool avatarAwake;
 
         public event Action Exit;
         public event Action<int> SelectRoom;
@@ -70,8 +71,9 @@ namespace Borneriget.MRI
             Bootstrap.Facade.SendNotification(doneNotification);
         }
 
-        public void Show(int room, string doneNotification)
+        public void Show(int room, string doneNotification, bool avatarAwake)
         {
+            this.avatarAwake = avatarAwake;
 #if UNITY_EDITOR
             lastMousePos = Input.mousePosition;
 #endif
@@ -133,7 +135,7 @@ namespace Borneriget.MRI
 
                 Api.UpdateScreenParams();
 
-                if (Bear.activeInHierarchy && progress < 1)
+                if (Bear.activeInHierarchy && !avatarAwake)
                 {
                     // See if we are looking at the bear
                     var progressDelta = 0f;
@@ -160,6 +162,7 @@ namespace Borneriget.MRI
                     {
                         GazeProgress.fillAmount = 0;
                         Bootstrap.Facade.SendNotification(StoryMediator.Notifications.AvatarClicked);
+                        avatarAwake = true;
                     }
                 }
 #if UNITY_EDITOR
