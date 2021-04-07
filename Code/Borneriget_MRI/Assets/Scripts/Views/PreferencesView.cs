@@ -55,6 +55,7 @@ namespace Borneriget.MRI
             else
             {
                 Bootstrap.Facade.SendNotification(SoundMediator.Notifications.MenuSpeak, 1);
+                FormatSelection.SetActive(false);
                 LanguageSelection.SetActive(true);
             }
         }
@@ -128,7 +129,6 @@ namespace Borneriget.MRI
         private void SelectFormat(bool useVr)
         {
             Bootstrap.Facade.SendNotification(SoundMediator.Notifications.ClickButton);
-            FormatSelection.SetActive(false);
             FormatSelected?.Invoke(useVr);
         }
     }
