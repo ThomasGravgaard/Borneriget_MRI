@@ -18,13 +18,20 @@ namespace Borneriget.MRI
 		}
 
 		[SerializeField]
-		private AudioClip[] speaks = null;
+		private AudioClip[] speaks_dk = null;
+		[SerializeField]
+		private AudioClip wakeUp_dk = null;
+		[SerializeField]
+		private AudioClip[] speaks_uk = null;
+		[SerializeField]
+		private AudioClip wakeUp_uk = null;
 
 		private State currentState;
 		private List<SpriteRenderer> theaObjects = new List<SpriteRenderer>();
 		private List<SpriteRenderer> theoObjects = new List<SpriteRenderer>();
 		private AudioSource audioSource;
 		private Animator animator;
+		private bool danishSpeaks;
 
         private void Awake()
 		{
@@ -66,8 +73,9 @@ namespace Borneriget.MRI
 			}
 		}
 
-		public void Show(PreferencesProxy.Avatars avatar)
+		public void Show(PreferencesProxy.Avatars avatar, bool danishSpeaks)
         {
+			this.danishSpeaks = danishSpeaks;
 			gameObject.SetActive(true);
 			foreach (var theoObject in theoObjects)
 			{
@@ -104,6 +112,11 @@ namespace Borneriget.MRI
 			return currentState;
 		}
 
+		public void WakeUpSpeak()
+        {
+			audioSource.PlayOneShot((danishSpeaks) ? wakeUp_dk : wakeUp_uk);
+		}
+
 		public void WakeUp(Action awake)
         {
 			StartCoroutine(WakeUpCo(awake));
@@ -122,7 +135,8 @@ namespace Borneriget.MRI
 
 		public void Speak(int progress, Action speakDone)
 		{
-			StartCoroutine(SpeakCo(speaks.SafeGet(progress), speakDone, progress < 5));
+			var clips = (danishSpeaks) ? speaks_dk : speaks_uk;
+			StartCoroutine(SpeakCo(clips.SafeGet(progress), speakDone, progress < 5));
 		}
 
 		public void StopSpeak()

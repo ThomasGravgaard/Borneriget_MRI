@@ -6,8 +6,9 @@ namespace Borneriget.MRI
 {
     public class AvatarMediator : Mediator
     {
-        public AvatarMediator(PreferencesProxy.Avatars avatar) : base(NAME) 
+        public AvatarMediator(PreferencesProxy.Avatars avatar, bool danishSpeaks) : base(NAME) 
         {
+            DanishSpeaks = danishSpeaks;
             Avatar = avatar;
         }
 
@@ -27,6 +28,8 @@ namespace Borneriget.MRI
         private AvatarView View => (AvatarView)ViewComponent;
 
         private PreferencesProxy.Avatars Avatar;
+        private bool DanishSpeaks;
+
         public override void OnRegister()
         {
             base.OnRegister();
@@ -47,7 +50,8 @@ namespace Borneriget.MRI
         private void InitializeView()
         {
             ViewComponent = Object.FindObjectOfType<AvatarView>(true);
-            View.Show(Avatar);
+            View.Show(Avatar, DanishSpeaks);
+            View.WakeUpSpeak();
         }
 
         public override void HandleNotification(INotification notification)

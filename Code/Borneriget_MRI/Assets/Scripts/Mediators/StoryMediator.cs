@@ -50,7 +50,7 @@ namespace Borneriget.MRI
             base.OnRegister();
             Preferences = Facade.RetrieveProxy<PreferencesProxy>();
 
-            Facade.RegisterMediator(new AvatarMediator(Preferences.Avatar));
+            Facade.RegisterMediator(new AvatarMediator(Preferences.Avatar, Preferences.Language == "da"));
             InitializeView();
         }
 

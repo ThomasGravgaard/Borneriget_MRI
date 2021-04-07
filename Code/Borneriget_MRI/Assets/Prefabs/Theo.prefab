@@ -1112,14 +1112,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b16454b1fdadf94a9730369c8ee708a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speaks:
+  speaks_dk:
   - {fileID: 8300000, guid: 0f77600cb9d6efe4db97d3e2869a6de5, type: 3}
   - {fileID: 8300000, guid: 1e763750de15f9f4d97f10245d4a333b, type: 3}
   - {fileID: 8300000, guid: 2e53802729536f34a958a028e9ba878c, type: 3}
   - {fileID: 8300000, guid: e31d1820daba6854cb6f413aca98980a, type: 3}
   - {fileID: 8300000, guid: 259ec963e2d6c664da97465fdef543b0, type: 3}
   - {fileID: 8300000, guid: 2e36204b40837c045a2d800f3a3ce261, type: 3}
-  wakeUp: {fileID: 8300000, guid: 1e83fca40c6cc0643b16d92e2541029f, type: 3}
+  wakeUp_dk: {fileID: 8300000, guid: 1e83fca40c6cc0643b16d92e2541029f, type: 3}
+  speaks_uk:
+  - {fileID: 8300000, guid: 0a627f2b31f64554b9f90bd659c9dd46, type: 3}
+  - {fileID: 8300000, guid: 00a0d8cbbc3235a43b6a9c65cd5ef759, type: 3}
+  - {fileID: 8300000, guid: b63e06d177fc5b44283e4b9a9d8a1fa8, type: 3}
+  - {fileID: 8300000, guid: 79a8bda7ecccae245b246144e77ce57a, type: 3}
+  - {fileID: 8300000, guid: 966a5185c5b270146af0b92d833c55ec, type: 3}
+  - {fileID: 8300000, guid: 4888dfe8987d1734eaa6b175c5039f7b, type: 3}
+  wakeUp_uk: {fileID: 8300000, guid: 36203793a7dc1564b80637e3c3430e35, type: 3}
 --- !u!65 &4247101871040160182
 BoxCollider:
   m_ObjectHideFlags: 0
