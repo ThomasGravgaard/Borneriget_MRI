@@ -63,6 +63,7 @@ namespace Borneriget.MRI
 
         public void Show(int room, string doneNotification)
         {
+            Debug.Log($"Show room. Done: {doneNotification}");
             avatarClicked = false;
             VideoProgress.fillAmount = 0;
             ExitButton.SetActive(true);

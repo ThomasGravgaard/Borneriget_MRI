@@ -17,6 +17,8 @@ namespace Borneriget.MRI
         private bool AvatarAwake = false;
         private int Progress = 0;
         private bool ShowMenu = false;
+        private bool Exiting = false;
+        private bool OnMenu = true;
 
         public static class Notifications
         {
@@ -25,7 +27,8 @@ namespace Borneriget.MRI
             public const string AvatarClicked = "AvatarClicked";
             public const string FadeAfterVideo = "FadeAfterVideo";
             public const string FadeAfterMenuSelect = "FadeAfterMenuSelect";
-            public const string ReturnToMenu = "ReturnToMenu";
+            public const string ShowPreferences = "ShowPreferences";
+            public const string ShowMenu = "ShowMenu";
         }
 
         public override string[] ListNotificationInterests()
@@ -36,7 +39,8 @@ namespace Borneriget.MRI
                 Notifications.AvatarClicked,
                 Notifications.FadeAfterVideo,
                 Notifications.FadeAfterMenuSelect,
-                Notifications.ReturnToMenu,
+                Notifications.ShowPreferences,
+                Notifications.ShowMenu,
                 VideoMediator.Notifications.PlayVideo,
                 VideoMediator.Notifications.VideoDone, 
                 VideoMediator.Notifications.VideoProgressUpdate,
@@ -71,13 +75,24 @@ namespace Borneriget.MRI
 
         private void View_Exit()
         {
-            SendNotification(FaderMediator.Notifications.StartFade, Notifications.ReturnToMenu);
+            if (ShowMenu && OnMenu)
+            {
+                SendNotification(FaderMediator.Notifications.StartFade, Notifications.ShowPreferences);
+            }
+            else
+            {
+                Exiting = true;
+                SendNotification(VideoMediator.Notifications.StopVideo);
+                SendNotification(AvatarMediator.Notifications.StopSpeak);
+                SendNotification(FaderMediator.Notifications.StartFade, Notifications.ShowMenu);
+            }
         }
 
         private void View_SelectRoom(int index)
         {
             if (ShowMenu)
             {
+                OnMenu = false;
                 // We will start the speak and the video
                 switch (index)
                 {
@@ -150,7 +165,10 @@ namespace Borneriget.MRI
                     View.ShowVideo();
                     break;
                 case VideoMediator.Notifications.VideoDone:
-                    SendNotification(FaderMediator.Notifications.StartFade, Notifications.FadeAfterVideo);
+                    if (!Exiting)
+                    {
+                        SendNotification(FaderMediator.Notifications.StartFade, Notifications.FadeAfterVideo);
+                    }
                     break;
                 case VideoMediator.Notifications.VideoProgressUpdate:
                     View.SetVideoProgress((VideoProgress)notification.Body);
@@ -162,14 +180,20 @@ namespace Borneriget.MRI
                         ShowMenu = true;
                         Progress = 0;
                     }
-                    Debug.Log($"Fade done. Progress {Progress}. ShowMenu {ShowMenu}");
+                    OnMenu = true;
                     View.Show(Progress, (ShowMenu) ? string.Empty : Notifications.ViewShown);
                     break;
                 case Notifications.FadeAfterMenuSelect:
                     View.Show(Progress, Notifications.ViewShown);
                     break;
-                case Notifications.ReturnToMenu:
+                case Notifications.ShowPreferences:
                     View.Hide();
+                    break;
+                case Notifications.ShowMenu:
+                    ShowMenu = true;
+                    Progress = 0;
+                    Exiting = false;
+                    View.Show(Progress, string.Empty);
                     break;
             }
         }

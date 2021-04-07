@@ -41,7 +41,7 @@ namespace Borneriget.MRI
 			// Register commands
 			Facade.RegisterCommand(TitleScreenMediator.Notifications.TitleScreenShown, () => new ChangeMediatorCommand<TitleScreenMediator, PreferencesMediator>());
 			Facade.RegisterCommand(PreferencesMediator.Notifications.PreferencesSelected, () => new ChangeMediatorCommand<PreferencesMediator, StoryMediator>());
-			Facade.RegisterCommand(StoryMediator.Notifications.ReturnToMenu, () => new ReturnToMenuCommand());
+			Facade.RegisterCommand(StoryMediator.Notifications.ShowPreferences, () => new ReturnToMenuCommand());
 
 			// Register mediators that we always have
 			Facade.RegisterMediator(new SoundMediator());
