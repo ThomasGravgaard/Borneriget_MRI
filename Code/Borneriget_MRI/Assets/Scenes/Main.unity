@@ -804,12 +804,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a38031c3c89ecc14db41e7fb07cb21b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonClick: {fileID: 8300000, guid: bd71697dafd5b134db4c34a8c6d58850, type: 3}
+  buttonClick: {fileID: 8300000, guid: 27c2232e74f9f014a85f51b5a5933048, type: 3}
   menuSpeaks:
   - {fileID: 8300000, guid: 7ee160c6768e15d48ab2fe039ec6529f, type: 3}
   - {fileID: 8300000, guid: 3324b0278a6f4c942aacdb4fd1b7cf74, type: 3}
   - {fileID: 8300000, guid: 09e3d25492302754d87cd7f06f05f751, type: 3}
   - {fileID: 8300000, guid: b292ebcf17932044787d9d7d92af6385, type: 3}
+  menuSpeaks_UK:
+  - {fileID: 8300000, guid: 09e3d25492302754d87cd7f06f05f751, type: 3}
+  - {fileID: 8300000, guid: ef377b80dd2a3b74487514912e953092, type: 3}
 --- !u!82 &553034071
 AudioSource:
   m_ObjectHideFlags: 0

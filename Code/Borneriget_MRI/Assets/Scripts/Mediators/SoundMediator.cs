@@ -42,7 +42,22 @@ namespace Borneriget.MRI
             }
             if (notification.Name == Notifications.MenuSpeak)
             {
-                View.MenuSpeak((int)notification.Body);
+                var speak = (int)notification.Body;
+                var isDanish = true;
+                if (speak > 1)
+                {
+                    // Check if we have UK prefs
+                    var preferences = Facade.RetrieveProxy<PreferencesProxy>();
+                    isDanish = !(preferences != null && preferences.Language == "en");
+                }
+                if (isDanish)
+                {
+                    View.MenuSpeak(speak);
+                }
+                else
+                {
+                    View.MenuSpeakUK(speak);
+                }
             }
         }
     }

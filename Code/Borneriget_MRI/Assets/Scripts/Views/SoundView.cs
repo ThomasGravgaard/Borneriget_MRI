@@ -9,6 +9,8 @@ namespace Borneriget.MRI
         private AudioClip buttonClick;
         [SerializeField]
         private AudioClip[] menuSpeaks;
+        [SerializeField]
+        private AudioClip[] menuSpeaks_UK;
 
         private AudioSource audioSource;
 
@@ -27,6 +29,15 @@ namespace Borneriget.MRI
             if (menuStep > -1 && menuStep < menuSpeaks.Length)
             {
                 audioSource.PlayOneShot(menuSpeaks[menuStep]);
+            }
+        }
+
+        public void MenuSpeakUK(int menuStep)
+        {
+            menuStep -= 2;
+            if (menuStep > -1 && menuStep < menuSpeaks.Length)
+            {
+                audioSource.PlayOneShot(menuSpeaks_UK[menuStep]);
             }
         }
     }
