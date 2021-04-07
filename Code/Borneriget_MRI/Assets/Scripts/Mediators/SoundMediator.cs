@@ -16,6 +16,7 @@ namespace Borneriget.MRI
         {
             public const string ClickButton = "ClickButton";
             public const string MenuSpeak = "MenuSpeak";
+            public const string StopSpeak = "StopSpeak";
         }
 
         public override void OnRegister()
@@ -30,34 +31,38 @@ namespace Borneriget.MRI
 
         public override string[] ListNotificationInterests()
         {
-            return new[] { Notifications.ClickButton, Notifications.MenuSpeak };
+            return new[] { Notifications.ClickButton, Notifications.MenuSpeak, Notifications.StopSpeak };
         }
 
         public override void HandleNotification(INotification notification)
         {
             base.HandleNotification(notification);
-            if (notification.Name == Notifications.ClickButton)
+            switch (notification.Name)
             {
-                View.ClickButton();
-            }
-            if (notification.Name == Notifications.MenuSpeak)
-            {
-                var speak = (int)notification.Body;
-                var isDanish = true;
-                if (speak > 1)
-                {
-                    // Check if we have UK prefs
-                    var preferences = Facade.RetrieveProxy<PreferencesProxy>();
-                    isDanish = !(preferences != null && preferences.Language == "en");
-                }
-                if (isDanish)
-                {
-                    View.MenuSpeak(speak);
-                }
-                else
-                {
-                    View.MenuSpeakUK(speak);
-                }
+                case Notifications.ClickButton:
+                    View.ClickButton();
+                    break;
+                case Notifications.MenuSpeak:
+                    var speak = (int)notification.Body;
+                    var isDanish = true;
+                    if (speak > 1)
+                    {
+                        // Check if we have UK prefs
+                        var preferences = Facade.RetrieveProxy<PreferencesProxy>();
+                        isDanish = !(preferences != null && preferences.Language == "en");
+                    }
+                    if (isDanish)
+                    {
+                        View.MenuSpeak(speak);
+                    }
+                    else
+                    {
+                        View.MenuSpeakUK(speak);
+                    }
+                    break;
+                case Notifications.StopSpeak:
+                    View.StopSpeak();
+                    break;
             }
         }
     }

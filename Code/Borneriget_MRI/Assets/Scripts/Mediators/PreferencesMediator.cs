@@ -64,6 +64,7 @@ namespace Borneriget.MRI
         {
             Preferences.UseVr = useVr;
             Facade.SendNotification(FaderMediator.Notifications.StartFade, Notifications.PreferencesSelected);
+            Facade.SendNotification(SoundMediator.Notifications.StopSpeak);
         }
     }
 }

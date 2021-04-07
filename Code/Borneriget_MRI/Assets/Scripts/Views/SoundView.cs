@@ -24,20 +24,32 @@ namespace Borneriget.MRI
             audioSource.PlayOneShot(buttonClick);
         }
 
+        private void PlayClip(AudioClip clip)
+        {
+            if (audioSource.isPlaying)
+            {
+                audioSource.Stop();
+            }
+            audioSource.clip = clip;
+            audioSource.Play();
+        }
+
         public void MenuSpeak(int menuStep)
         {
-            if (menuStep > -1 && menuStep < menuSpeaks.Length)
-            {
-                audioSource.PlayOneShot(menuSpeaks[menuStep]);
-            }
+            PlayClip(menuSpeaks.SafeGet(menuStep));
         }
 
         public void MenuSpeakUK(int menuStep)
         {
             menuStep -= 2;
-            if (menuStep > -1 && menuStep < menuSpeaks.Length)
+            PlayClip(menuSpeaks_UK.SafeGet(menuStep));
+        }
+
+        public void StopSpeak()
+        {
+            if (audioSource.isPlaying)
             {
-                audioSource.PlayOneShot(menuSpeaks_UK[menuStep]);
+                audioSource.Stop();
             }
         }
     }
