@@ -20,11 +20,17 @@ namespace Borneriget.MRI
 		[SerializeField]
 		private AudioClip[] speaks_dk = null;
 		[SerializeField]
-		private AudioClip wakeUp_dk = null;
+		private AudioClip wakeTheBear_dk = null;
 		[SerializeField]
 		private AudioClip[] speaks_uk = null;
 		[SerializeField]
-		private AudioClip wakeUp_uk = null;
+		private AudioClip wakeTheBear_uk = null;
+		[SerializeField]
+		private AudioClip snore = null;
+		[SerializeField]
+		private AudioClip waking = null;
+		[SerializeField]
+		private AudioSource snoreAudioSource = null;
 
 		private State currentState;
 		private List<SpriteRenderer> theaObjects = new List<SpriteRenderer>();
@@ -85,9 +91,13 @@ namespace Borneriget.MRI
 			{
 				theaObject.enabled = (avatar == PreferencesProxy.Avatars.Thea);
 			}
+			snoreAudioSource.clip = snore;
+			snoreAudioSource.loop = true;
+			snoreAudioSource.Play();
 		}
 
 		public void SetState(State state) {
+			Debug.Log("Set state " + state);
 			currentState = state;
 			animator.SetBool("happy", state == State.HAPPY);
 			animator.SetBool("stress", state == State.STRESSED);
@@ -98,6 +108,7 @@ namespace Borneriget.MRI
 			}
             if (state == State.DIPLOMA)
             {
+				animator.ResetTrigger("idle");
 				animator.SetTrigger("diploma");
             }
 		}
@@ -114,7 +125,7 @@ namespace Borneriget.MRI
 
 		public void WakeUpSpeak()
         {
-			audioSource.PlayOneShot((danishSpeaks) ? wakeUp_dk : wakeUp_uk);
+			audioSource.PlayOneShot((danishSpeaks) ? wakeTheBear_dk : wakeTheBear_uk);
 		}
 
 		public void WakeUp(Action awake)
@@ -124,12 +135,30 @@ namespace Borneriget.MRI
 
         private IEnumerator WakeUpCo(Action awake)
         {
+			snoreAudioSource.Stop();
+			snoreAudioSource.clip = waking;
+			snoreAudioSource.loop = false;
+			snoreAudioSource.Play();
+			yield return new WaitForSeconds(2);
 			SetState(State.NEUTRAL);
 			yield return new WaitForSeconds(3);
 			awake();
         }
 
-        public void Sleep() {
+		public void ShowDiploma()
+        {
+			StartCoroutine(ShowDiplomaCo());
+		}
+
+		private IEnumerator ShowDiplomaCo()
+        {
+			animator.SetBool("talking", true);
+			yield return new WaitForSeconds(6);
+			animator.SetBool("talking", false);
+			SetState(State.DIPLOMA);
+		}
+
+		public void Sleep() {
 			SetState(State.SLEEPING);
 		}
 

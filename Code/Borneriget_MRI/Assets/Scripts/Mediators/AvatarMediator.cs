@@ -68,10 +68,11 @@ namespace Borneriget.MRI
                     View.Speak((int)notification.Body, () => Facade.SendNotification(Notifications.SpeakDone));
                     break;
                 case Notifications.ShowDiploma:
-                    View.SetState(AvatarView.State.DIPLOMA);
+                    View.ShowDiploma();
                     break;
                 case Notifications.StopSpeak:
                     View.StopSpeak();
+                    Facade.SendNotification(Notifications.SpeakDone);
                     break;
             }
         }
