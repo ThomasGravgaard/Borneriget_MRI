@@ -62,4 +62,4 @@ crashlytics-build.properties
 # Important - do not check in video files at all
 *.mp4
 /Videos
-
+/Audio
