@@ -12,6 +12,7 @@ namespace Borneriget.MRI
         public new static string NAME = "StoryMediator";
 
         private IStoryView View => (IStoryView)ViewComponent;
+        private IVideoControl VideoView => ViewComponent as IVideoControl;
         private PreferencesProxy Preferences;
 
         private bool AvatarAwake = false;
@@ -65,6 +66,12 @@ namespace Borneriget.MRI
             base.OnRemove();
             View.Exit -= View_Exit;
             View.SelectRoom -= View_SelectRoom;
+            if (VideoView != null)
+            {
+                VideoView.StartSeek -= VideoView_StartSeek;
+                VideoView.EndSeek -= VideoView_EndSeek;
+                VideoView.SetSeekPosition -= VideoView_SetSeekPosition;
+            }
         }
 
         private void InitializeView()
@@ -73,6 +80,27 @@ namespace Borneriget.MRI
             View.Exit += View_Exit;
             View.SelectRoom += View_SelectRoom;
             View.Initialize(Notifications.ViewInitialized);
+            if (VideoView != null)
+            {
+                VideoView.StartSeek += VideoView_StartSeek;
+                VideoView.EndSeek += VideoView_EndSeek;
+                VideoView.SetSeekPosition += VideoView_SetSeekPosition;
+            }
+        }
+
+        private void VideoView_SetSeekPosition(float position)
+        {
+            SendNotification(VideoMediator.Notifications.VideoSeek, position);
+        }
+
+        private void VideoView_StartSeek()
+        {
+            SendNotification(VideoMediator.Notifications.StartVideoSeek);
+        }
+
+        private void VideoView_EndSeek()
+        {
+            SendNotification(VideoMediator.Notifications.EndVideoSeek);
         }
 
         private void View_Exit()
@@ -173,7 +201,7 @@ namespace Borneriget.MRI
                     }
                     break;
                 case VideoMediator.Notifications.VideoProgressUpdate:
-                    View.SetVideoProgress((VideoProgress)notification.Body);
+                    VideoView?.SetVideoProgress((VideoProgress)notification.Body);
                     break;
                 case Notifications.FadeAfterVideo:
                     if (Progress++ == 5)
@@ -186,10 +214,10 @@ namespace Borneriget.MRI
                     View.Show(Progress, (ShowMenu) ? string.Empty : Notifications.ViewShown, AvatarAwake);
                     break;
                 case VideoMediator.Notifications.VideoPaused:
-                    View.ShowPause();
+                    VideoView?.ShowPause();
                     break;
                 case VideoMediator.Notifications.VideoResumed:
-                    View.ShowResume();
+                    VideoView?.ShowResume();
                     break;
                 case Notifications.FadeAfterMenuSelect:
                     View.Show(Progress, Notifications.ViewShown, AvatarAwake);

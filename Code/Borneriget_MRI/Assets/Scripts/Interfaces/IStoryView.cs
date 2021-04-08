@@ -6,11 +6,8 @@ namespace Borneriget.MRI
     {
         public void Initialize(string doneNotification);
         public void Show(int room, string doneNotification, bool avatarAwake);
-        public void ShowVideo();
-        public void SetVideoProgress(VideoProgress progress);
         public void Hide();
-        void ShowPause();
-        void ShowResume();
+        public void ShowVideo();
 
         public event Action<int> SelectRoom;
         public event Action Exit;

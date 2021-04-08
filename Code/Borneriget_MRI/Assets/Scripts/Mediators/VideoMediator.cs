@@ -23,6 +23,9 @@ namespace Borneriget.MRI
             public const string VideoProgressUpdate = "VideoProgressUpdate";
             public const string VideoPaused = "VideoPaused";
             public const string VideoResumed = "VideoResumed";
+            public const string StartVideoSeek = "StartVideoSeek";
+            public const string VideoSeek = "VideoSeek";
+            public const string EndVideoSeek = "EndVideoSeek";
         }
 
         private VideoView View => (VideoView)ViewComponent;
@@ -69,7 +72,10 @@ namespace Borneriget.MRI
                 Notifications.PrepareVideo,
                 Notifications.PlayVideo,
                 Notifications.TogglePause,
-                Notifications.StopVideo
+                Notifications.StopVideo,
+                Notifications.StartVideoSeek,
+                Notifications.VideoSeek,
+                Notifications.EndVideoSeek
             };
         }
 
@@ -94,6 +100,15 @@ namespace Borneriget.MRI
                     break;
                 case Notifications.StopVideo:
                     View.StopVideo();
+                    break;
+                case Notifications.StartVideoSeek:
+                    View.StartSeek();
+                    break;
+                case Notifications.VideoSeek:
+                    View.SeekTo((float)notification.Body);
+                    break;
+                case Notifications.EndVideoSeek:
+                    View.EndSeek();
                     break;
             }
         }

@@ -7,7 +7,7 @@ using UnityEngine.Video;
 
 namespace Borneriget.MRI
 {
-    public class Story2dView : MonoBehaviour, IPointerClickHandler, IStoryView
+    public class Story2dView : MonoBehaviour, IPointerClickHandler, IStoryView, IBeginDragHandler, IDragHandler, IEndDragHandler, IVideoControl
     {
         [SerializeField]
         private Camera MenuCam;
@@ -30,12 +30,17 @@ namespace Borneriget.MRI
         private GameObject ButtonParent;
         [SerializeField]
         private Button[] Buttons;
+        [SerializeField]
+        private float dragYrange;
 
         [SerializeField]
         private Animator Animator;
 
         public event Action<int> SelectRoom;
         public event Action Exit;
+        public event Action StartSeek;
+        public event Action<float> SetSeekPosition;
+        public event Action EndSeek;
         private bool avatarClicked;
 
         private void Awake()
@@ -162,7 +167,7 @@ namespace Borneriget.MRI
                 }
                 else if (VideoImage.activeInHierarchy)
                 {
-                    if (eventData.button == PointerEventData.InputButton.Left)
+                    if (eventData.button == PointerEventData.InputButton.Left && eventData.position.y > dragYrange)
                     {
                         // We are playing a video. A click will pause it
                         Bootstrap.Facade.SendNotification(VideoMediator.Notifications.TogglePause);
@@ -201,6 +206,33 @@ namespace Borneriget.MRI
         public void ShowResume()
         {
             Animator.SetTrigger("Resume");
+        }
+
+        public void OnDrag(PointerEventData eventData)
+        {
+            if (eventData.position.y <= dragYrange)
+            {
+                var position = eventData.position.x / Screen.width;
+                SetSeekPosition?.Invoke(position);
+            }
+        }
+
+        public void OnBeginDrag(PointerEventData eventData)
+        {
+            if (eventData.position.y <= dragYrange)
+            {
+                Animator.SetBool("ShowTimeline", true);
+                StartSeek?.Invoke();
+            }
+        }
+
+        public void OnEndDrag(PointerEventData eventData)
+        {
+            if (VideoImage.activeInHierarchy)
+            {
+                Animator.SetBool("ShowTimeline", false);
+                EndSeek?.Invoke();
+            }
         }
     }
 }

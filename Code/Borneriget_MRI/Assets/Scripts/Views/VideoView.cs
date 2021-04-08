@@ -24,7 +24,13 @@ namespace Borneriget.MRI
 
         public void Initialize(bool isVr)
         {
+            Player.errorReceived += Player_errorReceived;
             Player.targetTexture = (isVr) ? VrTexture : NormalTexture;
+        }
+
+        private void Player_errorReceived(VideoPlayer source, string message)
+        {
+            Debug.LogError($"Player error {message}. Url: {source.url}");
         }
 
         public void Prepare(string videoUrl)
@@ -107,6 +113,31 @@ namespace Borneriget.MRI
             {
                 Player.Stop();
             }
+        }
+
+        public void SeekTo(float percentage)
+        {
+            if (Player.frameRate > 0 && Player.canSetTime)
+            {
+                var totalTime = Player.frameCount / Player.frameRate;
+                Player.time = totalTime * Mathf.Clamp01(percentage);
+            }
+            else
+            {
+                Debug.LogError($"Seek not possible!!! {Player.canSetTime}");
+            }
+        }
+
+        public void StartSeek()
+        {
+            PausedVideo = true;
+            Player.Pause();
+        }
+
+        public void EndSeek()
+        {
+            PausedVideo = false;
+            Player.Play();
         }
     }
 }
