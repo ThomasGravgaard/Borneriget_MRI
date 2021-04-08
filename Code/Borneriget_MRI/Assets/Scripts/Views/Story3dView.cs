@@ -1,6 +1,7 @@
 ﻿using Google.XR.Cardboard;
 using System;
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.XR.Management;
@@ -29,6 +30,10 @@ namespace Borneriget.MRI
         private float ProgressSpeed = 1.5f;
         [SerializeField]
         private float MouseRotateSpeed = 45f;
+        [SerializeField]
+        private GameObject Menu;
+        [SerializeField]
+        private GameObject[] MenuItems;
 
         private Vector3 lastMousePos;
         private bool vrPlaying = false;
@@ -84,6 +89,17 @@ namespace Borneriget.MRI
             Environment.SetActive(true);
             GazeProgress.gameObject.SetActive(true);
             StartCoroutine(ShowCo(doneNotification));
+            if (string.IsNullOrEmpty(doneNotification))
+            {
+                // We have no notification, so we will show the menu and wait for a click.
+                ScreenImage.enabled = false;
+                Menu.SetActive(true);
+            }
+            else
+            {
+                ScreenImage.enabled = true;
+                Menu.SetActive(false);
+            }
         }
 
         private IEnumerator ShowCo(string doneNotification)
@@ -135,34 +151,49 @@ namespace Borneriget.MRI
 
                 Api.UpdateScreenParams();
 
-                if (Bear.activeInHierarchy && !avatarAwake)
+                var doRaycast = (Bear.activeInHierarchy && !avatarAwake) || Menu.activeInHierarchy;
+
+                if (doRaycast)
                 {
                     // See if we are looking at the bear
                     var progressDelta = 0f;
-                    if (Physics.Raycast(Cam.transform.position, Cam.transform.forward, out RaycastHit hit))
+                    var triggerProgress = false;
+                    RaycastHit hit;
+                    if (Physics.Raycast(Cam.transform.position, Cam.transform.forward, out hit))
                     {
-                        if (hit.transform.gameObject == Bear)
-                        {
-                            progressDelta = (1 / ProgressSpeed) * Time.deltaTime;
-                        }
+                        progressDelta = (1 / ProgressSpeed) * Time.deltaTime;
                     }
                     if (progressDelta > 0)
                     {
-                        progress = Mathf.Clamp01(progress + progressDelta);
+                        if (progress < 1)
+                        {
+                            progress = Mathf.Clamp01(progress + progressDelta);
+                            if (GazeProgress)
+                            {
+                                GazeProgress.fillAmount = progress;
+                            }
+                            if (progress == 1)
+                            {
+                                GazeProgress.fillAmount = 0;
+                                if (hit.collider.gameObject == Bear)
+                                {
+                                    Bootstrap.Facade.SendNotification(StoryMediator.Notifications.AvatarClicked);
+                                    avatarAwake = true;
+                                }
+                                else
+                                {
+                                    var menuItem = Array.IndexOf(MenuItems, hit.collider.gameObject);
+                                    if (menuItem > 0)
+                                    {
+                                        SelectRoom?.Invoke(menuItem);
+                                    }
+                                }
+                            }
+                        }
                     }
                     else
                     {
                         progress = 0;
-                    }
-                    if (GazeProgress)
-                    {
-                        GazeProgress.fillAmount = progress;
-                    }
-                    if (progress == 1)
-                    {
-                        GazeProgress.fillAmount = 0;
-                        Bootstrap.Facade.SendNotification(StoryMediator.Notifications.AvatarClicked);
-                        avatarAwake = true;
                     }
                 }
 #if UNITY_EDITOR

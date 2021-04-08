@@ -2,12 +2,10 @@
 ------------------
 Features
 -------------------
-- Menu in VR
 
 -------------------
 Polish
 -------------------
-- Frame size on different devices
 - 2D video screen size fitting
 - 3d environment exit - where to go?
 - Error indicator if video cannot load. Bogus URL'screen.
@@ -51,3 +49,5 @@ Done
 + Glitch når vi fjerner diplom
 + UI når der pauses
 + 2D video seek
++ Frame size on menu relative to screen
++ Menu in VR
