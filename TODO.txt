@@ -2,8 +2,6 @@
 ------------------
 Features
 -------------------
-- UI når der pauses
-- 2D video seek
 - Menu in VR
 
 -------------------
@@ -12,7 +10,9 @@ Polish
 - Frame size on different devices
 - 2D video screen size fitting
 - 3d environment exit - where to go?
-- Load indicator if/when waiting for video
+- Error indicator if video cannot load. Bogus URL'screen.
+- Error indicator if there is no network.
+- Load indicator if/when waiting for video (how can this be tested?)
 - Use HasDeviceParams to tell ppl what is going on before we get params.
 
 -------------------
@@ -49,3 +49,5 @@ Done
 + Back/forward button everywhere that can skip to the next step (2D).
 + Glitch i bamsen ved overgang til diplom (eventuelt træk det lidt hvor lang tid der går før vi skifter animation).
 + Glitch når vi fjerner diplom
++ UI når der pauses
++ 2D video seek
