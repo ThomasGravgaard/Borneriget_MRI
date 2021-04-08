@@ -152,10 +152,6 @@ namespace Borneriget.MRI
                     {
                         SendNotification(VideoMediator.Notifications.PrepareVideo, Progress);
                     }
-                    else
-                    {
-                        Debug.Log("No video");
-                    }
                     if (AvatarAwake)
                     {
                         if (Progress == 5)
