@@ -85,17 +85,19 @@ namespace Borneriget.MRI
             VideoDone?.Invoke();
         }
 
-        public void TogglePause()
+        public bool TogglePause()
         {
             if (Player.isPlaying)
             {
                 PausedVideo = true;
                 Player.Pause();
+                return true;
             }
             else
             {
                 PausedVideo = false;
                 Player.Play();
+                return false;
             }
         }
 

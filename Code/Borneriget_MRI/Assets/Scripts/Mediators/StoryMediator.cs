@@ -42,8 +42,10 @@ namespace Borneriget.MRI
                 Notifications.ShowPreferences,
                 Notifications.ShowMenu,
                 VideoMediator.Notifications.PlayVideo,
-                VideoMediator.Notifications.VideoDone, 
+                VideoMediator.Notifications.VideoDone,
                 VideoMediator.Notifications.VideoProgressUpdate,
+                VideoMediator.Notifications.VideoPaused,
+                VideoMediator.Notifications.VideoResumed,
                 AvatarMediator.Notifications.SpeakDone, 
                 AvatarMediator.Notifications.AvatarAwake
             };
@@ -182,6 +184,12 @@ namespace Borneriget.MRI
                     }
                     OnMenu = true;
                     View.Show(Progress, (ShowMenu) ? string.Empty : Notifications.ViewShown, AvatarAwake);
+                    break;
+                case VideoMediator.Notifications.VideoPaused:
+                    View.ShowPause();
+                    break;
+                case VideoMediator.Notifications.VideoResumed:
+                    View.ShowResume();
                     break;
                 case Notifications.FadeAfterMenuSelect:
                     View.Show(Progress, Notifications.ViewShown, AvatarAwake);

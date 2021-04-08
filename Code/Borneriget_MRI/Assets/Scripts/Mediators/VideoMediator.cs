@@ -21,6 +21,8 @@ namespace Borneriget.MRI
             public const string StopVideo = "StopVideo";
             public const string VideoDone = "VideoDone";
             public const string VideoProgressUpdate = "VideoProgressUpdate";
+            public const string VideoPaused = "VideoPaused";
+            public const string VideoResumed = "VideoResumed";
         }
 
         private VideoView View => (VideoView)ViewComponent;
@@ -87,7 +89,8 @@ namespace Borneriget.MRI
                     View.PlayVideo();
                     break;
                 case Notifications.TogglePause:
-                    View.TogglePause();
+                    var paused = View.TogglePause();
+                    SendNotification((paused) ? Notifications.VideoPaused : Notifications.VideoResumed);
                     break;
                 case Notifications.StopVideo:
                     View.StopVideo();

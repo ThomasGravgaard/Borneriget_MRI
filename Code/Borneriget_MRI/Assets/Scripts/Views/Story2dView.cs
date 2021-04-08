@@ -31,6 +31,9 @@ namespace Borneriget.MRI
         [SerializeField]
         private Button[] Buttons;
 
+        [SerializeField]
+        private Animator Animator;
+
         public event Action<int> SelectRoom;
         public event Action Exit;
         private bool avatarClicked;
@@ -188,6 +191,16 @@ namespace Borneriget.MRI
         public void SetVideoProgress(VideoProgress progress)
         {
             VideoProgress.fillAmount = progress.Progress;
+        }
+
+        public void ShowPause()
+        {
+            Animator.SetTrigger("Pause");
+        }
+
+        public void ShowResume()
+        {
+            Animator.SetTrigger("Resume");
         }
     }
 }

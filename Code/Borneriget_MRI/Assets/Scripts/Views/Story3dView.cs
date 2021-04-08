@@ -184,5 +184,15 @@ namespace Borneriget.MRI
         {
             // We do not show progress in 3d.
         }
+
+        public void ShowPause()
+        {
+            // We cannot pause the video in 3d
+        }
+
+        public void ShowResume()
+        {
+            // We cannot pause the video in 3d
+        }
     }
 }

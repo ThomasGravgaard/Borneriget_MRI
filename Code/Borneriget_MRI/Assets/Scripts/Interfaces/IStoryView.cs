@@ -9,6 +9,8 @@ namespace Borneriget.MRI
         public void ShowVideo();
         public void SetVideoProgress(VideoProgress progress);
         public void Hide();
+        void ShowPause();
+        void ShowResume();
 
         public event Action<int> SelectRoom;
         public event Action Exit;
