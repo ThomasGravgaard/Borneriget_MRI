@@ -811,7 +811,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 09e3d25492302754d87cd7f06f05f751, type: 3}
   - {fileID: 8300000, guid: b292ebcf17932044787d9d7d92af6385, type: 3}
   menuSpeaks_UK:
-  - {fileID: 8300000, guid: 09e3d25492302754d87cd7f06f05f751, type: 3}
+  - {fileID: 8300000, guid: 8d080ffb96e7c9441af522f0f042022b, type: 3}
   - {fileID: 8300000, guid: ef377b80dd2a3b74487514912e953092, type: 3}
 --- !u!82 &553034071
 AudioSource:
@@ -2133,6 +2133,38 @@ PrefabInstance:
     - target: {fileID: 1332746548436598506, guid: 97787db8acce856468b73bfba30edd87, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1693240867484005443, guid: 97787db8acce856468b73bfba30edd87, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1693240867484005443, guid: 97787db8acce856468b73bfba30edd87, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1693240867484005443, guid: 97787db8acce856468b73bfba30edd87, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1693240867484005443, guid: 97787db8acce856468b73bfba30edd87, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1693240867484005443, guid: 97787db8acce856468b73bfba30edd87, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -110
+      objectReference: {fileID: 0}
+    - target: {fileID: 1693240867484005443, guid: 97787db8acce856468b73bfba30edd87, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -96
+      objectReference: {fileID: 0}
+    - target: {fileID: 1693240867484005443, guid: 97787db8acce856468b73bfba30edd87, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1693240867484005443, guid: 97787db8acce856468b73bfba30edd87, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 2250409115884802943, guid: 97787db8acce856468b73bfba30edd87, type: 3}
       propertyPath: m_AnchorMax.y
