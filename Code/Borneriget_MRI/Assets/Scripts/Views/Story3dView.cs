@@ -93,6 +93,7 @@ namespace Borneriget.MRI
             CamRoot.gameObject.SetActive(true);
             Environment.SetActive(true);
             GazeProgress.gameObject.SetActive(true);
+            Spinner.SetActive(false);
             StartCoroutine(ShowCo(doneNotification));
             if (string.IsNullOrEmpty(doneNotification))
             {
