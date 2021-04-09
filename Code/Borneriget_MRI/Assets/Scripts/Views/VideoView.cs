@@ -36,7 +36,7 @@ namespace Borneriget.MRI
 
         public void Prepare(string videoUrl)
         {
-            Player.url = videoUrl;
+            Player.url = videoUrl + "sdsd";
             StartCoroutine(PrepareVideoCo());
         }
 

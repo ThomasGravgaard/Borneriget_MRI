@@ -28,7 +28,7 @@ namespace Borneriget.MRI
         [SerializeField]
         private GameObject Spinner;
         [SerializeField]
-        private float SpinnerRotateSpeed = 180;
+        private float SpinnerRotateSpeed = -180;
 
         [SerializeField]
         private GameObject ButtonParent;

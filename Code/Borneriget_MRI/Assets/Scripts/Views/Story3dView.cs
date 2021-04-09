@@ -34,6 +34,10 @@ namespace Borneriget.MRI
         private GameObject Menu;
         [SerializeField]
         private GameObject[] MenuItems;
+        [SerializeField]
+        private GameObject Spinner;
+        [SerializeField]
+        private float SpinnerRotateSpeed = -180;
 
         private Vector3 lastMousePos;
         private bool vrPlaying = false;
@@ -48,6 +52,7 @@ namespace Borneriget.MRI
             Environment.SetActive(false);
             CamRoot.gameObject.SetActive(false);
             GazeProgress.gameObject.SetActive(false);
+            Spinner.SetActive(false);
             GazeProgress.fillAmount = 0;
         }
 
@@ -116,12 +121,16 @@ namespace Borneriget.MRI
 
         public void ShowSpinner()
         {
-
+            Spinner.SetActive(true);
         }
 
         public void SetVideoProgress(VideoProgress progress)
         {
             // Currently we are not showing video progress in 3d
+            if (Spinner.activeInHierarchy)
+            {
+                Spinner.SetActive(false);
+            }
         }
 
         public void ShowVideo()
@@ -167,7 +176,6 @@ namespace Borneriget.MRI
                 {
                     // See if we are looking at the bear
                     var progressDelta = 0f;
-                    var triggerProgress = false;
                     RaycastHit hit;
                     if (Physics.Raycast(Cam.transform.position, Cam.transform.forward, out hit))
                     {
@@ -205,6 +213,11 @@ namespace Borneriget.MRI
                     {
                         progress = 0;
                     }
+                }
+
+                if (Spinner.activeInHierarchy)
+                {
+                    Spinner.transform.Rotate(Vector3.forward, SpinnerRotateSpeed * Time.deltaTime);
                 }
 #if UNITY_EDITOR
                 var mouseDelta = lastMousePos - Input.mousePosition;
