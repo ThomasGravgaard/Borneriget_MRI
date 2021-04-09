@@ -1656,5 +1656,21 @@ PrefabInstance:
       propertyPath: dragYrange
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 8681481679365302547, guid: 97787db8acce856468b73bfba30edd87, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8681481679365302547, guid: 97787db8acce856468b73bfba30edd87, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8681481679365302547, guid: 97787db8acce856468b73bfba30edd87, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8681481679365302547, guid: 97787db8acce856468b73bfba30edd87, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97787db8acce856468b73bfba30edd87, type: 3}
