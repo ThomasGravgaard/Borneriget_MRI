@@ -148,8 +148,9 @@ namespace Borneriget.MRI
             Screen.sleepTimeout = SleepTimeout.SystemSetting;
         }
 
-        private void StopXR()
+        private IEnumerator StopXR()
         {
+            yield return new WaitForSeconds(1f);
             XRGeneralSettings.Instance.Manager.StopSubsystems();
             XRGeneralSettings.Instance.Manager.DeinitializeLoader();
         }
@@ -160,7 +161,7 @@ namespace Borneriget.MRI
             {
                 if (Api.IsCloseButtonPressed)
                 {
-                    StopXR();
+                    StartCoroutine(StopXR());
                     Exit?.Invoke();
                 }
 
