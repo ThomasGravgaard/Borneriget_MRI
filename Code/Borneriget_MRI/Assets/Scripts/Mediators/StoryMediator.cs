@@ -106,6 +106,7 @@ namespace Borneriget.MRI
 
         private void View_Exit()
         {
+            SendNotification(SoundMediator.Notifications.ClickButton);
             if (ShowMenu && OnMenu)
             {
                 SendNotification(FaderMediator.Notifications.StartFade, Notifications.ShowPreferences);

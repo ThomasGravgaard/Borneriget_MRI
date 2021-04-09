@@ -168,6 +168,7 @@ namespace Borneriget.MRI
                 }
                 else if (target == NextButton)
                 {
+                    Bootstrap.Facade.SendNotification(SoundMediator.Notifications.ClickButton);
                     if (VideoImage.activeInHierarchy)
                     {
                         Bootstrap.Facade.SendNotification(VideoMediator.Notifications.StopVideo);
@@ -183,6 +184,7 @@ namespace Borneriget.MRI
                     {
                         // We are playing a video. A click will pause it
                         Bootstrap.Facade.SendNotification(VideoMediator.Notifications.TogglePause);
+                        Bootstrap.Facade.SendNotification(SoundMediator.Notifications.ClickButton);
                     }
                     if (eventData.button == PointerEventData.InputButton.Right)
                     {
