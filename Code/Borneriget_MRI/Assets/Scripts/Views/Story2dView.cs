@@ -25,6 +25,10 @@ namespace Borneriget.MRI
         private GameObject ExitButton;
         [SerializeField]
         private GameObject NextButton;
+        [SerializeField]
+        private GameObject Spinner;
+        [SerializeField]
+        private float SpinnerRotateSpeed = 180;
 
         [SerializeField]
         private GameObject ButtonParent;
@@ -43,6 +47,8 @@ namespace Borneriget.MRI
         public event Action EndSeek;
         private bool avatarClicked;
 
+        private bool videoControlsEnabled => VideoImage.activeInHierarchy && VideoProgress.fillAmount > 0;
+
         private void Awake()
         {
             VideoProgress.fillAmount = 0;
@@ -52,6 +58,7 @@ namespace Borneriget.MRI
             VideoImage.SetActive(false);
             ExitButton.SetActive(false);
             NextButton.SetActive(false);
+            Spinner.SetActive(false);
             var buttonIndex = 0;
             foreach (var button in Buttons)
             {
@@ -117,6 +124,11 @@ namespace Borneriget.MRI
             Screen.sleepTimeout = SleepTimeout.SystemSetting;
         }
 
+        public void ShowSpinner()
+        {
+            Spinner.SetActive(true);
+        }
+
         public void ShowButtons()
         {
             ButtonParent.SetActive(true);
@@ -165,7 +177,7 @@ namespace Borneriget.MRI
                         Bootstrap.Facade.SendNotification(AvatarMediator.Notifications.StopSpeak);
                     }
                 }
-                else if (VideoImage.activeInHierarchy)
+                else if (videoControlsEnabled)
                 {
                     if (eventData.button == PointerEventData.InputButton.Left && eventData.position.y > dragYrange)
                     {
@@ -196,6 +208,7 @@ namespace Borneriget.MRI
         public void SetVideoProgress(VideoProgress progress)
         {
             VideoProgress.fillAmount = progress.Progress;
+            Spinner.SetActive(false);
         }
 
         public void ShowPause()
@@ -210,7 +223,7 @@ namespace Borneriget.MRI
 
         public void OnDrag(PointerEventData eventData)
         {
-            if (eventData.position.y <= dragYrange)
+            if (videoControlsEnabled && eventData.position.y <= dragYrange)
             {
                 var position = eventData.position.x / Screen.width;
                 SetSeekPosition?.Invoke(position);
@@ -219,7 +232,7 @@ namespace Borneriget.MRI
 
         public void OnBeginDrag(PointerEventData eventData)
         {
-            if (eventData.position.y <= dragYrange)
+            if (videoControlsEnabled && eventData.position.y <= dragYrange)
             {
                 Animator.SetBool("ShowTimeline", true);
                 StartSeek?.Invoke();
@@ -228,10 +241,18 @@ namespace Borneriget.MRI
 
         public void OnEndDrag(PointerEventData eventData)
         {
-            if (VideoImage.activeInHierarchy)
+            if (videoControlsEnabled)
             {
                 Animator.SetBool("ShowTimeline", false);
                 EndSeek?.Invoke();
+            }
+        }
+
+        public void Update()
+        {
+            if (Spinner.activeInHierarchy)
+            {
+                Spinner.transform.Rotate(Vector3.forward, SpinnerRotateSpeed * Time.deltaTime);
             }
         }
     }

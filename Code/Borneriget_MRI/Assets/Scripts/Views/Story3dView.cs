@@ -114,6 +114,16 @@ namespace Borneriget.MRI
             }
         }
 
+        public void ShowSpinner()
+        {
+
+        }
+
+        public void SetVideoProgress(VideoProgress progress)
+        {
+            // Currently we are not showing video progress in 3d
+        }
+
         public void ShowVideo()
         {
             Environment.SetActive(false);

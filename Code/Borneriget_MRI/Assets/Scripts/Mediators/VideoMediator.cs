@@ -26,6 +26,7 @@ namespace Borneriget.MRI
             public const string StartVideoSeek = "StartVideoSeek";
             public const string VideoSeek = "VideoSeek";
             public const string EndVideoSeek = "EndVideoSeek";
+            public const string ShowSpinner = "ShowSpinner";
         }
 
         private VideoView View => (VideoView)ViewComponent;
@@ -39,6 +40,12 @@ namespace Borneriget.MRI
             View.VideoPrepared += View_VideoPrepared;
             View.VideoDone += View_VideoDone;
             View.VideoProgressUpdate += View_VideoProgressUpdate;
+            View.ShowSpinner += View_ShowSpinner;
+        }
+
+        private void View_ShowSpinner()
+        {
+            SendNotification(Notifications.ShowSpinner);
         }
 
         public override void OnRemove()
@@ -47,6 +54,7 @@ namespace Borneriget.MRI
             View.VideoPrepared -= View_VideoPrepared;
             View.VideoDone -= View_VideoDone;
             View.VideoProgressUpdate -= View_VideoProgressUpdate;
+            View.ShowSpinner -= View_ShowSpinner;
         }
 
         private void View_VideoProgressUpdate(VideoProgress progress)

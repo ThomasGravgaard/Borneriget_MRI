@@ -47,6 +47,7 @@ namespace Borneriget.MRI
                 VideoMediator.Notifications.VideoProgressUpdate,
                 VideoMediator.Notifications.VideoPaused,
                 VideoMediator.Notifications.VideoResumed,
+                VideoMediator.Notifications.ShowSpinner,
                 AvatarMediator.Notifications.SpeakDone, 
                 AvatarMediator.Notifications.AvatarAwake
             };
@@ -197,7 +198,7 @@ namespace Borneriget.MRI
                     }
                     break;
                 case VideoMediator.Notifications.VideoProgressUpdate:
-                    VideoView?.SetVideoProgress((VideoProgress)notification.Body);
+                    View.SetVideoProgress((VideoProgress)notification.Body);
                     break;
                 case Notifications.FadeAfterVideo:
                     if (Progress++ == 5)
@@ -214,6 +215,9 @@ namespace Borneriget.MRI
                     break;
                 case VideoMediator.Notifications.VideoResumed:
                     VideoView?.ShowResume();
+                    break;
+                case VideoMediator.Notifications.ShowSpinner:
+                    View.ShowSpinner();
                     break;
                 case Notifications.FadeAfterMenuSelect:
                     View.Show(Progress, Notifications.ViewShown, AvatarAwake);

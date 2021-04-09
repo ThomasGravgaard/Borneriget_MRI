@@ -19,6 +19,7 @@ namespace Borneriget.MRI
         public event Action VideoPrepared;
         public event Action VideoDone;
         public event Action<VideoProgress> VideoProgressUpdate;
+        public event Action ShowSpinner;
 
         private bool PausedVideo = false;
 
@@ -56,9 +57,15 @@ namespace Borneriget.MRI
 
         private IEnumerator PlayVideoCo()
         {
+            var spinnerShown = false;
             while (!Player.isPrepared)
             {
                 yield return null;
+                if (!spinnerShown)
+                {
+                    ShowSpinner?.Invoke();
+                    spinnerShown = true;
+                }
             }
             Player.Play();           
             var totalTime = (Player.frameRate > 0) ? TimeSpan.FromSeconds(Player.frameCount / Player.frameRate) : TimeSpan.FromSeconds(0);

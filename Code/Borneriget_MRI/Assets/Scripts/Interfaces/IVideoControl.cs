@@ -4,7 +4,6 @@ namespace Borneriget.MRI
 {
     public interface IVideoControl
     {
-        public void SetVideoProgress(VideoProgress progress);
         void ShowPause();
         void ShowResume();
 
