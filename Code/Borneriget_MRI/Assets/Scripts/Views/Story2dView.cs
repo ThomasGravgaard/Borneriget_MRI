@@ -86,6 +86,7 @@ namespace Borneriget.MRI
             ExitButton.SetActive(avatarAwake);
             NextButton.SetActive(avatarAwake);
             VideoImage.SetActive(false);
+            Spinner.SetActive(false);
             MenuCam.enabled = true;
             Background.gameObject.SetActive(true);
             Bear.SetActive(true);
