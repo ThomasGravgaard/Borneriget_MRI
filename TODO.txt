@@ -7,10 +7,8 @@ Features
 Polish
 -------------------
 - 2D video screen size fitting
-- 3d environment exit - where to go?
 - Error indicator if video cannot load. Bogus URL'screen.
 - Error indicator if there is no network.
-- Load indicator if/when waiting for video (how can this be tested?)
 - Use HasDeviceParams to tell ppl what is going on before we get params.
 
 -------------------
@@ -51,3 +49,6 @@ Done
 + 2D video seek
 + Frame size on menu relative to screen
 + Menu in VR
++ Load indicator if/when waiting for video (how can this be tested?)
++ 3D return to menu should go directly back to selection because XR stops.
++ Spinner should go away when progressing
