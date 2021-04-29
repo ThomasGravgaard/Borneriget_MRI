@@ -2,30 +2,30 @@
 
 	"NormalVideos": {
 		"da": [
-			"https://csbdaaaa95db00cx48f7x90f.blob.core.windows.net/mri/location_01_DK.mp4",
-			"https://csbdaaaa95db00cx48f7x90f.blob.core.windows.net/mri/location_02_DK.mp4",
-			"https://csbdaaaa95db00cx48f7x90f.blob.core.windows.net/mri/location_03_01_DK.mp4",
-			"https://csbdaaaa95db00cx48f7x90f.blob.core.windows.net/mri/location_03_02_DK.mp4"
+			"https://xtra.nru.dk/downloads/app_videos/location_01_DK.mp4",
+			"https://xtra.nru.dk/downloads/app_videos/location_02_DK.mp4",
+			"https://xtra.nru.dk/downloads/app_videos/location_03_01_DK.mp4",
+			"https://xtra.nru.dk/downloads/app_videos/location_03_02_DK.mp4"
 		],
 		"en": [
-			"https://csbdaaaa95db00cx48f7x90f.blob.core.windows.net/mri/location_01_UK.mp4",
-			"https://csbdaaaa95db00cx48f7x90f.blob.core.windows.net/mri/location_02_UK.mp4",
-			"https://csbdaaaa95db00cx48f7x90f.blob.core.windows.net/mri/location_03_01_UK.mp4",
-			"https://csbdaaaa95db00cx48f7x90f.blob.core.windows.net/mri/location_03_02_UK.mp4"
+			"https://xtra.nru.dk/downloads/app_videos/location_01_UK.mp4",
+			"https://xtra.nru.dk/downloads/app_videos/location_02_UK.mp4",
+			"https://xtra.nru.dk/downloads/app_videos/location_03_01_UK.mp4",
+			"https://xtra.nru.dk/downloads/app_videos/location_03_02_UK.mp4"
 		]
 	},
 	"VrVideos": {
 		"da": [
-			"https://csbdaaaa95db00cx48f7x90f.blob.core.windows.net/mri/3D_location_01_DK.mp4",
-			"https://csbdaaaa95db00cx48f7x90f.blob.core.windows.net/mri/3D_location_02_DK.mp4",
-			"https://csbdaaaa95db00cx48f7x90f.blob.core.windows.net/mri/3D_location_03_01_DK.mp4",
-			"https://csbdaaaa95db00cx48f7x90f.blob.core.windows.net/mri/3D_location_03_02_DK.mp4"
+			"https://xtra.nru.dk/downloads/app_videos/3D_location_01_DK.mp4",
+			"https://xtra.nru.dk/downloads/app_videos/3D_location_02_DK.mp4",
+			"https://xtra.nru.dk/downloads/app_videos/3D_location_03_01_DK.mp4",
+			"https://xtra.nru.dk/downloads/app_videos/3D_location_03_02_DK.mp4"
 		],
 		"en": [
-			"https://csbdaaaa95db00cx48f7x90f.blob.core.windows.net/mri/3D_location_01_UK.mp4",
-			"https://csbdaaaa95db00cx48f7x90f.blob.core.windows.net/mri/3D_location_02_UK.mp4",
-			"https://csbdaaaa95db00cx48f7x90f.blob.core.windows.net/mri/3D_location_03_01_UK.mp4",
-			"https://csbdaaaa95db00cx48f7x90f.blob.core.windows.net/mri/3D_location_03_02_UK.mp4"
+			"https://xtra.nru.dk/downloads/app_videos/3D_location_01_UK.mp4",
+			"https://xtra.nru.dk/downloads/app_videos/3D_location_02_UK.mp4",
+			"https://xtra.nru.dk/downloads/app_videos/3D_location_03_01_UK.mp4",
+			"https://xtra.nru.dk/downloads/app_videos/3D_location_03_02_UK.mp4"
 		]
 	}
 }
