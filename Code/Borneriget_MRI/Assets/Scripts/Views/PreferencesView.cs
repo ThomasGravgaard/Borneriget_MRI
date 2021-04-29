@@ -30,10 +30,14 @@ namespace Borneriget.MRI
         private GameObject Cardboard;
         [SerializeField]
         private GameObject Frame;
+        [SerializeField]
+        private float RepeatSpeakTimer = 20;
 
         public event Action<bool> DanishSelected;
         public event Action<PreferencesProxy.Avatars> AvatarSelected;
         public event Action<bool> FormatSelected;
+
+        private Coroutine SpeakRoutine;
 
         private void Awake()
         {
@@ -49,14 +53,33 @@ namespace Borneriget.MRI
             Frame.SetActive(true);
             if (hasSelectedLanguage)
             {
-                Bootstrap.Facade.SendNotification(SoundMediator.Notifications.MenuSpeak, 2);
+                SpeakRoutine = StartCoroutine(SpeakRepeat(2));
                 FormatSelection.SetActive(true);
             }
             else
             {
-                Bootstrap.Facade.SendNotification(SoundMediator.Notifications.MenuSpeak, 1);
+                SpeakRoutine = StartCoroutine(SpeakRepeat(1));
                 FormatSelection.SetActive(false);
                 LanguageSelection.SetActive(true);
+            }
+        }
+
+        private void StopSpeak()
+        {
+            if (SpeakRoutine != null)
+            {
+                StopCoroutine(SpeakRoutine);
+                SpeakRoutine = null;
+            }
+        }
+
+        private IEnumerator SpeakRepeat(int speakIndex)
+        {
+            StopSpeak();
+            while (true)
+            {
+                Bootstrap.Facade.SendNotification(SoundMediator.Notifications.MenuSpeak, speakIndex);
+                yield return new WaitForSeconds(RepeatSpeakTimer);
             }
         }
 
@@ -114,7 +137,7 @@ namespace Borneriget.MRI
             LanguageSelection.SetActive(false);
             DanishSelected?.Invoke(danishSelected);
             AvatarSelection.SetActive(true);
-            Bootstrap.Facade.SendNotification(SoundMediator.Notifications.MenuSpeak, 2);
+            SpeakRoutine = StartCoroutine(SpeakRepeat(2));
         }
 
         private void SelectAvatar(PreferencesProxy.Avatars avatar)
@@ -123,11 +146,12 @@ namespace Borneriget.MRI
             AvatarSelected?.Invoke(avatar);
             AvatarSelection.SetActive(false);
             FormatSelection.SetActive(true);
-            Bootstrap.Facade.SendNotification(SoundMediator.Notifications.MenuSpeak, 3);
+            SpeakRoutine = StartCoroutine(SpeakRepeat(3));
         }
 
         private void SelectFormat(bool useVr)
         {
+            StopSpeak();
             Bootstrap.Facade.SendNotification(SoundMediator.Notifications.ClickButton);
             FormatSelected?.Invoke(useVr);
         }
