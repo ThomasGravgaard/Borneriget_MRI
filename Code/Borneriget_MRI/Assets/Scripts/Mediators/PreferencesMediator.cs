@@ -52,7 +52,6 @@ namespace Borneriget.MRI
 
         private void View_LanguageSelected(bool isDanish)
         {
-            Debug.Log($"Danish set {isDanish}");
             Preferences.IsDanish = isDanish;
         }
 

@@ -16,7 +16,7 @@ namespace Borneriget.MRI
         private PreferencesProxy Preferences;
 
         private bool AvatarAwake = false;
-        private int Progress = 0;
+        private int Progress = 5;
         private bool ShowMenu = false;
         private bool Exiting = false;
         private bool OnMenu = true;

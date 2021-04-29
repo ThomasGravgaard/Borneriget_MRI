@@ -31,9 +31,9 @@ namespace Borneriget.MRI
         [SerializeField]
         private float MouseRotateSpeed = 45f;
         [SerializeField]
-        private GameObject Menu;
+        private MenuView Menu;
         [SerializeField]
-        private GameObject[] MenuItems;
+        private GameObject[] MenuColliders;
         [SerializeField]
         private GameObject Spinner;
         [SerializeField]
@@ -53,12 +53,14 @@ namespace Borneriget.MRI
             CamRoot.gameObject.SetActive(false);
             GazeProgress.gameObject.SetActive(false);
             Spinner.SetActive(false);
+            Menu.Hide();
             GazeProgress.fillAmount = 0;
         }
 
         public void Initialize(bool isDanish, string doneNotification)
         {
             Screen.sleepTimeout = SleepTimeout.NeverSleep;
+            Menu.Initialize(isDanish);
             StartCoroutine(InitializeXRCo(doneNotification));
         }
 
@@ -99,12 +101,12 @@ namespace Borneriget.MRI
             {
                 // We have no notification, so we will show the menu and wait for a click.
                 ScreenImage.enabled = false;
-                Menu.SetActive(true);
+                Menu.Show();
             }
             else
             {
                 ScreenImage.enabled = true;
-                Menu.SetActive(false);
+                Menu.Hide();
             }
         }
 
@@ -172,7 +174,7 @@ namespace Borneriget.MRI
 
                 Api.UpdateScreenParams();
 
-                var doRaycast = (Bear.activeInHierarchy && !avatarAwake) || Menu.activeInHierarchy;
+                var doRaycast = (Bear.activeInHierarchy && !avatarAwake) || Menu.gameObject.activeInHierarchy;
 
                 if (doRaycast)
                 {
@@ -202,7 +204,7 @@ namespace Borneriget.MRI
                                 }
                                 else
                                 {
-                                    var menuItem = Array.IndexOf(MenuItems, hit.collider.gameObject);
+                                    var menuItem = Array.IndexOf(MenuColliders, hit.collider.gameObject);
                                     if (menuItem > 0)
                                     {
                                         SelectRoom?.Invoke(menuItem);

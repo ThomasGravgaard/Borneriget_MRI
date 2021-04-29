@@ -31,16 +31,9 @@ namespace Borneriget.MRI
         private float SpinnerRotateSpeed = -180;
 
         [SerializeField]
-        private GameObject ButtonParent;
-        [SerializeField]
-        private Button[] Buttons;
+        private MenuView Menu;
         [SerializeField]
         private float dragYrange;
-
-        [SerializeField]
-        private string[] menuTexts_DK;
-        [SerializeField]
-        private string[] menuTexts_UK;
 
         [SerializeField]
         private Animator Animator;
@@ -59,28 +52,23 @@ namespace Borneriget.MRI
             VideoProgress.fillAmount = 0;
             Background.gameObject.SetActive(false);
             Bear.SetActive(false);
-            ButtonParent.SetActive(false);
+            Menu.MenuSelected += Button_Click;
+            Menu.Hide();
             VideoImage.SetActive(false);
             ExitButton.SetActive(false);
             NextButton.SetActive(false);
             Spinner.SetActive(false);
-            var buttonIndex = 0;
-            foreach (var button in Buttons)
-            {
-                var idx = buttonIndex++;
-                button.onClick.AddListener(() => Button_Click(idx));
-            }
+        }
+
+        private void OnDestroy()
+        {
+            Menu.MenuSelected -= Button_Click;
         }
 
         public void Initialize(bool isDanish, string doneNotification)
         {
             Screen.sleepTimeout = SleepTimeout.NeverSleep;
-            for (int i = 0; i < Buttons.Length; i++)
-            {
-                var label = Buttons[i].GetComponentInChildren<Text>(true);
-                label.text = (isDanish) ? menuTexts_DK[i] : menuTexts_UK[i];
-                Debug.Log($"Set text {label.text}");
-            }
+            Menu.Initialize(isDanish);
             StartCoroutine(InitializeCo(doneNotification));
         }
 
@@ -105,12 +93,13 @@ namespace Borneriget.MRI
             {
                 // We have no notification, so we will show the menu and wait for a click.
                 Background.texture = BackgroundImages.SafeGet(0);
-                ButtonParent.SetActive(true);
+                Menu.Show();
             }
             else
             {
                 Background.texture = BackgroundImages.SafeGet(room);
                 StartCoroutine(ShowCo(doneNotification));
+                Menu.Hide();
             }
         }
 
@@ -129,7 +118,7 @@ namespace Borneriget.MRI
         {
             Background.gameObject.SetActive(false);
             Bear.SetActive(false);
-            ButtonParent.SetActive(false);
+            Menu.Hide();
             VideoImage.SetActive(false);
             ExitButton.SetActive(false);
             NextButton.SetActive(false);
@@ -143,12 +132,12 @@ namespace Borneriget.MRI
 
         public void ShowButtons()
         {
-            ButtonParent.SetActive(true);
+            Menu.Show();
         }
 
         private void Button_Click(int index)
         {
-            ButtonParent.SetActive(false);
+            Menu.Hide();
             SelectRoom?.Invoke(index);
         }
 
