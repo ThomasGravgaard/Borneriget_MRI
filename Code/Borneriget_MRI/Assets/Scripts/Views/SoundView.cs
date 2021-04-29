@@ -13,15 +13,17 @@ namespace Borneriget.MRI
         private AudioClip[] menuSpeaks_UK;
 
         private AudioSource audioSource;
+        private AudioSource clickSource;
 
         private void Awake()
         {
             audioSource = GetComponent<AudioSource>();
+            clickSource = gameObject.AddComponent<AudioSource>();
         }
 
         public void ClickButton()
         {
-            audioSource.PlayOneShot(buttonClick);
+            clickSource.PlayOneShot(buttonClick, 1);
         }
 
         private void PlayClip(AudioClip clip)
