@@ -38,6 +38,7 @@ namespace Borneriget.MRI
         public event Action<bool> DanishSelected;
         public event Action<PreferencesProxy.Avatars> AvatarSelected;
         public event Action<bool> FormatSelected;
+        private bool HasFormatBeenSelected = false;
 
         private Coroutine SpeakRoutine;
 
@@ -53,6 +54,7 @@ namespace Borneriget.MRI
         {
             gameObject.SetActive(true);
             Frame.SetActive(true);
+            HasFormatBeenSelected = false;
             if (hasSelectedLanguage)
             {
                 SpeakRoutine = StartCoroutine(SpeakRepeat(2));
@@ -120,7 +122,7 @@ namespace Borneriget.MRI
                     SelectAvatar(PreferencesProxy.Avatars.Thea);
                 }
             }
-            else if (FormatSelection.activeInHierarchy)
+            else if (FormatSelection.activeInHierarchy && !HasFormatBeenSelected)
             {
                 if (target == Tablet || target == Phone)
                 {
@@ -153,6 +155,7 @@ namespace Borneriget.MRI
 
         private void SelectFormat(bool useVr)
         {
+            HasFormatBeenSelected = true;
             StopSpeak();
             Bootstrap.Facade.SendNotification(SoundMediator.Notifications.ClickButton);
             FormatSelected?.Invoke(useVr);
