@@ -49,6 +49,7 @@ namespace Borneriget.MRI
 
         private void Awake()
         {
+            Application.unloading += Application_unloading;
             VideoProgress.fillAmount = 0;
             Background.gameObject.SetActive(false);
             Bear.SetActive(false);
@@ -63,6 +64,12 @@ namespace Borneriget.MRI
         private void OnDestroy()
         {
             Menu.MenuSelected -= Button_Click;
+            Application.unloading -= Application_unloading;
+        }
+
+        private void Application_unloading()
+        {
+            Screen.sleepTimeout = SleepTimeout.SystemSetting;
         }
 
         public void Initialize(bool isDanish, string doneNotification)
