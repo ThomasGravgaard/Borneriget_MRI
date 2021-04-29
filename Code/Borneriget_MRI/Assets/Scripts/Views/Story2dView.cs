@@ -38,6 +38,11 @@ namespace Borneriget.MRI
         private float dragYrange;
 
         [SerializeField]
+        private string[] menuTexts_DK;
+        [SerializeField]
+        private string[] menuTexts_UK;
+
+        [SerializeField]
         private Animator Animator;
 
         public event Action<int> SelectRoom;
@@ -67,9 +72,15 @@ namespace Borneriget.MRI
             }
         }
 
-        public void Initialize(string doneNotification)
+        public void Initialize(bool isDanish, string doneNotification)
         {
             Screen.sleepTimeout = SleepTimeout.NeverSleep;
+            for (int i = 0; i < Buttons.Length; i++)
+            {
+                var label = Buttons[i].GetComponentInChildren<Text>(true);
+                label.text = (isDanish) ? menuTexts_DK[i] : menuTexts_UK[i];
+                Debug.Log($"Set text {label.text}");
+            }
             StartCoroutine(InitializeCo(doneNotification));
         }
 

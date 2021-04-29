@@ -97,7 +97,8 @@ namespace Borneriget.MRI
                     break;
                 case Notifications.PrepareVideo:
                     var progress = (int)notification.Body;
-                    View.Prepare((Preferences.UseVr) ? Urls.VrVideos[Preferences.Language].SafeGet(progress) : Urls.NormalVideos[Preferences.Language].SafeGet(progress));
+                    var languageKey = (Preferences.IsDanish) ? "da" : "en";
+                    View.Prepare((Preferences.UseVr) ? Urls.VrVideos[languageKey].SafeGet(progress) : Urls.NormalVideos[languageKey].SafeGet(progress));
                     break;
                 case Notifications.PlayVideo:
                     View.PlayVideo();

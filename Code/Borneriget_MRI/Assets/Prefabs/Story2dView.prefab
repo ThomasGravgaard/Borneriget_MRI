@@ -856,12 +856,12 @@ MonoBehaviour:
   MenuCam: {fileID: 0}
   Background: {fileID: 3172135279258155868}
   BackgroundImages:
-  - {fileID: 2800000, guid: a87212331710dbf44b79748eb62467a1, type: 3}
-  - {fileID: 2800000, guid: a59635be1f3c71d42ad540254dee6d60, type: 3}
-  - {fileID: 2800000, guid: 3406931bd50865f47b0435b91ac8b57b, type: 3}
-  - {fileID: 2800000, guid: 3406931bd50865f47b0435b91ac8b57b, type: 3}
-  - {fileID: 2800000, guid: 9aa3b07473083484caa0e806af30af25, type: 3}
-  - {fileID: 2800000, guid: a59635be1f3c71d42ad540254dee6d60, type: 3}
+  - {fileID: 2800000, guid: 0ccdd9a8c4066ab4395a91fdbe8ff197, type: 3}
+  - {fileID: 2800000, guid: 830495de67355c8419c9c42aa814f58e, type: 3}
+  - {fileID: 2800000, guid: c6ed15c90a48f764a9be46be6025b40a, type: 3}
+  - {fileID: 2800000, guid: c6ed15c90a48f764a9be46be6025b40a, type: 3}
+  - {fileID: 2800000, guid: 573f802177526904ea1872dcfdc1115a, type: 3}
+  - {fileID: 2800000, guid: f9c9cfbb6c1b2444ab72f0ff6af4e99d, type: 3}
   Bear: {fileID: 8253602381621869983}
   VideoImage: {fileID: 1472694765158544697}
   VideoProgress: {fileID: 3357657002104225127}
@@ -874,7 +874,15 @@ MonoBehaviour:
   - {fileID: 459070049730062448}
   - {fileID: 4012243134467419797}
   - {fileID: 4245640013800506263}
-  dragYrange: 40
+  dragYrange: 100
+  menuTexts_DK:
+  - Forberedelsesrum
+  - MR-skannerrum
+  - Kontrolrum
+  menuTexts_UK:
+  - Preparation room
+  - MR-scanner room
+  - Control room
   Animator: {fileID: 3050355422246759794}
 --- !u!95 &3050355422246759794
 Animator:

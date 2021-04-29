@@ -6,7 +6,7 @@ namespace Borneriget.MRI
     {
         public new static string NAME = "PreferencesProxy";
 
-        public string Language { get; set; }
+        public bool IsDanish { get; set; }
         public Avatars Avatar { get; set; }
         public bool UseVr { get; set; }
 

@@ -49,7 +49,7 @@ namespace Borneriget.MRI
                     {
                         // Check if we have UK prefs
                         var preferences = Facade.RetrieveProxy<PreferencesProxy>();
-                        isDanish = !(preferences != null && preferences.Language == "en");
+                        isDanish = preferences?.IsDanish ?? true;
                     }
                     if (isDanish)
                     {

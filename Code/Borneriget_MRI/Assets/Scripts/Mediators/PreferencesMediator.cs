@@ -33,7 +33,7 @@ namespace Borneriget.MRI
 
         public override void OnRemove()
         {
-            View.LanguageSelected -= View_LanguageSelected;
+            View.DanishSelected -= View_LanguageSelected;
             View.AvatarSelected -= View_AvatarSelected;
             View.FormatSelected -= View_FormatSelected;
             View.Hide();
@@ -44,15 +44,16 @@ namespace Borneriget.MRI
         {
             // The preferences menu should already be present in the scene. Just get it.
             ViewComponent = Object.FindObjectOfType<PreferencesView>(true);
-            View.LanguageSelected += View_LanguageSelected;
+            View.DanishSelected += View_LanguageSelected;
             View.AvatarSelected += View_AvatarSelected;
             View.FormatSelected += View_FormatSelected;
             View.Show(hasSelectedLanguage);
         }
 
-        private void View_LanguageSelected(string language)
+        private void View_LanguageSelected(bool isDanish)
         {
-            Preferences.Language = language;
+            Debug.Log($"Danish set {isDanish}");
+            Preferences.IsDanish = isDanish;
         }
 
         private void View_AvatarSelected(PreferencesProxy.Avatars avatar)

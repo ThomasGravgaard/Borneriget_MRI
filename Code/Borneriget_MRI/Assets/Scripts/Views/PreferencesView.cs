@@ -31,7 +31,7 @@ namespace Borneriget.MRI
         [SerializeField]
         private GameObject Frame;
 
-        public event Action<string> LanguageSelected;
+        public event Action<bool> DanishSelected;
         public event Action<PreferencesProxy.Avatars> AvatarSelected;
         public event Action<bool> FormatSelected;
 
@@ -77,11 +77,11 @@ namespace Borneriget.MRI
             {
                 if (target == Danish)
                 {
-                    SelectLanguage("da");
+                    SelectLanguage(true);
                 }
                 if (target == English)
                 {
-                    SelectLanguage("en");
+                    SelectLanguage(false);
                 }
             }
             else if (AvatarSelection.activeInHierarchy)
@@ -108,11 +108,11 @@ namespace Borneriget.MRI
             }
         }
 
-        private void SelectLanguage(string language)
+        private void SelectLanguage(bool danishSelected)
         {
             Bootstrap.Facade.SendNotification(SoundMediator.Notifications.ClickButton);
             LanguageSelection.SetActive(false);
-            LanguageSelected?.Invoke(language);
+            DanishSelected?.Invoke(danishSelected);
             AvatarSelection.SetActive(true);
             Bootstrap.Facade.SendNotification(SoundMediator.Notifications.MenuSpeak, 2);
         }

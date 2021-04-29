@@ -58,7 +58,7 @@ namespace Borneriget.MRI
             base.OnRegister();
             Preferences = Facade.RetrieveProxy<PreferencesProxy>();
 
-            Facade.RegisterMediator(new AvatarMediator(Preferences.Avatar, Preferences.Language == "da"));
+            Facade.RegisterMediator(new AvatarMediator(Preferences.Avatar, Preferences.IsDanish));
             InitializeView();
         }
 
@@ -80,7 +80,7 @@ namespace Borneriget.MRI
             ViewComponent = Preferences.UseVr ? (IStoryView)Object.FindObjectOfType<Story3dView>(true) : (IStoryView)Object.FindObjectOfType<Story2dView>(true);
             View.Exit += View_Exit;
             View.SelectRoom += View_SelectRoom;
-            View.Initialize(Notifications.ViewInitialized);
+            View.Initialize(Preferences.IsDanish, Notifications.ViewInitialized);
             if (VideoView != null)
             {
                 VideoView.StartSeek += VideoView_StartSeek;

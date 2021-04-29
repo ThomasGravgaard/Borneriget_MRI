@@ -4,7 +4,7 @@ namespace Borneriget.MRI
 {
     public interface IStoryView
     {
-        public void Initialize(string doneNotification);
+        public void Initialize(bool isDanish, string doneNotification);
         public void Show(int room, string doneNotification, bool avatarAwake);
         public void Hide();
         public void ShowVideo();

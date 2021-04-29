@@ -56,7 +56,7 @@ namespace Borneriget.MRI
             GazeProgress.fillAmount = 0;
         }
 
-        public void Initialize(string doneNotification)
+        public void Initialize(bool isDanish, string doneNotification)
         {
             Screen.sleepTimeout = SleepTimeout.NeverSleep;
             StartCoroutine(InitializeXRCo(doneNotification));
