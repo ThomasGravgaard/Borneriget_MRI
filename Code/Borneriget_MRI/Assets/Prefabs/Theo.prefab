@@ -1132,6 +1132,8 @@ MonoBehaviour:
   snore: {fileID: 8300000, guid: f549ad3b57103f74eb7702520f442d1e, type: 3}
   waking: {fileID: 8300000, guid: 81846ee758df1b248a15bbd893f72da7, type: 3}
   snoreAudioSource: {fileID: 8337269809995577831}
+  scannerStopSpeakTiming_DK: {x: 6, y: 29}
+  scannerStopSpeakTiming_UK: {x: 6, y: 29}
 --- !u!65 &4247101871040160182
 BoxCollider:
   m_ObjectHideFlags: 0

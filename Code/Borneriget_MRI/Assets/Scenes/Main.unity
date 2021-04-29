@@ -320,7 +320,6 @@ MonoBehaviour:
   NormalTexture: {fileID: 8400000, guid: 3927725e6b3929842b5cb3d5c31ea163, type: 2}
   VrTexture: {fileID: 8400000, guid: 7ebddbae6933d8a4bb7fc38f85973adb, type: 2}
   ShortenInEditor: 0
-  Videos: []
 --- !u!328 &436693508
 VideoPlayer:
   m_ObjectHideFlags: 0

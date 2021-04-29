@@ -31,6 +31,10 @@ namespace Borneriget.MRI
 		private AudioClip waking = null;
 		[SerializeField]
 		private AudioSource snoreAudioSource = null;
+		[SerializeField]
+		private Vector2 scannerStopSpeakTiming_DK = Vector2.zero;
+		[SerializeField]
+		private Vector2 scannerStopSpeakTiming_UK = Vector2.zero;
 
 		private State currentState;
 		private List<SpriteRenderer> theaObjects = new List<SpriteRenderer>();
@@ -164,7 +168,15 @@ namespace Borneriget.MRI
 		public void Speak(int progress, Action speakDone)
 		{
 			var clips = (danishSpeaks) ? speaks_dk : speaks_uk;
-			StartCoroutine(SpeakCo(clips.SafeGet(progress), speakDone, progress < 5));
+            if (progress == 3)
+            {
+				var timing = (danishSpeaks) ? scannerStopSpeakTiming_DK : scannerStopSpeakTiming_UK;
+				StartCoroutine(SpeakWithPauseCo(clips.SafeGet(progress), speakDone, timing.x, timing.y));
+			}
+			else
+            {
+				StartCoroutine(SpeakCo(clips.SafeGet(progress), speakDone, progress < 5));
+			}
 		}
 
 		public void StopSpeak()
@@ -189,5 +201,20 @@ namespace Borneriget.MRI
 			audioSource.Stop();
 			speakDone();
 		}
-    }
+
+		private IEnumerator SpeakWithPauseCo(AudioClip clip, Action speakDone, float startPause, float endPause)
+		{
+			audioSource.PlayOneShot(clip);
+			animator.SetBool("talking", true);
+			yield return new WaitForSeconds(startPause);
+			animator.SetBool("talking", false);
+			yield return new WaitForSeconds(endPause - startPause);
+			animator.SetBool("talking", true);
+			yield return new WaitForSeconds(clip.length - endPause);
+			animator.SetBool("talking", false);
+			audioSource.Stop();
+			speakDone();
+		}
+
+	}
 }
