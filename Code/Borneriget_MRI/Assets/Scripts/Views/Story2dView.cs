@@ -7,7 +7,7 @@ using UnityEngine.Video;
 
 namespace Borneriget.MRI
 {
-    public class Story2dView : MonoBehaviour, IPointerClickHandler, IStoryView, IBeginDragHandler, IDragHandler, IEndDragHandler, IVideoControl
+    public class Story2dView : MonoBehaviour, IPointerDownHandler, IStoryView, IBeginDragHandler, IDragHandler, IEndDragHandler, IVideoControl
     {
         [SerializeField]
         private Camera MenuCam;
@@ -149,7 +149,7 @@ namespace Borneriget.MRI
             avatarClicked = true;
         }
 
-        public void OnPointerClick(PointerEventData eventData)
+        public void OnPointerDown(PointerEventData eventData)
         {
             var target = eventData.pointerCurrentRaycast.gameObject;
             if (!avatarClicked)
