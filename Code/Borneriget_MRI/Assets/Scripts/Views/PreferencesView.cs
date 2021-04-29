@@ -27,6 +27,8 @@ namespace Borneriget.MRI
         [SerializeField]
         private GameObject Tablet;
         [SerializeField]
+        private GameObject Phone;
+        [SerializeField]
         private GameObject Cardboard;
         [SerializeField]
         private GameObject Frame;
@@ -120,7 +122,7 @@ namespace Borneriget.MRI
             }
             else if (FormatSelection.activeInHierarchy)
             {
-                if (target == Tablet)
+                if (target == Tablet || target == Phone)
                 {
                     SelectFormat(false);
                 }
