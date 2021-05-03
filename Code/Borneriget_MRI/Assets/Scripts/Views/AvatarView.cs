@@ -17,12 +17,20 @@ namespace Borneriget.MRI
 			DIPLOMA
 		}
 
+		[Serializable]
+		public struct SpeakInfo
+		{
+			public float AnimationDelay;
+			public float AnimationStopOffset;
+			public AudioClip Clip;
+		}
+
 		[SerializeField]
-		private AudioClip[] speaks_dk = null;
+		private SpeakInfo[] speaksDk = null;
+		[SerializeField]
+		private SpeakInfo[] speaksUk = null;
 		[SerializeField]
 		private AudioClip wakeTheBear_dk = null;
-		[SerializeField]
-		private AudioClip[] speaks_uk = null;
 		[SerializeField]
 		private AudioClip wakeTheBear_uk = null;
 		[SerializeField]
@@ -167,7 +175,7 @@ namespace Borneriget.MRI
 
 		public void Speak(int progress, Action speakDone)
 		{
-			var clips = (danishSpeaks) ? speaks_dk : speaks_uk;
+			var clips = (danishSpeaks) ? speaksDk : speaksUk;
             if (progress == 3)
             {
 				var timing = (danishSpeaks) ? scannerStopSpeakTiming_DK : scannerStopSpeakTiming_UK;
@@ -186,14 +194,15 @@ namespace Borneriget.MRI
 			audioSource.Stop();
 		}
 
-		private IEnumerator SpeakCo(AudioClip clip, Action speakDone, bool activateTalk)
+		private IEnumerator SpeakCo(SpeakInfo speak, Action speakDone, bool activateTalk)
 		{			
-			audioSource.PlayOneShot(clip);
+			audioSource.PlayOneShot(speak.Clip);
             if (activateTalk)
             {
+				yield return new WaitForSeconds(speak.AnimationDelay);
 				animator.SetBool("talking", true);
 			}
-			yield return new WaitForSeconds(clip.length);
+			yield return new WaitForSeconds(speak.Clip.length - speak.AnimationStopOffset - speak.AnimationDelay);
             if (activateTalk)
             {
 				animator.SetBool("talking", false);
@@ -202,15 +211,16 @@ namespace Borneriget.MRI
 			speakDone();
 		}
 
-		private IEnumerator SpeakWithPauseCo(AudioClip clip, Action speakDone, float startPause, float endPause)
+		private IEnumerator SpeakWithPauseCo(SpeakInfo speak, Action speakDone, float startPause, float endPause)
 		{
-			audioSource.PlayOneShot(clip);
+			audioSource.PlayOneShot(speak.Clip);			
+			yield return new WaitForSeconds(speak.AnimationDelay);
 			animator.SetBool("talking", true);
 			yield return new WaitForSeconds(startPause);
 			animator.SetBool("talking", false);
 			yield return new WaitForSeconds(endPause - startPause);
 			animator.SetBool("talking", true);
-			yield return new WaitForSeconds(clip.length - endPause);
+			yield return new WaitForSeconds(speak.Clip.length - endPause - speak.AnimationStopOffset - speak.AnimationDelay);
 			animator.SetBool("talking", false);
 			audioSource.Stop();
 			speakDone();
