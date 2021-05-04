@@ -8,7 +8,6 @@ namespace Borneriget.MRI
         {
             base.Execute(notification);
             Facade.SendNotification(VideoMediator.Notifications.StopVideo);
-            Facade.SendNotification(AvatarMediator.Notifications.StopSpeak);
         }
     }
 }

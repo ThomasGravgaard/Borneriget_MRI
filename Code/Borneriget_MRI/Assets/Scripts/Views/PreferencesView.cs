@@ -66,7 +66,7 @@ namespace Borneriget.MRI
 
             if (hasSelectedLanguage)
             {
-                SpeakRoutine = StartCoroutine(SpeakRepeat(2));
+                SpeakRoutine = StartCoroutine(SpeakRepeat(3));
                 FormatSelection.SetActive(true);
             }
             else

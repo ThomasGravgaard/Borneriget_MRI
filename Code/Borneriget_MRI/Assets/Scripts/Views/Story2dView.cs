@@ -82,6 +82,7 @@ namespace Borneriget.MRI
 
         public void Initialize(bool isDanish, string doneNotification)
         {
+            avatarClicked = false;
             Screen.sleepTimeout = SleepTimeout.NeverSleep;
             Menu.Initialize(isDanish);
             StartCoroutine(InitializeCo(doneNotification));

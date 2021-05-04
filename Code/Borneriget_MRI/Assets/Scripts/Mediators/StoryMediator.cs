@@ -57,7 +57,6 @@ namespace Borneriget.MRI
         {
             base.OnRegister();
             Preferences = Facade.RetrieveProxy<PreferencesProxy>();
-
             Facade.RegisterMediator(new AvatarMediator(Preferences.Avatar, Preferences.IsDanish));
             InitializeView();
         }
@@ -73,6 +72,7 @@ namespace Borneriget.MRI
                 VideoView.EndSeek -= VideoView_EndSeek;
                 VideoView.SetSeekPosition -= VideoView_SetSeekPosition;
             }
+            Facade.RemoveMediator(AvatarMediator.NAME);
         }
 
         private void InitializeView()

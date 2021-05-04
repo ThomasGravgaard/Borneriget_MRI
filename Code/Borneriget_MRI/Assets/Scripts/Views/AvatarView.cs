@@ -95,6 +95,12 @@ namespace Borneriget.MRI
 			}
 		}
 
+        public void ResetAvatar()
+        {
+            StopSpeak();
+            SetState(State.SLEEPING);
+        }
+
 		public void Show(PreferencesProxy.Avatars avatar, bool danishSpeaks)
         {
 			this.danishSpeaks = danishSpeaks;

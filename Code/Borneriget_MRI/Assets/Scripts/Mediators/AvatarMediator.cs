@@ -34,6 +34,12 @@ namespace Borneriget.MRI
             InitializeView();
         }
 
+        public override void OnRemove()
+        {
+            base.OnRemove();
+            View.ResetAvatar();
+        }
+
         public override string[] ListNotificationInterests()
         {
             return new[] {
