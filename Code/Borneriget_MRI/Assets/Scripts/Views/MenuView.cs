@@ -52,5 +52,27 @@ namespace Borneriget.MRI
                 button.interactable = false;
             }
         }
+
+        public string GetText(int room)
+        {
+            var button = -1;
+            if (room == 1)
+            {
+                button = 0;
+            }
+            if (room == 2)
+            {
+                button = 1;
+            }
+            if (room == 4)
+            {
+                button = 2;
+            }
+            if (button == -1)
+            {
+                return string.Empty;
+            }
+            return Buttons[button].GetComponentInChildren<Text>(true).text;
+        }
     }
 }

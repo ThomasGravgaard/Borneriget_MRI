@@ -17,8 +17,6 @@ namespace Borneriget.MRI
         [SerializeField]
         private Texture[] ScreenImages;
         [SerializeField]
-        private Texture[] Icon;
-        [SerializeField]
         private GameObject Environment;
         [SerializeField]
         private Camera MenuCam;
@@ -40,6 +38,14 @@ namespace Borneriget.MRI
         private GameObject Spinner;
         [SerializeField]
         private float SpinnerRotateSpeed = -180;
+        [SerializeField]
+        private Animator RoomIconAnimation;
+        [SerializeField]
+        private RawImage RoomIcon;
+        [SerializeField]
+        private Text RoomText;
+        [SerializeField]
+        private Texture[] Icon;
 
         private Vector3 lastMousePos;
         private bool vrPlaying = false;
@@ -109,6 +115,14 @@ namespace Borneriget.MRI
             {
                 ScreenImage.enabled = true;
                 Menu.Hide();
+            }
+            var icon = Icon.SafeGet(room);
+            if (icon)
+            {
+                // We have an icon, so set its properties and show it
+                RoomText.text = Menu.GetText(room);
+                RoomIcon.texture = icon;
+                RoomIconAnimation.SetTrigger("Fade");
             }
         }
 

@@ -16,8 +16,6 @@ namespace Borneriget.MRI
         [SerializeField]
         private Texture[] BackgroundImages;
         [SerializeField]
-        private Texture[] Icon;
-        [SerializeField]
         private GameObject Bear;
         [SerializeField]
         private GameObject VideoImage;
@@ -31,6 +29,14 @@ namespace Borneriget.MRI
         private GameObject Spinner;
         [SerializeField]
         private float SpinnerRotateSpeed = -180;
+        [SerializeField]
+        private Animator RoomIconAnimation;
+        [SerializeField]
+        private RawImage RoomIcon;
+        [SerializeField]
+        private Text RoomText;
+        [SerializeField]
+        private Texture[] Icon;
 
         [SerializeField]
         private MenuView Menu;
@@ -109,6 +115,14 @@ namespace Borneriget.MRI
                 Background.texture = BackgroundImages.SafeGet(room);
                 StartCoroutine(ShowCo(doneNotification));
                 Menu.Hide();
+            }
+            var icon = Icon.SafeGet(room);
+            if (icon)
+            {
+                // We have an icon, so set its properties and show it
+                RoomText.text = Menu.GetText(room);
+                RoomIcon.texture = icon;
+                RoomIconAnimation.SetTrigger("Fade");
             }
         }
 
