@@ -55,7 +55,6 @@ namespace Borneriget.MRI
 
         public override void OnRegister()
         {
-            Debug.Log("Create story mediator");
             base.OnRegister();
             Preferences = Facade.RetrieveProxy<PreferencesProxy>();
 
