@@ -1145,11 +1145,11 @@ MonoBehaviour:
   - AnimationDelay: 0
     AnimationStopOffset: 0
     Clip: {fileID: 8300000, guid: 79a8bda7ecccae245b246144e77ce57a, type: 3}
-  - AnimationDelay: 0
+  - AnimationDelay: 0.5
     AnimationStopOffset: 0
     Clip: {fileID: 8300000, guid: 966a5185c5b270146af0b92d833c55ec, type: 3}
   - AnimationDelay: 0
-    AnimationStopOffset: 0
+    AnimationStopOffset: 2
     Clip: {fileID: 8300000, guid: 4888dfe8987d1734eaa6b175c5039f7b, type: 3}
   wakeTheBear_dk: {fileID: 8300000, guid: 1e83fca40c6cc0643b16d92e2541029f, type: 3}
   wakeTheBear_uk: {fileID: 8300000, guid: 36203793a7dc1564b80637e3c3430e35, type: 3}
@@ -1157,9 +1157,9 @@ MonoBehaviour:
   waking: {fileID: 8300000, guid: 81846ee758df1b248a15bbd893f72da7, type: 3}
   snoreAudioSource: {fileID: 8337269809995577831}
   scannerStopSpeakTiming_DK: {x: 5.5, y: 28}
-  scannerStopSpeakTiming_UK: {x: 6, y: 29}
+  scannerStopSpeakTiming_UK: {x: 7, y: 29}
   diplomaDelay_DK: 10
-  diplomaDelay_UK: 8
+  diplomaDelay_UK: 12
 --- !u!65 &4247101871040160182
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -1150,30 +1150,6 @@ PrefabInstance:
       propertyPath: MenuCam
       value: 
       objectReference: {fileID: 180068257}
-    - target: {fileID: 4432650911555419256, guid: 1ca7d5601b22f7548b4ff2fc323f4b16, type: 3}
-      propertyPath: ScreenImages.Array.data[0]
-      value: 
-      objectReference: {fileID: 2800000, guid: 0ccdd9a8c4066ab4395a91fdbe8ff197, type: 3}
-    - target: {fileID: 4432650911555419256, guid: 1ca7d5601b22f7548b4ff2fc323f4b16, type: 3}
-      propertyPath: ScreenImages.Array.data[1]
-      value: 
-      objectReference: {fileID: 2800000, guid: 830495de67355c8419c9c42aa814f58e, type: 3}
-    - target: {fileID: 4432650911555419256, guid: 1ca7d5601b22f7548b4ff2fc323f4b16, type: 3}
-      propertyPath: ScreenImages.Array.data[2]
-      value: 
-      objectReference: {fileID: 2800000, guid: c6ed15c90a48f764a9be46be6025b40a, type: 3}
-    - target: {fileID: 4432650911555419256, guid: 1ca7d5601b22f7548b4ff2fc323f4b16, type: 3}
-      propertyPath: ScreenImages.Array.data[3]
-      value: 
-      objectReference: {fileID: 2800000, guid: c6ed15c90a48f764a9be46be6025b40a, type: 3}
-    - target: {fileID: 4432650911555419256, guid: 1ca7d5601b22f7548b4ff2fc323f4b16, type: 3}
-      propertyPath: ScreenImages.Array.data[4]
-      value: 
-      objectReference: {fileID: 2800000, guid: 573f802177526904ea1872dcfdc1115a, type: 3}
-    - target: {fileID: 4432650911555419256, guid: 1ca7d5601b22f7548b4ff2fc323f4b16, type: 3}
-      propertyPath: ScreenImages.Array.data[5]
-      value: 
-      objectReference: {fileID: 2800000, guid: f9c9cfbb6c1b2444ab72f0ff6af4e99d, type: 3}
     - target: {fileID: 4432650911555419257, guid: 1ca7d5601b22f7548b4ff2fc323f4b16, type: 3}
       propertyPath: m_Name
       value: Story3dView
