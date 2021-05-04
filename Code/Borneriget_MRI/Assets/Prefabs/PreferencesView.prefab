@@ -279,6 +279,7 @@ MonoBehaviour:
   Cardboard: {fileID: 7048268769158336510}
   Frame: {fileID: 7048268769169978579}
   RepeatSpeakTimer: 20
+  WifiMessage: {fileID: 69786486855601721}
 --- !u!222 &7048268768854950083
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -327,7 +328,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 6ba355019ebe74c4782f518a93596c73, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -584,6 +585,7 @@ RectTransform:
   - {fileID: 7048268769734180023}
   - {fileID: 7048268769146391926}
   - {fileID: 7048268768546648766}
+  - {fileID: 1273026623196009817}
   m_Father: {fileID: 7048268768854950076}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -994,3 +996,120 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1001 &8857007594824194142
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 7048268769169978576}
+    m_Modifications:
+    - target: {fileID: 6766038535731972422, guid: 73af68349e3869544b37644c6876e1dc, type: 3}
+      propertyPath: m_Alpha
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7728418317183503623, guid: 73af68349e3869544b37644c6876e1dc, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7728418317183503623, guid: 73af68349e3869544b37644c6876e1dc, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7728418317183503623, guid: 73af68349e3869544b37644c6876e1dc, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7728418317183503623, guid: 73af68349e3869544b37644c6876e1dc, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7728418317183503623, guid: 73af68349e3869544b37644c6876e1dc, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7728418317183503623, guid: 73af68349e3869544b37644c6876e1dc, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7728418317183503623, guid: 73af68349e3869544b37644c6876e1dc, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7728418317183503623, guid: 73af68349e3869544b37644c6876e1dc, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7728418317183503623, guid: 73af68349e3869544b37644c6876e1dc, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 7728418317183503623, guid: 73af68349e3869544b37644c6876e1dc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7728418317183503623, guid: 73af68349e3869544b37644c6876e1dc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7728418317183503623, guid: 73af68349e3869544b37644c6876e1dc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7728418317183503623, guid: 73af68349e3869544b37644c6876e1dc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7728418317183503623, guid: 73af68349e3869544b37644c6876e1dc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7728418317183503623, guid: 73af68349e3869544b37644c6876e1dc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7728418317183503623, guid: 73af68349e3869544b37644c6876e1dc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7728418317183503623, guid: 73af68349e3869544b37644c6876e1dc, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7728418317183503623, guid: 73af68349e3869544b37644c6876e1dc, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7728418317183503623, guid: 73af68349e3869544b37644c6876e1dc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7728418317183503623, guid: 73af68349e3869544b37644c6876e1dc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7728418317183503623, guid: 73af68349e3869544b37644c6876e1dc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8709693836414601187, guid: 73af68349e3869544b37644c6876e1dc, type: 3}
+      propertyPath: m_Name
+      value: WifiMessage
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 73af68349e3869544b37644c6876e1dc, type: 3}
+--- !u!224 &1273026623196009817 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7728418317183503623, guid: 73af68349e3869544b37644c6876e1dc, type: 3}
+  m_PrefabInstance: {fileID: 8857007594824194142}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &69786486855601721 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8799337730435208807, guid: 73af68349e3869544b37644c6876e1dc, type: 3}
+  m_PrefabInstance: {fileID: 8857007594824194142}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c5fd3b96a154a44b90400fc9d3481d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -34,6 +34,8 @@ namespace Borneriget.MRI
         private GameObject Frame;
         [SerializeField]
         private float RepeatSpeakTimer = 20;
+        [SerializeField]
+        private WifiView WifiMessage;
 
         public event Action<bool> DanishSelected;
         public event Action<PreferencesProxy.Avatars> AvatarSelected;
@@ -55,6 +57,13 @@ namespace Borneriget.MRI
             gameObject.SetActive(true);
             Frame.SetActive(true);
             HasFormatBeenSelected = false;
+
+            if (Application.internetReachability == NetworkReachability.NotReachable)
+            {
+                WifiMessage.Show();
+                return;
+            }
+
             if (hasSelectedLanguage)
             {
                 SpeakRoutine = StartCoroutine(SpeakRepeat(2));
