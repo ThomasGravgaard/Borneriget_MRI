@@ -16,7 +16,7 @@ namespace Borneriget.MRI
         private PreferencesProxy Preferences;
 
         private bool AvatarAwake = false;
-        private int Progress = 0;
+        private int Progress = 4;
         private bool ShowMenu = false;
         private bool Exiting = false;
         private bool OnMenu = true;
@@ -55,6 +55,7 @@ namespace Borneriget.MRI
 
         public override void OnRegister()
         {
+            Debug.Log("Create story mediator");
             base.OnRegister();
             Preferences = Facade.RetrieveProxy<PreferencesProxy>();
 
@@ -156,10 +157,6 @@ namespace Borneriget.MRI
                     }
                     if (AvatarAwake)
                     {
-                        if (Progress == 5)
-                        {
-                            SendNotification(AvatarMediator.Notifications.ShowDiploma);
-                        }
                         SendNotification(AvatarMediator.Notifications.AvatarSpeak, Progress);
                     }
                     break;
@@ -185,7 +182,6 @@ namespace Borneriget.MRI
                     else
                     {
                         // We have no more videos, so just fade to the next speak.
-                        SendNotification(AvatarMediator.Notifications.Idle);
                         SendNotification(FaderMediator.Notifications.StartFade, Notifications.FadeAfterVideo);
                     }
                     break;

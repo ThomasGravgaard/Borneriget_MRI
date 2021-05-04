@@ -266,6 +266,13 @@ MonoBehaviour:
   - {fileID: 2800000, guid: c6ed15c90a48f764a9be46be6025b40a, type: 3}
   - {fileID: 2800000, guid: 573f802177526904ea1872dcfdc1115a, type: 3}
   - {fileID: 2800000, guid: f9c9cfbb6c1b2444ab72f0ff6af4e99d, type: 3}
+  Icon:
+  - {fileID: 0}
+  - {fileID: 2800000, guid: f42f44510f02db94f97d0a4157801cf8, type: 3}
+  - {fileID: 2800000, guid: 4b4794b2664ce6a4bbab4d23979f8eee, type: 3}
+  - {fileID: 0}
+  - {fileID: 2800000, guid: 3d0b728497b965f4b89df1d9c67d46fe, type: 3}
+  - {fileID: 0}
   Environment: {fileID: 4748976178994690848}
   MenuCam: {fileID: 0}
   Cam: {fileID: 4748976178819131262}

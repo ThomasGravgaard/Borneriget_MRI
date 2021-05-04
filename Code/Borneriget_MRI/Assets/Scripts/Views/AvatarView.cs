@@ -43,6 +43,10 @@ namespace Borneriget.MRI
 		private Vector2 scannerStopSpeakTiming_DK = Vector2.zero;
 		[SerializeField]
 		private Vector2 scannerStopSpeakTiming_UK = Vector2.zero;
+		[SerializeField]
+		private float diplomaDelay_DK = 8;
+		[SerializeField]
+		private float diplomaDelay_UK = 8;
 
 		private State currentState;
 		private List<SpriteRenderer> theaObjects = new List<SpriteRenderer>();
@@ -124,12 +128,6 @@ namespace Borneriget.MRI
             }
 		}
 
-		public void BackToIdle()
-        {
-			SetState(State.NEUTRAL);
-			animator.SetTrigger("idle");
-		}
-
 		public State GetState() {
 			return currentState;
 		}
@@ -156,19 +154,6 @@ namespace Borneriget.MRI
 			awake();
         }
 
-		public void ShowDiploma()
-        {
-			StartCoroutine(ShowDiplomaCo());
-		}
-
-		private IEnumerator ShowDiplomaCo()
-        {
-			animator.SetBool("talking", true);
-			yield return new WaitForSeconds(6);
-			animator.SetBool("talking", false);
-			SetState(State.DIPLOMA);
-		}
-
 		public void Sleep() {
 			SetState(State.SLEEPING);
 		}
@@ -176,14 +161,18 @@ namespace Borneriget.MRI
 		public void Speak(int progress, Action speakDone)
 		{
 			var clips = (danishSpeaks) ? speaksDk : speaksUk;
-            if (progress == 3)
-            {
+			if (progress == 3)
+			{
 				var timing = (danishSpeaks) ? scannerStopSpeakTiming_DK : scannerStopSpeakTiming_UK;
 				StartCoroutine(SpeakWithPauseCo(clips.SafeGet(progress), speakDone, timing.x, timing.y));
 			}
+			else if (progress == 5)
+			{
+				StartCoroutine(ShowDiplomaCo(speakDone));
+			}
 			else
             {
-				StartCoroutine(SpeakCo(clips.SafeGet(progress), speakDone, progress < 5));
+				StartCoroutine(SpeakCo(clips.SafeGet(progress), speakDone));
 			}
 		}
 
@@ -194,19 +183,13 @@ namespace Borneriget.MRI
 			audioSource.Stop();
 		}
 
-		private IEnumerator SpeakCo(SpeakInfo speak, Action speakDone, bool activateTalk)
-		{			
+		private IEnumerator SpeakCo(SpeakInfo speak, Action speakDone)
+		{
 			audioSource.PlayOneShot(speak.Clip);
-            if (activateTalk)
-            {
-				yield return new WaitForSeconds(speak.AnimationDelay);
-				animator.SetBool("talking", true);
-			}
+			yield return new WaitForSeconds(speak.AnimationDelay);
+			animator.SetBool("talking", true);
 			yield return new WaitForSeconds(speak.Clip.length - speak.AnimationStopOffset - speak.AnimationDelay);
-            if (activateTalk)
-            {
-				animator.SetBool("talking", false);
-            }
+			animator.SetBool("talking", false);
 			audioSource.Stop();
 			speakDone();
 		}
@@ -226,5 +209,22 @@ namespace Borneriget.MRI
 			speakDone();
 		}
 
+		private IEnumerator ShowDiplomaCo(Action speakDone)
+		{
+			var speak = ((danishSpeaks) ? speaksDk : speaksUk).SafeGet(5);
+			audioSource.PlayOneShot(speak.Clip);
+			yield return new WaitForSeconds(speak.AnimationDelay);
+			animator.SetBool("talking", true);
+			var diplomaDelay = (danishSpeaks) ? diplomaDelay_DK : diplomaDelay_UK;
+			yield return new WaitForSeconds(diplomaDelay);
+			animator.SetBool("talking", false);
+			SetState(State.DIPLOMA);
+			yield return new WaitForSeconds(speak.Clip.length - speak.AnimationDelay - diplomaDelay);
+			audioSource.Stop();
+			speakDone();
+			yield return new WaitForSeconds(speak.AnimationStopOffset);
+			SetState(State.NEUTRAL);
+			animator.SetTrigger("idle");
+		}
 	}
 }

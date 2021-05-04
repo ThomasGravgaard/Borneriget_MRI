@@ -16,6 +16,8 @@ namespace Borneriget.MRI
         [SerializeField]
         private Texture[] BackgroundImages;
         [SerializeField]
+        private Texture[] Icon;
+        [SerializeField]
         private GameObject Bear;
         [SerializeField]
         private GameObject VideoImage;
