@@ -35,7 +35,8 @@ namespace Borneriget.MRI
 		private static void InitializeProgram()
 		{
 			// Load in the video Urls
-			var config = Resources.Load<TextAsset>("Config");
+			var configName = (Application.platform == RuntimePlatform.IPhonePlayer) ? "Config-iOS" : "Config-Android";
+			var config = Resources.Load<TextAsset>(configName);
 			var videoUrls = JsonConvert.DeserializeObject<VideoUrls>(config.text);
 
 			// Register commands
