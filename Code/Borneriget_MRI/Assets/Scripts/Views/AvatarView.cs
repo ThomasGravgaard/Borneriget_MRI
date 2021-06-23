@@ -47,6 +47,8 @@ namespace Borneriget.MRI
 		private float diplomaDelay_DK = 8;
 		[SerializeField]
 		private float diplomaDelay_UK = 8;
+		[SerializeField]
+		private ParticleSystem particles;
 
 		private State currentState;
 		private List<SpriteRenderer> theaObjects = new List<SpriteRenderer>();
@@ -150,6 +152,7 @@ namespace Borneriget.MRI
 
         private IEnumerator WakeUpCo(Action awake)
         {
+			particles.Play();
 			snoreAudioSource.Stop();
 			snoreAudioSource.clip = waking;
 			snoreAudioSource.loop = false;
