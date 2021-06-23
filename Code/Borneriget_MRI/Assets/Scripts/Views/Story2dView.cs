@@ -52,7 +52,7 @@ namespace Borneriget.MRI
         public event Action<float> SetSeekPosition;
         public event Action EndSeek;
         private bool avatarClicked;
-
+        private bool buttonClicked = false;
         private bool videoControlsEnabled => VideoImage.activeInHierarchy && VideoProgress.fillAmount > 0;
 
         private void Awake()
@@ -125,6 +125,7 @@ namespace Borneriget.MRI
                 RoomIcon.texture = icon;
                 RoomIconAnimation.SetTrigger("Fade");
             }
+            buttonClicked = false;
         }
 
         private IEnumerator ShowCo(string doneNotification)
@@ -175,6 +176,10 @@ namespace Borneriget.MRI
 
         public void OnPointerDown(PointerEventData eventData)
         {
+            if (buttonClicked)
+            {
+                return;
+            }
             var target = eventData.pointerCurrentRaycast.gameObject;
             if (!avatarClicked)
             {
@@ -189,10 +194,12 @@ namespace Borneriget.MRI
             {
                 if (target == ExitButton)
                 {
+                    buttonClicked = true;
                     Exit?.Invoke();
                 }
                 else if (target == NextButton)
                 {
+                    buttonClicked = true;
                     Bootstrap.Facade.SendNotification(SoundMediator.Notifications.ClickButton);
                     if (VideoImage.activeInHierarchy)
                     {
@@ -227,6 +234,7 @@ namespace Borneriget.MRI
 
         public void ShowVideo()
         {
+            buttonClicked = false;
             Bear.SetActive(false);
             Background.gameObject.SetActive(false);
             VideoImage.SetActive(true);
