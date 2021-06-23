@@ -20,6 +20,7 @@ namespace Borneriget.MRI
         private bool ShowMenu = false;
         private bool Exiting = false;
         private bool OnMenu = true;
+        private int EditorStartProgress = 0;
 
         public static class Notifications
         {
@@ -86,6 +87,10 @@ namespace Borneriget.MRI
                 VideoView.StartSeek += VideoView_StartSeek;
                 VideoView.EndSeek += VideoView_EndSeek;
                 VideoView.SetSeekPosition += VideoView_SetSeekPosition;
+            }
+            if (Application.isEditor)
+            {
+                Progress = EditorStartProgress;
             }
         }
 
