@@ -37,7 +37,7 @@ namespace Borneriget.MRI
         public void Prepare(string videoUrl)
         {
             Player.url = videoUrl;
-            Debug.Log($"Video URL: {videoUrl}");
+            //Debug.Log($"Video URL: {videoUrl}");
             StartCoroutine(PrepareVideoCo());
         }
 
