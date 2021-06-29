@@ -181,16 +181,13 @@ namespace Borneriget.MRI
                 return;
             }
             var target = eventData.pointerCurrentRaycast.gameObject;
-            if (!avatarClicked)
+            // The bear is always available for clicks...
+            if (target == Bear)
             {
-                // The bear is not awake, so the only controls active are the bear
-                if (target == Bear)
-                {
-                    Bootstrap.Facade.SendNotification(StoryMediator.Notifications.AvatarClicked);
-                    StartCoroutine(ShowButtonsAfterAwake());
-                }
+                Bootstrap.Facade.SendNotification(StoryMediator.Notifications.AvatarClicked);
+                StartCoroutine(ShowButtonsAfterAwake());
             }
-            else
+            if (avatarClicked)
             {
                 if (target == ExitButton)
                 {
