@@ -49,6 +49,8 @@ namespace Borneriget.MRI
 		private float diplomaDelay_UK = 8;
 		[SerializeField]
 		private ParticleSystem particles;
+		[SerializeField]
+		private Transform particleParent;
 
 		private State currentState;
 		private List<SpriteRenderer> theaObjects = new List<SpriteRenderer>();
@@ -145,6 +147,12 @@ namespace Borneriget.MRI
 			audioSource.PlayOneShot((danishSpeaks) ? wakeTheBear_dk : wakeTheBear_uk);
 		}
 
+		public void ShowStars()
+        {
+			var p = Instantiate(particles);
+			p.transform.SetParent(particleParent, false);
+		}
+
 		public void WakeUp(Action awake)
         {
 			StartCoroutine(WakeUpCo(awake));
@@ -152,7 +160,7 @@ namespace Borneriget.MRI
 
         private IEnumerator WakeUpCo(Action awake)
         {
-			particles.Play();
+			ShowStars();
 			snoreAudioSource.Stop();
 			snoreAudioSource.clip = waking;
 			snoreAudioSource.loop = false;
@@ -228,10 +236,12 @@ namespace Borneriget.MRI
 			yield return new WaitForSeconds(diplomaDelay);
 			animator.SetBool("talking", false);
 			SetState(State.DIPLOMA);
-			yield return new WaitForSeconds(speak.Clip.length - speak.AnimationDelay - diplomaDelay);
+			yield return new WaitForSeconds(speak.Clip.length - speak.AnimationDelay - diplomaDelay - speak.AnimationStopOffset);
+			animator.SetBool("talking", false);
+			yield return new WaitForSeconds(speak.AnimationStopOffset);
 			audioSource.Stop();
 			speakDone();
-			yield return new WaitForSeconds(speak.AnimationStopOffset);
+			yield return new WaitForSeconds(1);
 			SetState(State.NEUTRAL);
 			animator.SetTrigger("idle");
 		}

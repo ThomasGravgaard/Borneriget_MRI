@@ -165,9 +165,9 @@ namespace Borneriget.MRI
                     }
                     break;
                 case Notifications.AvatarClicked:
+                    SendNotification(AvatarMediator.Notifications.TouchAvatar);
                     if (!AvatarAwake)
                     {
-                        SendNotification(AvatarMediator.Notifications.WakeAvatar);
                         AvatarAwake = true;
                     }
                     break;

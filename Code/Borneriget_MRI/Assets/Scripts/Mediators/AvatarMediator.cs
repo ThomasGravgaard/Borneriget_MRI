@@ -16,7 +16,7 @@ namespace Borneriget.MRI
 
         public static class Notifications
         {
-            public const string WakeAvatar = "WakeAvatar";
+            public const string TouchAvatar = "TouchAvatar";
             public const string AvatarAwake = "AvatarAwake";
             public const string AvatarSpeak = "AvatarSpeak";
             public const string StopSpeak = "StopSpeak";
@@ -27,6 +27,7 @@ namespace Borneriget.MRI
 
         private PreferencesProxy.Avatars Avatar;
         private bool DanishSpeaks;
+        private bool AvatarWokenUp = false;
 
         public override void OnRegister()
         {
@@ -43,7 +44,7 @@ namespace Borneriget.MRI
         public override string[] ListNotificationInterests()
         {
             return new[] {
-                Notifications.WakeAvatar,
+                Notifications.TouchAvatar,
                 Notifications.AvatarSpeak,
                 Notifications.StopSpeak,
             };
@@ -60,8 +61,16 @@ namespace Borneriget.MRI
         {
             switch (notification.Name)
             {
-                case Notifications.WakeAvatar:
-                    View.WakeUp(() => SendNotification(Notifications.AvatarAwake));
+                case Notifications.TouchAvatar:
+                    if (AvatarWokenUp)
+                    {
+                        View.ShowStars();
+                    }
+                    else
+                    {
+                        AvatarWokenUp = true;
+                        View.WakeUp(() => SendNotification(Notifications.AvatarAwake));
+                    }
                     break;
                 case Notifications.AvatarSpeak:
                     View.Speak((int)notification.Body, () => Facade.SendNotification(Notifications.SpeakDone));
