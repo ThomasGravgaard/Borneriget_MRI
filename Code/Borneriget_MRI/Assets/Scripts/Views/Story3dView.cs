@@ -74,19 +74,22 @@ namespace Borneriget.MRI
 
         private IEnumerator InitializeXRCo(string doneNotification)
         {
-            yield return XRGeneralSettings.Instance.Manager.InitializeLoader();
-            if (XRGeneralSettings.Instance.Manager.activeLoader == null)
+            if (XRGeneralSettings.Instance != null)
             {
-                Debug.Log("Initializing XR Failed.");
-            }
-            else
-            {
-                if (!Api.HasDeviceParams())
+                yield return XRGeneralSettings.Instance.Manager.InitializeLoader();
+                if (XRGeneralSettings.Instance.Manager.activeLoader == null)
                 {
-                    Api.ScanDeviceParams();
+                    Debug.Log("Initializing XR Failed.");
                 }
-                XRGeneralSettings.Instance.Manager.StartSubsystems();
-                vrPlaying = true;
+                else
+                {
+                    if (!Api.HasDeviceParams())
+                    {
+                        Api.ScanDeviceParams();
+                    }
+                    XRGeneralSettings.Instance.Manager.StartSubsystems();
+                    vrPlaying = true;
+                }
             }
             Bootstrap.Facade.SendNotification(doneNotification);
         }
