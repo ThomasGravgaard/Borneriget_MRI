@@ -20,9 +20,7 @@ namespace Borneriget.MRI
         private bool ShowMenu = false;
         private bool Exiting = false;
         private bool OnMenu = true;
-#if UNITY_EDITOR
         private int EditorStartProgress = 4;
-#endif
 
         public static class Notifications
         {
