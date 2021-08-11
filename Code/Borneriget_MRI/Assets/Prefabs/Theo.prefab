@@ -1150,7 +1150,7 @@ MonoBehaviour:
     AnimationStopOffset: 0
     Clip: {fileID: 8300000, guid: 966a5185c5b270146af0b92d833c55ec, type: 3}
   - AnimationDelay: 0
-    AnimationStopOffset: 2
+    AnimationStopOffset: 1
     Clip: {fileID: 8300000, guid: 4888dfe8987d1734eaa6b175c5039f7b, type: 3}
   wakeTheBear_dk: {fileID: 8300000, guid: 1e83fca40c6cc0643b16d92e2541029f, type: 3}
   wakeTheBear_uk: {fileID: 8300000, guid: 36203793a7dc1564b80637e3c3430e35, type: 3}

@@ -48,6 +48,10 @@ namespace Borneriget.MRI
 		[SerializeField]
 		private float diplomaDelay_UK = 8;
 		[SerializeField]
+		private float diplomaIdleWait_DK = 1;
+		[SerializeField]
+		private float diplomaIdleWait_UK = 2;
+		[SerializeField]
 		private ParticleSystem particles;
 		[SerializeField]
 		private Transform particleParent;
@@ -237,11 +241,11 @@ namespace Borneriget.MRI
 			animator.SetBool("talking", false);
 			SetState(State.DIPLOMA);
 			yield return new WaitForSeconds(speak.Clip.length - speak.AnimationDelay - diplomaDelay - speak.AnimationStopOffset);
-			animator.SetBool("talking", false);
-			yield return new WaitForSeconds(speak.AnimationStopOffset);
+			animator.SetTrigger("diplomaIdle");
 			audioSource.Stop();
+			yield return new WaitForSeconds(speak.AnimationStopOffset);
 			speakDone();
-			yield return new WaitForSeconds(1);
+			yield return new WaitForSeconds((danishSpeaks) ? diplomaIdleWait_DK : diplomaIdleWait_UK);
 			SetState(State.NEUTRAL);
 			animator.SetTrigger("idle");
 		}
